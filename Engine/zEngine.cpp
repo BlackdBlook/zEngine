@@ -1,4 +1,4 @@
-#include "zshEngine.h"
+#include "zEngine.h"
 #include "../ToolKit/GLLib.h"
 #include "../Levels/DrawSJX/DrawSanjiaoxing.h"
 #include "../Levels/DrawRTSJX/DrawRTSJX.h"
@@ -13,7 +13,7 @@ level->Init();
 #define LEVEL_COUNT 4
 
 
-void zshEngine::processInput(GLFWwindow* window)
+void zEngine::processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -25,7 +25,7 @@ void zshEngine::processInput(GLFWwindow* window)
         }
     }
 }
-zshEngine::zshEngine()
+zEngine::zEngine()
 {
     GLLib::GLInit();
     window = GLLib::CreateWindow(1280,720);
@@ -33,7 +33,7 @@ zshEngine::zshEngine()
 
 }
 
-void zshEngine::Run()
+void zEngine::Run()
 {
     while (!glfwWindowShouldClose(window))
     {
@@ -50,7 +50,7 @@ void zshEngine::Run()
     glfwTerminate();
 }
 
-void zshEngine::SetLevel(int index)
+void zEngine::SetLevel(int index)
 {
     switch (index)
     {
@@ -71,12 +71,12 @@ void zshEngine::SetLevel(int index)
     }
 }
 
-void zshEngine::Draw()
+void zEngine::Draw()
 {
     level->Draw();
 }
 
-void zshEngine::Update()
+void zEngine::Update()
 {
     GLLib::processECSInput(window);
     level->Update();

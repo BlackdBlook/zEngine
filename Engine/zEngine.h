@@ -5,11 +5,11 @@
 #include "Core/Camera/Camera.h"
 struct GLFWwindow;
 
-class zshEngine
+class zEngine
 {
 public:
     void processInput(GLFWwindow* window);
-    zshEngine();
+    zEngine();
     void Run();
     void SetLevel(int index);
 protected:
@@ -26,4 +26,4 @@ private:
 };
 
 
-typedef zshEngine Engine;
+typedef zEngine Engine;
