@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{0b035918-c918-4615-9414-f177517329a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ToolKit">
+      <UniqueIdentifier>{a0a63274-dab5-4eb4-afb4-a93b84b796bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{7ba82331-efc9-4495-8562-b7e8c9889d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object">
+      <UniqueIdentifier>{a8421256-fb98-458c-9064-824961facc94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels">
+      <UniqueIdentifier>{f4821ade-e650-4327-96af-4839556caa6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{a409987a-df85-4c6e-b3ef-7711aa12ef3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{e69ebeb5-3a3e-444c-bca2-c8c2bd6772b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\SanJiaoXing">
+      <UniqueIdentifier>{ffc1830a-9560-4f15-909b-3485445fbdf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{d29a2665-0070-4a7a-9c89-05221d4ae123}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{eea9bcc6-fb4c-47e5-a72c-6cb215a42d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Mesh">
+      <UniqueIdentifier>{caabe443-ee2d-47bb-952c-7b6ddaa32a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels\DrawRTSJX">
+      <UniqueIdentifier>{197f562a-9a22-46fa-b83e-67b6f4378d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\rtsjx">
+      <UniqueIdentifier>{de5fb5d4-57f6-4893-8e75-77e958969b4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels\DrawSJX">
+      <UniqueIdentifier>{e3559ee7-8912-4146-bd1b-ba1eea2f98bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels\DrwaBox">
+      <UniqueIdentifier>{e8d958fd-3bc7-4f6f-ab29-709ac6af9bbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\box">
+      <UniqueIdentifier>{da50c201-a39f-4a07-97a2-585a2f1e574d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels\DrawBoxWithLight">
+      <UniqueIdentifier>{8f386e7a-bc2c-4012-ab92-f735c3b71ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Camera">
+      <UniqueIdentifier>{ae9c7b34-3dae-4eb7-bdfd-98500dcb818e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Texture">
+      <UniqueIdentifier>{5c5bf5c3-f778-48c9-99ab-bedabd0cc72e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\SanJiaoXing">
+      <UniqueIdentifier>{fed28f9d-c138-4a5c-97ec-8401f4f6861f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Box">
+      <UniqueIdentifier>{e6b939fd-22c7-4a23-b0d4-f0646380070b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\roteSJX">
+      <UniqueIdentifier>{fcab04ac-669c-46a0-a02d-837156422c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\TexBox">
+      <UniqueIdentifier>{022d80d8-e06a-4cc8-8446-43f602337a4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\TexBox">
+      <UniqueIdentifier>{0e87f4d6-79e5-457d-97a0-2a85002fe1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels\DrawTexBox">
+      <UniqueIdentifier>{21a20e52-fe60-471b-8e15-49fc9bf10475}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\zshEngine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolKit\FileToolKit.cpp">
+      <Filter>ToolKit</Filter>
+    </ClCompile>
+    <ClCompile Include="source\glad.c">
+      <Filter>ToolKit</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ToolKit\GLLib.cpp">
+      <Filter>ToolKit</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Core\ShaderProgram.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Core\Shader.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Core\Level.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Object\Object.cpp">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Component\Mesh\Mesh.cpp">
+      <Filter>Engine\Component\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Log\Log.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\DrawRTSJX\DrawRTSJX.cpp">
+      <Filter>Levels\DrawRTSJX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Component\Component.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\DrawBox\DrawBox.cpp">
+      <Filter>Levels\DrwaBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\DrawSJX\DrawSanjiaoxing.cpp">
+      <Filter>Levels\DrawSJX</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\BoxWithLight\BoxWithLight.cpp">
+      <Filter>Levels\DrawBoxWithLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Core\Camera\Camera.cpp">
+      <Filter>Engine\Core\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolKit\ImgToolKit.cpp">
+      <Filter>ToolKit</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolKit\stb_img.cpp">
+      <Filter>ToolKit</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\SanJiaoXing.cpp">
+      <Filter>Objects\SanJiaoXing</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Box.cpp">
+      <Filter>Objects\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\roteSJX.cpp">
+      <Filter>Objects\roteSJX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Core\Texture2D\Texture2D.cpp">
+      <Filter>Engine\Core\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\TexBox.cpp">
+      <Filter>Objects\TexBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\DrawTexBox\DrawTexBox.cpp">
+      <Filter>Levels\DrawTexBox</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\zshEngine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolKit\FileToolKit.h">
+      <Filter>ToolKit</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolKit\Typedef.h">
+      <Filter>ToolKit</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolKit\GLLib.h">
+      <Filter>ToolKit</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core\ShaderProgram.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="Engine\Core\Shader.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core\Level.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Object\Object.h">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\Log.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Component\Mesh\Mesh.h">
+      <Filter>Engine\Component\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\DrawRTSJX\DrawRTSJX.h">
+      <Filter>Levels\DrawRTSJX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Component\Component.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\DrawBox\DrawBox.h">
+      <Filter>Levels\DrwaBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\LevelHeader.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\DrawSJX\DrawSanjiaoxing.h">
+      <Filter>Levels\DrawSJX</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\BoxWithLight\BoxWithLight.h">
+      <Filter>Levels\DrawBoxWithLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\ObjectHeader.h" />
+    <ClInclude Include="Engine\Core\Camera\Camera.h">
+      <Filter>Engine\Core\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolKit\ImgToolKit.h">
+      <Filter>ToolKit</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolKit\stb_img.h">
+      <Filter>ToolKit</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\SanJiaoXing.h">
+      <Filter>Objects\SanJiaoXing</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Box.h">
+      <Filter>Objects\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\roteSJX.h">
+      <Filter>Objects\roteSJX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core\Texture2D\Texture2D.h">
+      <Filter>Engine\Core\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TexBox.h">
+      <Filter>Objects\TexBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\DrawTexBox\DrawTexBox.h">
+      <Filter>Levels\DrawTexBox</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\SanJiaoXing.vsc">
+      <Filter>Shaders\SanJiaoXing</Filter>
+    </None>
+    <None Include="Shaders\SanJiaoXing.fsc">
+      <Filter>Shaders\SanJiaoXing</Filter>
+    </None>
+    <None Include="Shaders\rtsjx.vsc">
+      <Filter>Shaders\rtsjx</Filter>
+    </None>
+    <None Include="Shaders\rtsjx.fsc">
+      <Filter>Shaders\rtsjx</Filter>
+    </None>
+    <None Include="Shaders\Box.vsc">
+      <Filter>Shaders\box</Filter>
+    </None>
+    <None Include="Shaders\Box.fsc">
+      <Filter>Shaders\box</Filter>
+    </None>
+    <None Include="Shaders\TexBox.fsc">
+      <Filter>Shaders\TexBox</Filter>
+    </None>
+    <None Include="Shaders\TexBox.vsc">
+      <Filter>Shaders\TexBox</Filter>
+    </None>
+  </ItemGroup>
+</Project>
