@@ -4,9 +4,6 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{0b035918-c918-4615-9414-f177517329a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ToolKit">
-      <UniqueIdentifier>{a0a63274-dab5-4eb4-afb4-a93b84b796bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Core">
       <UniqueIdentifier>{7ba82331-efc9-4495-8562-b7e8c9889d8e}</UniqueIdentifier>
     </Filter>
@@ -76,9 +73,27 @@
     <Filter Include="Levels\DrawTexBox">
       <UniqueIdentifier>{21a20e52-fe60-471b-8e15-49fc9bf10475}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{460d981f-9f2b-4236-a9ac-a6c769684c1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Light">
+      <UniqueIdentifier>{da08dc1c-b8c3-4cd1-ada9-41de57a04e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\PointLight">
+      <UniqueIdentifier>{5128697b-8fb1-4903-a8f9-222ec2e00441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\boxWithLight">
+      <UniqueIdentifier>{bd0089ac-93f9-4be7-bafd-ac4faa8d7531}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\BoxWithLight">
+      <UniqueIdentifier>{8019ae86-2c3e-446e-b952-f729024c7ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ToolKit">
+      <UniqueIdentifier>{a0a63274-dab5-4eb4-afb4-a93b84b796bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine\zshEngine.cpp">
+    <ClCompile Include="Engine\zEngine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="ToolKit\FileToolKit.cpp">
@@ -151,9 +166,15 @@
     <ClCompile Include="Levels\DrawTexBox\DrawTexBox.cpp">
       <Filter>Levels\DrawTexBox</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\PointLight.cpp">
+      <Filter>Objects\PointLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\BoxWithLight.cpp">
+      <Filter>Objects\BoxWithLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\zshEngine.h">
+    <ClInclude Include="Engine\zEngine.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="ToolKit\FileToolKit.h">
@@ -202,7 +223,6 @@
     <ClInclude Include="Levels\BoxWithLight\BoxWithLight.h">
       <Filter>Levels\DrawBoxWithLight</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\ObjectHeader.h" />
     <ClInclude Include="Engine\Core\Camera\Camera.h">
       <Filter>Engine\Core\Camera</Filter>
     </ClInclude>
@@ -230,6 +250,15 @@
     <ClInclude Include="Levels\DrawTexBox\DrawTexBox.h">
       <Filter>Levels\DrawTexBox</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\ObjectHeader.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\PointLight.h">
+      <Filter>Objects\PointLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\BoxWithLight.h">
+      <Filter>Objects\BoxWithLight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\SanJiaoXing.vsc">
@@ -255,6 +284,18 @@
     </None>
     <None Include="Shaders\TexBox.vsc">
       <Filter>Shaders\TexBox</Filter>
+    </None>
+    <None Include="Shaders\pointLight.vsc">
+      <Filter>Shaders\Light</Filter>
+    </None>
+    <None Include="Shaders\pointLight.fsc">
+      <Filter>Shaders\Light</Filter>
+    </None>
+    <None Include="Shaders\boxWithLight.vsc">
+      <Filter>Shaders\boxWithLight</Filter>
+    </None>
+    <None Include="Shaders\boxWithLight.fsc">
+      <Filter>Shaders\boxWithLight</Filter>
     </None>
   </ItemGroup>
 </Project>

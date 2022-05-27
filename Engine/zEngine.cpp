@@ -4,6 +4,7 @@
 #include "../Levels/DrawRTSJX/DrawRTSJX.h"
 #include "../Levels/DrawBox/DrawBox.h"
 #include "../Levels/DrawTexBox/DrawTexBox.h"
+#include "../Levels/BoxWithLight/BoxWithLight.h"
 #include <GLFW/glfw3.h>
 
 #define makeLevel(s) \
@@ -12,6 +13,7 @@ level->Init();
 
 #define LEVEL_COUNT 4
 
+zEngine* zEngine::ins = nullptr;
 
 void zEngine::processInput(GLFWwindow* window)
 {
@@ -25,12 +27,16 @@ void zEngine::processInput(GLFWwindow* window)
         }
     }
 }
+GLFWwindow* zEngine::GetWindow()
+{
+    return window;
+}
 zEngine::zEngine()
 {
     GLLib::GLInit();
     window = GLLib::CreateWindow(1280,720);
     glEnable(GL_DEPTH_TEST);
-
+    zEngine::ins = this;
 }
 
 void zEngine::Run()
@@ -66,9 +72,17 @@ void zEngine::SetLevel(int index)
     case 3:
         makeLevel(DrawTexBox);
         break;
+    case 4:
+        makeLevel(DrawBoxWithLight);
+        break;
     default:
         break;
     }
+}
+
+zEngine* zEngine::GetInstance()
+{
+    return ins;
 }
 
 void zEngine::Draw()

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\BoxWithLight.cpp" />
     <ClCompile Include="Engine\Core\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Core\Texture2D\Texture2D.cpp" />
     <ClCompile Include="Levels\BoxWithLight\BoxWithLight.cpp" />
@@ -31,13 +32,14 @@
     <ClCompile Include="Engine\Core\Level.cpp" />
     <ClCompile Include="Engine\Core\ShaderProgram.cpp" />
     <ClCompile Include="Engine\Object\Object.cpp" />
-    <ClCompile Include="Engine\zshEngine.cpp" />
+    <ClCompile Include="Engine\zEngine.cpp" />
     <ClCompile Include="Engine\Core\Shader.cpp" />
     <ClCompile Include="Engine\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="Log\Log.cpp" />
     <ClCompile Include="Objects\SanJiaoXing.cpp" />
     <ClCompile Include="Objects\roteSJX.cpp" />
     <ClCompile Include="Objects\TexBox.cpp" />
+    <ClCompile Include="Objects\PointLight.cpp" />
     <ClCompile Include="ToolKit\GLLib.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\glad.c" />
@@ -46,6 +48,7 @@
     <ClCompile Include="ToolKit\stb_img.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\BoxWithLight.h" />
     <ClInclude Include="Engine\Core\Camera\Camera.h" />
     <ClInclude Include="Engine\Core\Texture2D\Texture2D.h" />
     <ClInclude Include="Levels\BoxWithLight\BoxWithLight.h" />
@@ -56,7 +59,7 @@
     <ClInclude Include="Engine\Core\Shader.h" />
     <ClInclude Include="Engine\Core\ShaderProgram.h" />
     <ClInclude Include="Engine\Object\Object.h" />
-    <ClInclude Include="Engine\zshEngine.h" />
+    <ClInclude Include="Engine\zEngine.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Levels\DrawRTSJX\DrawRTSJX.h" />
     <ClInclude Include="Levels\DrawSJX\DrawSanjiaoxing.h" />
@@ -68,6 +71,7 @@
     <ClInclude Include="Objects\roteSJX.h" />
     <ClInclude Include="Objects\SanJiaoXing.h" />
     <ClInclude Include="Objects\TexBox.h" />
+    <ClInclude Include="Objects\PointLight.h" />
     <ClInclude Include="ToolKit\GLLib.h" />
     <ClInclude Include="ToolKit\FileToolKit.h" />
     <ClInclude Include="ToolKit\ImgToolKit.h" />
@@ -77,6 +81,10 @@
   <ItemGroup>
     <None Include="Shaders\Box.fsc" />
     <None Include="Shaders\Box.vsc" />
+    <None Include="Shaders\boxWithLight.fsc" />
+    <None Include="Shaders\boxWithLight.vsc" />
+    <None Include="Shaders\pointLight.fsc" />
+    <None Include="Shaders\pointLight.vsc" />
     <None Include="Shaders\rtsjx.fsc" />
     <None Include="Shaders\rtsjx.vsc" />
     <None Include="Shaders\SanJiaoXing.fsc" />
@@ -90,6 +98,7 @@
     <ProjectGuid>{fd1cd291-7353-4631-b459-59acdc90942f}</ProjectGuid>
     <RootNamespace>LearnOpengl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>zEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -156,6 +165,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -170,6 +182,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -184,7 +199,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -201,6 +218,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
