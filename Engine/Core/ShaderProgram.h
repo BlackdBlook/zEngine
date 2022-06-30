@@ -20,7 +20,9 @@ public:
     void operator+=(Shader& s);
     void setUniform(const char* name ,float x);
     void setUniform(const char* name ,int x);
+    void setUniform(const char* name, glm::vec3& x);
     void setUniform(const char* name ,glm::mat4& x);
+    void setUniform(const char* name, float x, float y, float z);
     void setUniform(const char* name, float x, float y, float z, float w);
     ~ShaderProgram();
 };

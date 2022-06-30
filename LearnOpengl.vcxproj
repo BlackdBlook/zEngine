@@ -22,7 +22,7 @@
     <ClCompile Include="Objects\BoxWithLight.cpp" />
     <ClCompile Include="Engine\Core\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Core\Texture2D\Texture2D.cpp" />
-    <ClCompile Include="Levels\BoxWithLight\BoxWithLight.cpp" />
+    <ClCompile Include="Levels\BoxWithLight\DrawBoxWithLight.cpp" />
     <ClCompile Include="Levels\DrawSJX\DrawSanjiaoxing.cpp" />
     <ClCompile Include="Levels\DrawTexBox\DrawTexBox.cpp" />
     <ClCompile Include="Objects\Box.cpp" />
@@ -51,7 +51,7 @@
     <ClInclude Include="Objects\BoxWithLight.h" />
     <ClInclude Include="Engine\Core\Camera\Camera.h" />
     <ClInclude Include="Engine\Core\Texture2D\Texture2D.h" />
-    <ClInclude Include="Levels\BoxWithLight\BoxWithLight.h" />
+    <ClInclude Include="Levels\BoxWithLight\DrawBoxWithLight.h" />
     <ClInclude Include="Levels\DrawBox\DrawBox.h" />
     <ClInclude Include="Engine\Component\Component.h" />
     <ClInclude Include="Engine\Component\Mesh\Mesh.h" />

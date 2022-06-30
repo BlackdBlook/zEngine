@@ -1,18 +1,9 @@
 #include "BoxWithLight.h"
 #include "../Engine/Core/Camera/Camera.h"
 
-glm::mat4 getRotMat(glm::vec3 r)
-{
-    mat4(ans);
-    ans = glm::rotate(ans, glm::radians(r.x), glm::vec3(1, 0, 0));
-    ans = glm::rotate(ans, glm::radians(r.y), glm::vec3(0, 1, 0));
-    ans = glm::rotate(ans, glm::radians(r.z), glm::vec3(0, 0, 1));
-    return ans;
-}
-
 void BoxWithLight::Init()
 {
-    shader = std::make_shared<ShaderProgram>("Box", "Box");
+    shader = std::make_shared<ShaderProgram>("boxWithLight", "boxWithLight");
     float vertices[] = {
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
          0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -90,10 +81,22 @@ BoxWithLight::~BoxWithLight()
 
 void BoxWithLight::Update()
 {
+    //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
+    double lerp = glfwGetTime() / 5.0f;
     mat4(model);
     model = glm::translate(model, vec);
-    model *= getRotMat(GetRot());
+    model = glm::rotate(model,
+        glm::radians((float)(360.0f * lerp)),
+        glm::vec3(1.0, 0.0, 0.0));
+    model = glm::rotate(model,
+        glm::radians((float)(360.0f * lerp)),
+        glm::vec3(0.0, 1.0, 0.0));
+    model = glm::rotate(model,
+        glm::radians((float)(360.0f * lerp)),
+        glm::vec3(0.0, 0.0, 1.0));
     shader->setUniform("model", model);
+
+
 
     mat4(view);
     view = Camera::GetCamera()->GetCameraView();
@@ -102,11 +105,23 @@ void BoxWithLight::Update()
     mat4(projection);
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
     shader->setUniform("projection", projection);
+
+
+    
 }
 
 void BoxWithLight::Draw()
 {
+    glm::vec3 pos = Light->GetPos();
+    shader->setUniform("lightPos", pos);
+    pos = Camera::GetCamera()->GetPos();
+    shader->setUniform("viewPos", pos);
     shader->use();
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
+}
+
+void BoxWithLight::setLight(std::shared_ptr<PointLight> light)
+{
+    Light = light;
 }

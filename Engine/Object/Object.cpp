@@ -48,3 +48,12 @@ glm::vec3 Object::GetRot()
 {
     return rot;
 }
+
+glm::mat4 Object::getRotMat(glm::vec3 r)
+{
+    mat4(ans);
+    ans = glm::rotate(ans, glm::radians(r.x), glm::vec3(1, 0, 0));
+    ans = glm::rotate(ans, glm::radians(r.y), glm::vec3(0, 1, 0));
+    ans = glm::rotate(ans, glm::radians(r.z), glm::vec3(0, 0, 1));
+    return ans;   
+}

@@ -82,10 +82,21 @@ void ShaderProgram::setUniform(const char* name, int x)
     glUniform1i(id, x);
 }
 
+void ShaderProgram::setUniform(const char* name, glm::vec3& x)
+{
+    setUniform(name, x.x, x.y, x.z);
+}
+
 void ShaderProgram::setUniform(const char* name, glm::mat4& x)
 {
     GLID id = getUniformFromCache(name);
     glUniformMatrix4fv(id, 1,GL_FALSE,glm::value_ptr(x));
+}
+
+void ShaderProgram::setUniform(const char* name, float x, float y, float z)
+{
+    GLID id = getUniformFromCache(name);
+    glUniform3f(id, x, y, z);
 }
 
 void ShaderProgram::setUniform(const char* name, float x, float y, float z, float w)

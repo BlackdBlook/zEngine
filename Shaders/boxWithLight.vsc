@@ -20,5 +20,5 @@ void main()
     ans = projection * ans;
     gl_Position = ans;
 
-    normal = aNormal;
+    normal = mat3(transpose(inverse(model))) * aNormal;
 }

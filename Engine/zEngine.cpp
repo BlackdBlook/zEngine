@@ -4,7 +4,7 @@
 #include "../Levels/DrawRTSJX/DrawRTSJX.h"
 #include "../Levels/DrawBox/DrawBox.h"
 #include "../Levels/DrawTexBox/DrawTexBox.h"
-#include "../Levels/BoxWithLight/BoxWithLight.h"
+#include "../Levels/BoxWithLight/DrawBoxWithLight.h"
 #include <GLFW/glfw3.h>
 
 #define makeLevel(s) \
