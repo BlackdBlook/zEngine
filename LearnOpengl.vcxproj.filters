@@ -99,9 +99,6 @@
     <ClCompile Include="ToolKit\FileToolKit.cpp">
       <Filter>ToolKit</Filter>
     </ClCompile>
-    <ClCompile Include="source\glad.c">
-      <Filter>ToolKit</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ToolKit\GLLib.cpp">
       <Filter>ToolKit</Filter>
@@ -171,6 +168,9 @@
     </ClCompile>
     <ClCompile Include="Objects\BoxWithLight.cpp">
       <Filter>Objects\BoxWithLight</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolKit\glad.c">
+      <Filter>ToolKit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
