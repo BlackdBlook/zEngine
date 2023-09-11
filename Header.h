@@ -4,7 +4,7 @@
 #include "ToolKit/Typedef.h"
 #include "ToolKit/ImgToolKit.h"
 #include "ToolKit/FileToolKit.h"
-#include "Log/Log.h"
+#include "LogPrinter/Log.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>

@@ -35,7 +35,7 @@
     <ClCompile Include="Engine\zEngine.cpp" />
     <ClCompile Include="Engine\Core\Shader.cpp" />
     <ClCompile Include="Engine\Component\Mesh\Mesh.cpp" />
-    <ClCompile Include="Log\Log.cpp" />
+    <ClCompile Include="LogPrinter\Log.cpp" />
     <ClCompile Include="Objects\SanJiaoXing.cpp" />
     <ClCompile Include="Objects\roteSJX.cpp" />
     <ClCompile Include="Objects\TexBox.cpp" />
@@ -65,7 +65,7 @@
     <ClInclude Include="Levels\DrawSJX\DrawSanjiaoxing.h" />
     <ClInclude Include="Levels\DrawTexBox\DrawTexBox.h" />
     <ClInclude Include="Levels\LevelHeader.h" />
-    <ClInclude Include="Log\Log.h" />
+    <ClInclude Include="LogPrinter\Log.h" />
     <ClInclude Include="Objects\Box.h" />
     <ClInclude Include="Objects\ObjectHeader.h" />
     <ClInclude Include="Objects\roteSJX.h" />
