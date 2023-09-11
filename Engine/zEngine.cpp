@@ -7,11 +7,13 @@
 #include "../Levels/BoxWithLight/DrawBoxWithLight.h"
 #include <GLFW/glfw3.h>
 
+#include "../Levels/TexBoxWithLight/DrawTexBoxWithLight.h"
+
 #define makeLevel(s) \
 level = std::shared_ptr<s>(new s());\
-level->Init();
+level->Init()
 
-#define LEVEL_COUNT 4
+#define LEVEL_COUNT 5
 
 zEngine* zEngine::ins = nullptr;
 
@@ -74,6 +76,9 @@ void zEngine::SetLevel(int index)
         break;
     case 4:
         makeLevel(DrawBoxWithLight);
+        break;
+    case 5:
+        makeLevel(DrawTexBoxWithLight);
         break;
     default:
         break;

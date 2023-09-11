@@ -1,12 +1,11 @@
 #include "PointLight.h"
 #include "../Engine/zEngine.h"
 #include "../Engine/Core/Camera/Camera.h"
-#define SHADERNAME "pointLight"
 
 void PointLight::Init()
 {
     shader = std::make_shared<ShaderProgram>
-        (SHADERNAME, SHADERNAME);
+        ("pointLight", "pointLight");
     glGenVertexArrays(1,&vao);
     glGenBuffers(1,&vbo);
     glBindVertexArray(vao);

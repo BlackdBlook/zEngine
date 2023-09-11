@@ -4,6 +4,11 @@ Level::Level()
 {
 	
 }
+
+Level::~Level()
+{
+}
+
 void Level::Start()
 {
 	for (auto o : objs)
