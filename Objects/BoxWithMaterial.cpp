@@ -1,9 +1,19 @@
-#include "TexBoxWithLight.h"
-#include "../Engine/Core/Camera/Camera.h"
+﻿#include "BoxWithMaterial.h"
+#include "Engine/Core/Camera/Camera.h"
+#include "PointLight.h"
+#include "Engine/SubSystem/AssetSystem.h"
 
-void TexBoxWithLight::Init()
+
+BoxWithMaterial::BoxWithMaterial()
 {
-    shader = std::make_shared<ShaderProgram>("texBoxWithLight", "texBoxWithLight");
+    vao = 0;
+    vbo = 0;
+}
+
+void BoxWithMaterial::Start()
+{
+    Object::Start();
+    shader = std::make_shared<ShaderProgram>("BoxWithMat");
     static const float vertices[] = {
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,  
          0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,  
@@ -58,47 +68,42 @@ void TexBoxWithLight::Init()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
-    std::string imgName = PathToolKit::GetCurrentPath() + "\\image\\default.jpg";
+    std::string imgName = AssetSystem::GetInstance()->GetFilePathByName("container2.png");
+    //std::string imgName = AssetSystem::GetInstance()->GetFilePathByName("container2.jpg");
     Tex = Texture2D(imgName.c_str());
-    shader->setUniform("Texture",0);
-
-}
-TexBoxWithLight::TexBoxWithLight(glm::vec3 pos)
-{
-    vec = pos;
-    Init();
-}
-TexBoxWithLight::TexBoxWithLight()
-{
-    vec = glm::vec3(0,0,0);
-    Init();
+    imgName = AssetSystem::GetInstance()->GetFilePathByName("container2_specular.png");
+    specular = Texture2D(imgName.c_str());
+    imgName = AssetSystem::GetInstance()->GetFilePathByName("matrix.jpg");
+    upTex = Texture2D(imgName.c_str());
+    shader->setUniform("material.diffuse",0);
+    shader->setUniform("material.specular",1);
+    shader->setUniform("UpTex",2);
 }
 
-TexBoxWithLight::~TexBoxWithLight()
+void BoxWithMaterial::Update()
 {
-    glDeleteBuffers(1,&vbo);
-    glDeleteVertexArrays(1, &vao);
-}
-
-void TexBoxWithLight::Update()
-{
+    Object::Update();
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
     double lerp = glfwGetTime() / 5.0f;
     mat4(model);
-    model = glm::translate(model, vec);
+    model = glm::translate(model, GetPos());
+    const glm::vec3 rot = GetRot();
+    
     model = glm::rotate(model,
-        glm::radians((float)(360.0f * lerp)),
-        glm::vec3(1.0, 0.0, 0.0));
+     glm::radians(rot.x),
+     glm::vec3(1.0, 0.0, 0.0));
     model = glm::rotate(model,
-        glm::radians((float)(360.0f * lerp)),
+        glm::radians(rot.y),
         glm::vec3(0.0, 1.0, 0.0));
     model = glm::rotate(model,
-        glm::radians((float)(360.0f * lerp)),
+        glm::radians(rot.z),
         glm::vec3(0.0, 0.0, 1.0));
     shader->setUniform("model", model);
+}
 
-
-
+void BoxWithMaterial::Draw()
+{
+    Object::Draw();
     mat4(view);
     view = Camera::GetCamera()->GetCameraView();
     shader->setUniform("view", view);
@@ -107,21 +112,33 @@ void TexBoxWithLight::Update()
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
     shader->setUniform("projection", projection);
     
-}
-
-void TexBoxWithLight::Draw()
-{
-    glm::vec3 pos = Light->GetPos();
-    shader->setUniform("lightPos", pos);
-    pos = Camera::GetCamera()->GetPos();
-    shader->setUniform("viewPos", pos);
+    shader->setUniform("Time", (float)glfwGetTime());
+    
+    shader->setUniform("material.specular", 0.5f, 0.5f, 0.5f);
+    shader->setUniform("material.shininess", 32.0f);
+    shader->setUniform("light.position", Light->GetPos());
+    
+    shader->setUniform("light.color",  1.f, 1.f, 1.f);
+    shader->setUniform("light.ambient",  0.2f, 0.2f, 0.2f);
+    shader->setUniform("light.diffuse",  1.5f, 1.5f, 1.5f); // 将光照调暗了一些以搭配场景
+    shader->setUniform("light.specular", 1.0f, 1.0f, 1.0f); 
+    shader->setUniform("viewPos", Camera::GetCamera()->GetPos());
     shader->use();
     Tex.Bind();
+    specular.Bind(1);
+    upTex.Bind(2);
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
+    
 }
 
-void TexBoxWithLight::setLight(std::shared_ptr<PointLight> light)
+BoxWithMaterial::~BoxWithMaterial()
+{
+    glDeleteBuffers(1,&vbo);
+    glDeleteVertexArrays(1, &vao);
+}
+
+void BoxWithMaterial::setLight(std::shared_ptr<PointLight> light)
 {
     Light = light;
 }

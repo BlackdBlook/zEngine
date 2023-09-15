@@ -1,38 +1,65 @@
 #include "FileToolKit.h"
 #include <fstream>
-#include <cstdio>
+#include <filesystem>
+#include "../Header.h"
 #include <direct.h>
-#include <iostream>
 using namespace std;
+using namespace std::filesystem;
 FileDoesNotExist::FileDoesNotExist(const string&& info)
 {
     this->info = info;
 }
-string FileToolKit::ReadFile(const char* path)
+
+string ReadFile_Internal(ifstream&& fs)
 {
-    cout << path << endl;
-    if (!FileExist(path))
-    {
-        return "";
-    }
     string s;
-    ifstream file(path);
-    while (!file.eof())
+    while (!fs.eof())
     {
         char c[100]={0};
-        file.read(c, 99);
+        fs.read(c, 99);
         s += c;
     }
-    file.close();
+    fs.close();
     return s;
 }
-bool FileToolKit::FileExist(const char* path)
+
+string FileToolKit::ReadFile(const char* path)
 {
-    ifstream read;
-    read.open(path);
-    bool ans = read.is_open();
-    read.close();
-    return ans;
+    LOG("读取文件", path);
+    if (!FileExist(path))
+    {
+        LOG("要读取的文件不存在");
+        return "";
+    }
+
+    return ReadFile_Internal(ifstream{path});
+}
+
+std::string FileToolKit::ReadFile(const std::string& path)
+{
+    LOG("读取文件", path);
+    if (!FileExist(path))
+    {
+        LOG("要读取的文件不存在");
+        return "";
+    }
+
+    return ReadFile_Internal(ifstream{path});
+}
+
+bool FileToolKit::FileExist(const char* Path)
+{
+    return FileToolKit::FileExist(path{Path});    
+}
+
+bool FileToolKit::FileExist(const std::string& Path)
+{
+    return FileToolKit::FileExist(path{Path});    
+}
+
+bool FileToolKit::FileExist(const std::filesystem::path& path)
+{
+    return exists(path);
 }
 bool FileToolKit::WriteFile(const char* path, const char* context, EWriteFileMode mode)
 {
@@ -64,6 +91,16 @@ bool FileToolKit::DeleteFile(const char* path)
     return remove(path) == 0;
 }
 
+std::string FileToolKit::GetFileName(const char* Path)
+{
+    return FileToolKit::GetFileName(path{Path});
+}
+
+std::string FileToolKit::GetFileName(const std::filesystem::path& Path)
+{
+    return Path.filename().generic_string();
+}
+
 bool FileToolKit::OverriedWrite(const char* path, const char* context)
 {
     ofstream file(path, ios::out | ios::ate);
@@ -88,6 +125,7 @@ string PathToolKit::GetCurrentPath()
     char* ans = nullptr;
     if ((ans = _getcwd(NULL, 0)) == nullptr)
     {
+        LOG(L"ÃÂ¨ÃÂÃÂ·ÃÂ¥ÃÂÃÂÃÂ¨ÃÂ·ÃÂ¯ÃÂ¥ÃÂ¾ÃÂÃÂ¥ÃÂ¤ÃÂ±ÃÂ¨ÃÂ´ÃÂ¥");
         return "";
     }
     string s(ans);
@@ -100,10 +138,34 @@ string PathToolKit::GetFullPath(const char* path)
     return "";
 }
 
+bool PathToolKit::GetAllFileInDirectory(std::vector<std::string>& Out, const path& Path, bool SubPath)
+{
+    if(exists(Path) == false)
+    {
+        return false;
+    }
+    
+    const directory_iterator it {Path};
+
+    for(const auto& i : it)
+    {
+        if(SubPath && i.is_directory())
+        {
+            GetAllFileInDirectory(Out, i.path(), SubPath);
+        }
+        else
+        {
+            Out.push_back(i.path().string());
+        }
+    }
+    return true;
+}
+
+
 string PathToolKit::CompiePath(vector<const char*>&& path)
 {
-    if (path.size() <= 0)
-        return string();
+    if (path.empty())
+        return string{};
     string s;
     s += GetCurrentPath() + '\\';
     for (const char* c : path)

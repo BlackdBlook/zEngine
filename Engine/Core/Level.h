@@ -8,9 +8,9 @@ class Level
 public:
     Level();
     virtual ~Level();
-    void Start();
     void Update();
     void Draw();
+    void Start();
     virtual void Init() {}
 protected:
     std::vector<std::shared_ptr<Object>> objs;

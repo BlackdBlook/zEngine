@@ -91,6 +91,15 @@
     <Filter Include="ToolKit">
       <UniqueIdentifier>{a0a63274-dab5-4eb4-afb4-a93b84b796bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\TexBoxWithLight">
+      <UniqueIdentifier>{e6c199fa-99dc-48b2-a64c-14e705998722}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\TexBoxWithLight">
+      <UniqueIdentifier>{7456ade6-9ce5-4933-b9b3-458e1c1de048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Levels\DrawTexBoxWithLight">
+      <UniqueIdentifier>{0b1a2ea4-2202-41bb-8858-f54a8666ea6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\zEngine.cpp">
@@ -117,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Component\Mesh\Mesh.cpp">
       <Filter>Engine\Component\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Log\Log.cpp">
-      <Filter>Log</Filter>
     </ClCompile>
     <ClCompile Include="Levels\DrawRTSJX\DrawRTSJX.cpp">
       <Filter>Levels\DrawRTSJX</Filter>
@@ -172,6 +178,17 @@
     <ClCompile Include="ToolKit\glad.c">
       <Filter>ToolKit</Filter>
     </ClCompile>
+    <ClCompile Include="LogPrinter\Log.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.cpp">
+      <Filter>Levels\DrawTexBoxWithLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\TexBoxWithLight.cpp">
+      <Filter>Objects\TexBoxWithLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
+    <ClCompile Include="Objects\BoxWithMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\zEngine.h">
@@ -198,9 +215,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Object\Object.h">
       <Filter>Engine\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Log\Log.h">
-      <Filter>Log</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Component\Mesh\Mesh.h">
       <Filter>Engine\Component\Mesh</Filter>
@@ -259,6 +273,17 @@
     <ClInclude Include="Objects\BoxWithLight.h">
       <Filter>Objects\BoxWithLight</Filter>
     </ClInclude>
+    <ClInclude Include="LogPrinter\Log.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.h">
+      <Filter>Levels\DrawTexBoxWithLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TexBoxWithLight.h">
+      <Filter>Objects\TexBoxWithLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
+    <ClInclude Include="Objects\BoxWithMaterial.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\SanJiaoXing.vsc">
@@ -296,6 +321,12 @@
     </None>
     <None Include="Shaders\boxWithLight.fsc">
       <Filter>Shaders\boxWithLight</Filter>
+    </None>
+    <None Include="Shaders\texBoxWithLight.fsc">
+      <Filter>Shaders\TexBoxWithLight</Filter>
+    </None>
+    <None Include="Shaders\texBoxWithLight.vsc">
+      <Filter>Shaders\TexBoxWithLight</Filter>
     </None>
   </ItemGroup>
 </Project>

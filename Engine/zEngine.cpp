@@ -8,12 +8,15 @@
 #include <GLFW/glfw3.h>
 
 #include "../Levels/TexBoxWithLight/DrawTexBoxWithLight.h"
+#include "Levels/BoxWithMat/DrawBoxWithMat.h"
+#include "SubSystem/AssetSystem.h"
 
 #define makeLevel(s) \
 level = std::shared_ptr<s>(new s());\
-level->Init()
+level->Init();\
+level->Start()
 
-#define LEVEL_COUNT 5
+#define LEVEL_COUNT 6
 
 zEngine* zEngine::ins = nullptr;
 
@@ -38,6 +41,9 @@ zEngine::zEngine()
     GLLib::GLInit();
     window = GLLib::CreateWindow(1280,720);
     glEnable(GL_DEPTH_TEST);
+
+    AssetSystem::GetInstance();
+    
     zEngine::ins = this;
 }
 
@@ -79,6 +85,9 @@ void zEngine::SetLevel(int index)
         break;
     case 5:
         makeLevel(DrawTexBoxWithLight);
+        break;
+    case 6:
+        makeLevel(DrawBoxWithMat);
         break;
     default:
         break;

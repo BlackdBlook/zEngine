@@ -5,13 +5,27 @@ Texture2D::Texture2D(const char* name)
     Texture t = ImgToolKit::ReadImage(name);
     if (t->IsValid())
     {
+        GLenum channel;
+
+        switch (t->nrChannels)
+        {
+        case 4:
+            channel = GL_RGBA;
+            break;
+        case 3:
+        default:
+            channel = GL_RGB;
+            break;
+        }
+        
         glGenTextures(1,&texture);
         glBindTexture(GL_TEXTURE_2D,texture);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, t->width, t->height, 0, GL_RGB, GL_UNSIGNED_BYTE, t->Texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, t->width, t->height,
+            0, channel, GL_UNSIGNED_BYTE, t->Texture);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
 }

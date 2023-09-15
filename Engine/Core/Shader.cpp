@@ -2,37 +2,37 @@
 #include <cstring>
 #include "../../ToolKit/FileToolKit.h"
 #include <iostream>
+
+#include "../SubSystem/AssetSystem.h"
 const char* defultPath = "Shaders/";
 
 Shader::Shader(const char* name, EShaderType t)
 {
-    const char* type;
+    //const char* type = nullptr;
+    std::string FullName{name};
     switch (t)
     {
     case EShaderType::VertexShader:
-        type = ".vsc";
+        FullName += ".vsc";
         break;
     case EShaderType::FragmentShader:
-        type = ".fsc";
+        FullName += ".fsc";
         break;
     case EShaderType::CompileShader:
-        type = ".csc";
-        break;
-    default:
-        return;
+        FullName += ".csc";
         break;
     }
 
     id = glCreateShader((GLenum)t);
-    std::string path = PathToolKit::CompiePath
-    ({ defultPath ,name }) + type;
+    //std::string path = PathToolKit::CompiePath({ defultPath ,name }) + type;
+    std::string path = AssetSystem::GetInstance()->GetFilePathByName(FullName);
     std::string s = FileToolKit::ReadFile(path.c_str());
     auto sp = s.c_str();
     GLint lp = (GLint)s.length();
     glShaderSource(id, 1, &sp, &lp);
     glCompileShader(id);
 
-    int  success;
+    int success;
     glGetShaderiv(id, GL_COMPILE_STATUS, &success);
     if (!success)
     {

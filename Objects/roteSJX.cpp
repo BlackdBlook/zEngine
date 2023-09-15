@@ -14,10 +14,10 @@ roteSJX::roteSJX(bool b)
     glBindVertexArray(vao);
     glGenBuffers(1, &vbo);
     float vertices[] = {
-        // 位置              // 颜色
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // 右下
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 左下
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // 顶部
+        // 脙聝脗聨脙聜脗禄脙聝脗聳脙聝脗聝              // 脙聝脗聭脙聝脗聲脙聝脗聣脙聜脗芦
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // 脙聝脗聯脙聝脗聮脙聝脗聫脙聝脗聜
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // 脙聝脗聴脙聝脗鲁脙聝脗聫脙聝脗聜
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // 脙聜脗露脙聜脗楼脙聜脗虏脙聜脗驴
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);

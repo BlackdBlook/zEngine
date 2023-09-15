@@ -6,7 +6,7 @@
 void DrawTexBoxWithLight::Init()
 {
     Camera::GetCamera()->Reset();
-    Camera::GetCamera()->SetPos(glm::vec3(3,0,0));
+    Camera::GetCamera()->SetPos(glm::vec3(5,0,0));
     Camera::GetCamera()->SetFont(glm::vec3(1,0,0));
 
     std::shared_ptr<TexBoxWithLight>  b = std::make_shared<TexBoxWithLight>(glm::vec3(0, 0, 0));

@@ -31,6 +31,12 @@ ShaderProgram::ShaderProgram()
     uniformCache = new std::map<const char*, GLID>();
 }
 
+ShaderProgram::ShaderProgram(const char* ver)
+    :ShaderProgram(ver,ver)
+{
+    
+}
+
 ShaderProgram::ShaderProgram(const char* ver, const char* far)
 {
     programID = glCreateProgram();
@@ -82,12 +88,12 @@ void ShaderProgram::setUniform(const char* name, int x)
     glUniform1i(id, x);
 }
 
-void ShaderProgram::setUniform(const char* name, glm::vec3& x)
+void ShaderProgram::setUniform(const char* name, const glm::vec3& x)
 {
     setUniform(name, x.x, x.y, x.z);
 }
 
-void ShaderProgram::setUniform(const char* name, glm::mat4& x)
+void ShaderProgram::setUniform(const char* name, const glm::mat4& x)
 {
     GLID id = getUniformFromCache(name);
     glUniformMatrix4fv(id, 1,GL_FALSE,glm::value_ptr(x));
