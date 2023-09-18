@@ -9,12 +9,19 @@
 
 #include "../Levels/TexBoxWithLight/DrawTexBoxWithLight.h"
 #include "Levels/BoxWithMat/DrawBoxWithMat.h"
+#include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
 #include "SubSystem/AssetSystem.h"
 
 #define makeLevel(s) \
 level = std::shared_ptr<s>(new s());\
 level->Init();\
 level->Start()
+
+#define addLevel(s) \
+levelList.emplace_back([this]() \
+{                               \
+    makeLevel(s);               \
+})                              
 
 #define LEVEL_COUNT 6
 
@@ -24,7 +31,7 @@ void zEngine::processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-    for (int i = GLFW_KEY_0; i <= GLFW_KEY_0 + LEVEL_COUNT; i++)
+    for (int i = GLFW_KEY_0; i < GLFW_KEY_0 + levelList.size(); i++)
     {
         if (glfwGetKey(window, i) == GLFW_PRESS)
         {
@@ -44,6 +51,8 @@ zEngine::zEngine()
 
     AssetSystem::GetInstance();
     
+    InitLevel();
+
     zEngine::ins = this;
 }
 
@@ -64,34 +73,21 @@ void zEngine::Run()
     glfwTerminate();
 }
 
+void zEngine::InitLevel()
+{
+    addLevel(DrawSanjiaoxing);
+    addLevel(DrawRTSJX);
+    addLevel(DrawBox);
+    addLevel(DrawTexBox);
+    addLevel(DrawBoxWithLight);
+    addLevel(DrawTexBoxWithLight);
+    addLevel(DrawBoxWithMat);
+    addLevel(DrawAdvanceLight);
+}
+
 void zEngine::SetLevel(int index)
 {
-    switch (index)
-    {
-    case 0:
-        makeLevel(DrawSanjiaoxing);
-        break;
-    case 1: 
-        makeLevel(DrawRTSJX);
-        break;
-    case 2: 
-        makeLevel(DrawBox);
-        break;
-    case 3:
-        makeLevel(DrawTexBox);
-        break;
-    case 4:
-        makeLevel(DrawBoxWithLight);
-        break;
-    case 5:
-        makeLevel(DrawTexBoxWithLight);
-        break;
-    case 6:
-        makeLevel(DrawBoxWithMat);
-        break;
-    default:
-        break;
-    }
+    levelList[index]();
 }
 
 zEngine* zEngine::GetInstance()

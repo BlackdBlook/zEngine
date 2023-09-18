@@ -1,7 +1,10 @@
 #pragma once
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+
+#include "ToolKit/ImgToolKit.h"
 
 
 class AssetSystem
@@ -9,15 +12,14 @@ class AssetSystem
 public:
 
     AssetSystem();
-
     
+    static AssetSystem* GetInstance();
     
     std::string GetFilePathByName(const std::string& s);
 
-    
-    static AssetSystem* GetInstance();
+    Texture LoadImage(const std::string& ImageName);
 
-
+    std::string LoadTextFile(const std::string& TextName);
 
 private:
 
@@ -28,6 +30,9 @@ private:
     void RefreshFileMap();
 
     bool IsIgnoreToFileMap(const std::string& Name);
+
+    // 加载缓存
+    std::unordered_map<std::string, std::weak_ptr<void>> AssetCache;
     
     // 文件映射表
     std::unordered_map<std::string, std::string> FileMap;

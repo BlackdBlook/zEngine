@@ -24,7 +24,7 @@ Shader::Shader(const char* name, EShaderType t)
     }
 
     id = glCreateShader((GLenum)t);
-    //std::string path = PathToolKit::CompiePath({ defultPath ,name }) + type;
+
     std::string path = AssetSystem::GetInstance()->GetFilePathByName(FullName);
     std::string s = FileToolKit::ReadFile(path.c_str());
     auto sp = s.c_str();

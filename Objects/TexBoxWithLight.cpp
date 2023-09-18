@@ -57,9 +57,8 @@ void TexBoxWithLight::Init()
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
-
-    std::string imgName = PathToolKit::GetCurrentPath() + "\\image\\default.jpg";
-    Tex = Texture2D(imgName.c_str());
+    
+    Tex = Texture2D("default.jpg");
     shader->setUniform("Texture",0);
 
 }

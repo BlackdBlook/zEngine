@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
+    <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
     <ClCompile Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.cpp" />
+    <ClCompile Include="Mesh\Box\Mesh_Box.cpp" />
     <ClCompile Include="Objects\BoxWithLight.cpp" />
     <ClCompile Include="Engine\Core\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Core\Texture2D\Texture2D.cpp" />
@@ -40,6 +42,7 @@
     <ClCompile Include="Engine\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="LogPrinter\Log.cpp" />
     <ClCompile Include="Objects\BoxWithMaterial.cpp" />
+    <ClCompile Include="Objects\DrawAdvanceBox\BoxV3.cpp" />
     <ClCompile Include="Objects\SanJiaoXing.cpp" />
     <ClCompile Include="Objects\roteSJX.cpp" />
     <ClCompile Include="Objects\TexBox.cpp" />
@@ -55,7 +58,9 @@
   <ItemGroup>
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
+    <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
     <ClInclude Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.h" />
+    <ClInclude Include="Mesh\Box\Mesh_Box.h" />
     <ClInclude Include="Objects\BoxWithLight.h" />
     <ClInclude Include="Engine\Core\Camera\Camera.h" />
     <ClInclude Include="Engine\Core\Texture2D\Texture2D.h" />
@@ -76,6 +81,7 @@
     <ClInclude Include="LogPrinter\Log.h" />
     <ClInclude Include="Objects\Box.h" />
     <ClInclude Include="Objects\BoxWithMaterial.h" />
+    <ClInclude Include="Objects\DrawAdvanceBox\BoxV3.h" />
     <ClInclude Include="Objects\ObjectHeader.h" />
     <ClInclude Include="Objects\roteSJX.h" />
     <ClInclude Include="Objects\SanJiaoXing.h" />

@@ -64,8 +64,7 @@ void TexBox::Init()
 
     glm::mat4 model(1.0f);
     model = glm::translate(model, vec);
-    std::string imgName = PathToolKit::GetCurrentPath() + "\\image\\default.jpg";
-    t = Texture2D(imgName.c_str());
+    t = Texture2D("default.jpg");
     shader->use();
     shader->setUniform("Texture",0);
     shader->setUniform("model", model);

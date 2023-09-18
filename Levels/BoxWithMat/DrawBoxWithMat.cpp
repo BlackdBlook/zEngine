@@ -20,16 +20,17 @@ class LevelScript1 : public Object
 public:
     void Update() override
     {
-        const float Distance = 7.f;
+        const float Distance = -15.f;
+        const double time = glfwGetTime() * -1;
         Camera::GetCamera()->SetPos(glm::vec3(
-        sin(glfwGetTime()) * Distance,
+        sin(time) * Distance,
         0,
-        cos(glfwGetTime()) * Distance));
+        cos(time) * Distance));
         
         Camera::GetCamera()->SetFont(glm::vec3(
-        sin(glfwGetTime()) * Distance,
+        sin(time) * Distance,
         0,
-        cos(glfwGetTime()) * Distance));
+        cos(time) * Distance));
     }
 };
 
@@ -45,10 +46,11 @@ public:
     void Update() override
     {
         const float Distance = 5.f;
+        const double time = glfwGetTime() * -4;
         point_light->SetPos(glm::vec3(
-        sin(glfwGetTime()) * Distance,
+        sin(time) * Distance,
         0,
-        cos(glfwGetTime()) * Distance));
+        cos(time) * Distance));
     }
 };
 
@@ -89,5 +91,6 @@ void DrawBoxWithMat::Init()
     objs.push_back(Light);
     
     //objs.push_back(std::make_shared<LevelScript2>());
+    objs.push_back(std::make_shared<LevelScript1>());
     objs.push_back(std::make_shared<LevelScript2>(Light));
 }

@@ -22,6 +22,46 @@ std::string AssetSystem::GetFilePathByName(const std::string& s)
     return it->second;
 }
 
+Texture AssetSystem::LoadImage(const std::string& ImageName)
+{
+    auto cache = AssetCache.find(ImageName);
+
+    // 检查缓存是否有效
+    if(cache != AssetCache.end())
+    {
+        // 缓存命中且未过期
+        if(!cache->second.expired())
+        {
+            auto ans = cache->second.lock();
+
+            return std::static_pointer_cast<m_Texture>(ans);
+        }
+    }
+    std::string Path = GetFilePathByName(ImageName);
+    
+    if(Path.empty())
+    {
+        return NULL;
+    }
+
+    Texture ans = ImgToolKit::ReadImage(Path.c_str());
+    std::weak_ptr tex {ans};
+    if(cache != AssetCache.end())
+    {
+        cache->second = tex;
+    }else
+    {
+        AssetCache.insert({ImageName, tex});
+    }
+
+    return ans;
+}
+
+std::string AssetSystem::LoadTextFile(const std::string& TextName)
+{
+    return "";
+}
+
 AssetSystem* AssetSystem::GetInstance()
 {
     static AssetSystem* const ins = new AssetSystem();

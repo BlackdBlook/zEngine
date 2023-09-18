@@ -1,17 +1,15 @@
-﻿#include "BoxWithMaterial.h"
+#include "BoxV3.h"
+#include "Header.h"
 #include "Engine/Core/Camera/Camera.h"
-#include "PointLight.h"
-#include "Engine/SubSystem/AssetSystem.h"
 #include "Mesh/Box/Mesh_Box.h"
 
-
-BoxWithMaterial::BoxWithMaterial()
+BoxV3::BoxV3()
 {
     vao = 0;
     vbo = 0;
 }
 
-void BoxWithMaterial::Start()
+void BoxV3::Start()
 {
     Object::Start();
     shader = std::make_shared<ShaderProgram>("BoxWithMat");
@@ -41,7 +39,7 @@ void BoxWithMaterial::Start()
     shader->setUniform("UpTex",2);
 }
 
-void BoxWithMaterial::Update()
+void BoxV3::Update()
 {
     Object::Update();
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
@@ -62,7 +60,7 @@ void BoxWithMaterial::Update()
     shader->setUniform("model", model);
 }
 
-void BoxWithMaterial::Draw()
+void BoxV3::Draw()
 {
     Object::Draw();
     mat4(view);
@@ -77,7 +75,7 @@ void BoxWithMaterial::Draw()
     
     shader->setUniform("material.specular", 0.5f, 0.5f, 0.5f);
     shader->setUniform("material.shininess", 32.0f);
-    shader->setUniform("light.position", Light->GetPos());
+    //shader->setUniform("light.position", Light->GetPos());
     
     shader->setUniform("light.color",  1.f, 1.f, 1.f);
     shader->setUniform("light.ambient",  0.2f, 0.2f, 0.2f);
@@ -93,13 +91,13 @@ void BoxWithMaterial::Draw()
     
 }
 
-BoxWithMaterial::~BoxWithMaterial()
+BoxV3::~BoxV3()
 {
     glDeleteBuffers(1,&vbo);
     glDeleteVertexArrays(1, &vao);
 }
 
-void BoxWithMaterial::setLight(std::shared_ptr<PointLight> light)
+void BoxV3::setLight(std::shared_ptr<PointLight> light)
 {
     Light = light;
 }

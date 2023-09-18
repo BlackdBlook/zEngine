@@ -12,6 +12,7 @@ public:
     GLFWwindow* GetWindow();
     zEngine();
     void Run();
+    void InitLevel();
     void SetLevel(int index);
     static zEngine* GetInstance();
 protected:
@@ -21,6 +22,8 @@ private:
     GLFWwindow* window;
     std::shared_ptr<Camera> camera = nullptr;
     std::shared_ptr<Level> level = nullptr;
+
+    std::vector<std::function<void()>> levelList;
 
     void Update();
     void Draw();

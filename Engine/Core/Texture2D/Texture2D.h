@@ -4,6 +4,7 @@ class Texture2D
 {
     GLID unit = 0;
     GLID texture = -1;
+    Texture Image;
 public:
     Texture2D(const char* name);
     Texture2D();
