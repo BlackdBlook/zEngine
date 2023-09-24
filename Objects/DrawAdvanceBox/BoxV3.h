@@ -3,6 +3,8 @@
 #include "Engine/Object/Object.h"
 #include "Objects/PointLight.h"
 
+class PointLightV2;
+
 class BoxV3 : public Object
 {
 public:
@@ -12,7 +14,7 @@ public:
     GLID vao,vbo;
     std::shared_ptr<ShaderProgram> shader;
     Texture2D t;
-    std::shared_ptr<PointLight> Light;
+    std::shared_ptr<PointLightV2> Light;
     
 public:
 
@@ -21,5 +23,5 @@ public:
     void Update() override;
     void Draw() override;
     ~BoxV3() override;
-    void setLight(std::shared_ptr<PointLight> light);
+    void setLight(std::shared_ptr<PointLightV2> light);
 };

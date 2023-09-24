@@ -5,15 +5,27 @@ struct Material {
     float shininess;
 };
 
-struct Light {
+struct PointLight {
+    // 点光
     vec3 position;
+    // 平行光
+    //vec3 driection;
     vec3 color;
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
 };
 
-uniform Light light;
+struct DirectLight {
+    // 平行光
+    vec3 driection;
+    vec3 color;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+
+uniform PointLight light;
 uniform Material material;
 uniform vec3 viewPos;
 uniform sampler2D UpTex;
@@ -22,6 +34,7 @@ uniform float Time;
 out vec4 FragColor;
 
 in vec3 normal;
+// 像素位置
 in vec3 FragPos;
 in vec2 TexCoord;
 

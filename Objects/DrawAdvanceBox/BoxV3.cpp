@@ -2,6 +2,7 @@
 #include "Header.h"
 #include "Engine/Core/Camera/Camera.h"
 #include "Mesh/Box/Mesh_Box.h"
+#include "Objects/PointLightV2.h"
 
 BoxV3::BoxV3()
 {
@@ -12,7 +13,7 @@ BoxV3::BoxV3()
 void BoxV3::Start()
 {
     Object::Start();
-    shader = std::make_shared<ShaderProgram>("BoxWithMat");
+    shader = std::make_shared<ShaderProgram>("BoxV3");
 
 
     glGenVertexArrays(1, &vao);
@@ -36,7 +37,20 @@ void BoxV3::Start()
     upTex = Texture2D("matrix.jpg");
     shader->setUniform("material.diffuse",0);
     shader->setUniform("material.specular",1);
+    shader->setUniform("material.specular", 0.5f, 0.5f, 0.5f);
+    shader->setUniform("material.shininess", 32.0f);
     shader->setUniform("UpTex",2);
+    shader->setUniform("Light.constant",  1.0f);
+    // 衰减强度
+    shader->setUniform("Light.linear",    0.0014f);
+    // 二次衰减强度
+    shader->setUniform("Light.quadratic", 0.000007f);
+    shader->setUniform("Light.color",  1.f, 1.f, 1.f);
+    shader->setUniform("Light.ambient",  0.2f, 0.2f, 0.2f);
+    shader->setUniform("Light.diffuse",  1.5f, 1.5f, 1.5f); // 将光照调暗了一些以搭配场景
+    shader->setUniform("Light.specular", 1.0f, 1.0f, 1.0f);
+    shader->setUniform("Light.cutOff",   glm::cos(glm::radians(25.5f)));
+    shader->setUniform("Light.outerCutOff",   glm::cos(glm::radians(30.5f)));
 }
 
 void BoxV3::Update()
@@ -73,14 +87,11 @@ void BoxV3::Draw()
     
     shader->setUniform("Time", (float)glfwGetTime());
     
-    shader->setUniform("material.specular", 0.5f, 0.5f, 0.5f);
-    shader->setUniform("material.shininess", 32.0f);
-    //shader->setUniform("light.position", Light->GetPos());
+
+    shader->setUniform("Light.position", Light->GetPos());
+    shader->setUniform("Light.direction", -Camera::GetCamera()->GetFont());
     
-    shader->setUniform("light.color",  1.f, 1.f, 1.f);
-    shader->setUniform("light.ambient",  0.2f, 0.2f, 0.2f);
-    shader->setUniform("light.diffuse",  1.5f, 1.5f, 1.5f); // 将光照调暗了一些以搭配场景
-    shader->setUniform("light.specular", 1.0f, 1.0f, 1.0f); 
+
     shader->setUniform("viewPos", Camera::GetCamera()->GetPos());
     shader->use();
     Tex.Bind();
@@ -97,7 +108,7 @@ BoxV3::~BoxV3()
     glDeleteVertexArrays(1, &vao);
 }
 
-void BoxV3::setLight(std::shared_ptr<PointLight> light)
+void BoxV3::setLight(std::shared_ptr<PointLightV2> light)
 {
     Light = light;
 }
