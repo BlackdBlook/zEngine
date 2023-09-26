@@ -12,7 +12,7 @@ class Shader
 private:
     GLID id = 0;
 public:
-    Shader(const char* name, EShaderType t);
+    Shader(const std::string& name, EShaderType t);
     GLID operator*() 
     {
         return id;

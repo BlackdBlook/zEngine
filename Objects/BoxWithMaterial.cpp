@@ -39,6 +39,12 @@ void BoxWithMaterial::Start()
     shader->setUniform("material.diffuse",0);
     shader->setUniform("material.specular",1);
     shader->setUniform("UpTex",2);
+
+    shader->setUniform("material.shininess", 32.0f);
+    shader->setUniform("light.color",  1.f, 1.f, 1.f);
+    shader->setUniform("light.ambient",  0.2f, 0.2f, 0.2f);
+    shader->setUniform("light.diffuse",  1.5f, 1.5f, 1.5f); // 将光照调暗了一些以搭配场景
+    shader->setUniform("light.specular", 1.0f, 1.0f, 1.0f); 
 }
 
 void BoxWithMaterial::Update()
@@ -73,16 +79,11 @@ void BoxWithMaterial::Draw()
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
     shader->setUniform("projection", projection);
     
-    shader->setUniform("Time", (float)glfwGetTime());
+    //shader->setUniform("Time", (float)glfwGetTime());
     
-    shader->setUniform("material.specular", 0.5f, 0.5f, 0.5f);
-    shader->setUniform("material.shininess", 32.0f);
+    //shader->setUniform("material.specular", 0.5f, 0.5f, 0.5f);
+
     shader->setUniform("light.position", Light->GetPos());
-    
-    shader->setUniform("light.color",  1.f, 1.f, 1.f);
-    shader->setUniform("light.ambient",  0.2f, 0.2f, 0.2f);
-    shader->setUniform("light.diffuse",  1.5f, 1.5f, 1.5f); // 将光照调暗了一些以搭配场景
-    shader->setUniform("light.specular", 1.0f, 1.0f, 1.0f); 
     shader->setUniform("viewPos", Camera::GetCamera()->GetPos());
     shader->use();
     Tex.Bind();

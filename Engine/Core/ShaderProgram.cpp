@@ -3,19 +3,19 @@
 #include <glad/glad.h>
 #include <iostream>
 #include "../../Header.h"
-GLID ShaderProgram::getUniformFromCache(const char* name)
+GLID ShaderProgram::getUniformFromCache(const std::string& name)
 {
     glUseProgram(programID);
     auto value = uniformCache->find(name);
     if (value == uniformCache->end())
     {
         GLID ans;
-        ans = glGetUniformLocation(programID, name);
+        ans = glGetUniformLocation(programID, name.c_str());
         if (ans == 0xffffffff)
         {
-            LOG("unifrom not find", programID, name);
+            LOG("unifrom not find", shaderNameVer, shaderNameFar, name);
         }
-        uniformCache->insert(std::pair<const char*, GLID>(name, ans));
+        uniformCache->insert(std::pair<std::string, GLID>(name, ans));
         return ans;
     }
     else
@@ -28,22 +28,33 @@ GLID ShaderProgram::getUniformFromCache(const char* name)
 ShaderProgram::ShaderProgram()
 {
     programID = glCreateProgram(); 
-    uniformCache = new std::map<const char*, GLID>();
+    uniformCache = new std::unordered_map<std::string, GLID>();
 }
 
-ShaderProgram::ShaderProgram(const char* ver)
-    :ShaderProgram(ver,ver)
-{
-    
-}
-
-ShaderProgram::ShaderProgram(const char* ver, const char* far)
+ShaderProgram::ShaderProgram(std::string&& ver)
 {
     programID = glCreateProgram();
-    uniformCache = new std::map<const char*, GLID>();
+    uniformCache = new std::unordered_map<std::string, GLID>();
+    shaderNameVer = ver;
+    shaderNameFar = shaderNameVer;
     use();
-    Shader vs(ver, EShaderType::VertexShader);
-    Shader fs(far, EShaderType::FragmentShader);
+    Shader vs(shaderNameVer, EShaderType::VertexShader);
+    Shader fs(shaderNameFar, EShaderType::FragmentShader);
+    
+    Attach(vs);
+    Attach(fs);
+    link();
+}
+
+ShaderProgram::ShaderProgram(std::string&& ver, std::string&& far)
+{
+    programID = glCreateProgram();
+    uniformCache = new std::unordered_map<std::string, GLID>();
+    shaderNameVer = ver;
+    shaderNameFar = far;
+    use();
+    Shader vs(shaderNameVer, EShaderType::VertexShader);
+    Shader fs(shaderNameFar, EShaderType::FragmentShader);
     
     Attach(vs);
     Attach(fs);
@@ -68,6 +79,7 @@ void ShaderProgram::Attach(Shader& vs)
         return;
     }
     glAttachShader(programID, *vs);
+    glCheckError();
 }
 
 void ShaderProgram::operator+=(Shader& s)
@@ -80,12 +92,16 @@ void ShaderProgram::setUniform(const char* name, float x)
     GLID id = getUniformFromCache(name);
     
     glUniform1f(id, x);
+
+    glCheckError(name);
 }
 
 void ShaderProgram::setUniform(const char* name, int x)
 {
     GLID id = getUniformFromCache(name);
     glUniform1i(id, x);
+
+    glCheckError(name);
 }
 
 void ShaderProgram::setUniform(const char* name, const glm::vec3& x)
@@ -97,18 +113,24 @@ void ShaderProgram::setUniform(const char* name, const glm::mat4& x)
 {
     GLID id = getUniformFromCache(name);
     glUniformMatrix4fv(id, 1,GL_FALSE,glm::value_ptr(x));
+
+    glCheckError(name);
 }
 
 void ShaderProgram::setUniform(const char* name, float x, float y, float z)
 {
     GLID id = getUniformFromCache(name);
     glUniform3f(id, x, y, z);
+    
+    glCheckError(name);
 }
 
 void ShaderProgram::setUniform(const char* name, float x, float y, float z, float w)
 {
     GLID id = getUniformFromCache(name);
     glUniform4f(id, x, y, z, w);
+
+    glCheckError(name);
 }
 
 ShaderProgram::~ShaderProgram()

@@ -1,20 +1,25 @@
 #pragma once
 #include"../../ToolKit/Typedef.h"
 #include <map>
+#include <string>
+#include <unordered_map>
 #include <glm/glm.hpp>
 class Shader;
 class ShaderProgram
 {
     GLID programID;
-    std::map<const char*, GLID>* uniformCache;
+    std::unordered_map<std::string, GLID>* uniformCache;
 
-    GLID getUniformFromCache(const char* name);
+    GLID getUniformFromCache(const std::string& name);
+
+    std::string shaderNameVer;
+    std::string shaderNameFar;
 
 
 public:
     ShaderProgram();
-    ShaderProgram(const char* ver);
-    ShaderProgram(const char* ver,const char* far);
+    ShaderProgram(std::string&& ver);
+    ShaderProgram(std::string&& ver,std::string&& far);
     void use();
     void link();
     void Attach(Shader& s);

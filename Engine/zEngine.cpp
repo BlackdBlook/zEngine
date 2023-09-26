@@ -31,6 +31,13 @@ void zEngine::processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    if(glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS)
+    {
+        GLenum error = glGetError();
+        LOG(error);
+    }
+    
     for (int i = GLFW_KEY_0; i < GLFW_KEY_0 + levelList.size(); i++)
     {
         if (glfwGetKey(window, i) == GLFW_PRESS)
@@ -63,7 +70,7 @@ void zEngine::Run()
         processInput(window);
         Camera::GetCamera()->Update();
         Update();
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0,0,0, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Draw();
         glfwSwapBuffers(window);

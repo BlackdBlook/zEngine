@@ -6,7 +6,7 @@
 #include "../SubSystem/AssetSystem.h"
 const char* defultPath = "Shaders/";
 
-Shader::Shader(const char* name, EShaderType t)
+Shader::Shader(const std::string& name, EShaderType t)
 {
     //const char* type = nullptr;
     std::string FullName{name};
@@ -31,7 +31,7 @@ Shader::Shader(const char* name, EShaderType t)
     GLint lp = (GLint)s.length();
     glShaderSource(id, 1, &sp, &lp);
     glCompileShader(id);
-
+    
     int success;
     glGetShaderiv(id, GL_COMPILE_STATUS, &success);
     if (!success)

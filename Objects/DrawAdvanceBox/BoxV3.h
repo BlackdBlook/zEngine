@@ -14,7 +14,15 @@ public:
     GLID vao,vbo;
     std::shared_ptr<ShaderProgram> shader;
     Texture2D t;
-    std::shared_ptr<PointLightV2> Light;
+    std::vector<std::shared_ptr<PointLightV2>> PointLight;
+
+    void initDirectLight();
+    
+    void initPointLight(int index);
+    void updatePointLight(int index);
+    
+    void initSpotLight();
+    void updateSpotLight();
     
 public:
 
@@ -23,5 +31,5 @@ public:
     void Update() override;
     void Draw() override;
     ~BoxV3() override;
-    void setLight(std::shared_ptr<PointLightV2> light);
+    void addLight(std::shared_ptr<PointLightV2> light);
 };

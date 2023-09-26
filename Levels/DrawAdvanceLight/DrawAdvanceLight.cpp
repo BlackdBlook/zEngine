@@ -71,9 +71,18 @@ void DrawAdvanceLight::Test2()
     const float Distance = 15.f;
     Camera::GetCamera()->SetPos(glm::vec3(Distance, 0, 0));
     Camera::GetCamera()->SetFont(glm::vec3(1, 0, 0));
-    
-    auto Light = std::make_shared<PointLightV2>(glm::vec3(Distance - 6,0,0.5));
     srand((int)glfwGetTime());
+    
+    std::vector<std::shared_ptr<PointLightV2>> points;
+
+    for(int i = 0;i < 4; i++)
+    {
+        const float x = random_float(-5, 5);
+        const float y = random_float(-3,3);
+        const float z = random_float(-5, 5);
+        points.emplace_back(std::make_shared<PointLightV2>(glm::vec3(x,y,z)));
+        objs.push_back(points[i]);
+    }
 
     for(int i = 0;i < 10; i++)
     {
@@ -89,13 +98,12 @@ void DrawAdvanceLight::Test2()
         auto box = std::make_shared<BoxV3>();
         box->SetPos(pos);
         box->SetRot(rot);
-        box->setLight(Light);
+        for(auto l : points)
+        {
+            box->addLight(l);
+        }
         objs.push_back(box);
     }
-    std::cout << 1 << std::endl;
-
-    objs.push_back(Light);
-    
     
     //objs.push_back(std::make_shared<LevelScript1>());
     //objs.push_back(std::make_shared<LevelScript2>(Light));
@@ -116,7 +124,7 @@ void DrawAdvanceLight::Test1()
     auto box = std::make_shared<BoxV3>();
     box->SetPos(glm::vec3{0,0,0});
 
-    box->setLight(Light);
+    box->addLight(Light);
     
     objs.push_back(box);
     objs.push_back(Light);
