@@ -63,8 +63,8 @@ void BoxV3::initSpotLight()
     shader->setUniform("spotLight.ambient",  glm::vec3{0});
     shader->setUniform("spotLight.diffuse",  glm::vec3{1}); // 将光照调暗了一些以搭配场景
     shader->setUniform("spotLight.specular", glm::vec3{1});
-    shader->setUniform("spotLight.cutOff",   glm::cos(glm::radians(3.0f)));
-    shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(5.0f)));
+    shader->setUniform("spotLight.cutOff",   glm::cos(glm::radians(10.0f)));
+    shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(15.0f)));
 }
 
 void BoxV3::updateSpotLight()

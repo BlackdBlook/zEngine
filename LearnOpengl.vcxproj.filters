@@ -189,6 +189,13 @@
     </ClCompile>
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Objects\BoxWithMaterial.cpp" />
+    <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
+    <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
+    <ClCompile Include="Mesh\Box\Mesh_Box.cpp" />
+    <ClCompile Include="Objects\DrawAdvanceBox\BoxV3.cpp" />
+    <ClCompile Include="Objects\DriectLight\DriectLight.cpp" />
+    <ClCompile Include="Objects\PointLightV2.cpp" />
+    <ClCompile Include="Objects\SpotLight\SpotLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\zEngine.h">
@@ -284,6 +291,13 @@
     </ClInclude>
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Objects\BoxWithMaterial.h" />
+    <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
+    <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
+    <ClInclude Include="Mesh\Box\Mesh_Box.h" />
+    <ClInclude Include="Objects\DrawAdvanceBox\BoxV3.h" />
+    <ClInclude Include="Objects\DriectLight\DriectLight.h" />
+    <ClInclude Include="Objects\PointLightV2.h" />
+    <ClInclude Include="Objects\SpotLight\SpotLight.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\SanJiaoXing.vsc">
@@ -310,12 +324,6 @@
     <None Include="Shaders\TexBox.vsc">
       <Filter>Shaders\TexBox</Filter>
     </None>
-    <None Include="Shaders\pointLight.vsc">
-      <Filter>Shaders\Light</Filter>
-    </None>
-    <None Include="Shaders\pointLight.fsc">
-      <Filter>Shaders\Light</Filter>
-    </None>
     <None Include="Shaders\boxWithLight.vsc">
       <Filter>Shaders\boxWithLight</Filter>
     </None>
@@ -328,5 +336,9 @@
     <None Include="Shaders\texBoxWithLight.vsc">
       <Filter>Shaders\TexBoxWithLight</Filter>
     </None>
+    <None Include="Shaders\Light\pointLight.fsc" />
+    <None Include="Shaders\Light\pointLight.vsc" />
+    <None Include="Shaders\Light\SpotLight.fsc" />
+    <None Include="Shaders\Light\SpotLight.vsc" />
   </ItemGroup>
 </Project>
