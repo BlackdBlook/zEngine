@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
     <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="ToolKit\stb_img.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
     <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
