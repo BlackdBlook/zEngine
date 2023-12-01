@@ -19,12 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Component\Model\Model.cpp" />
+    <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
     <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
+    <ClCompile Include="Levels\NanoSuit0\DrawNanosuit.cpp" />
     <ClCompile Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.cpp" />
-    <ClCompile Include="Mesh\Box\Mesh_Box.cpp" />
+    <ClCompile Include="MeshData\Box\Mesh_Box.cpp" />
     <ClCompile Include="Objects\BoxWithLight.cpp" />
     <ClCompile Include="Engine\Core\Camera\Camera.cpp" />
     <ClCompile Include="Engine\Core\Texture2D\Texture2D.cpp" />
@@ -60,12 +63,15 @@
     <ClCompile Include="ToolKit\stb_img.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Component\Model\Model.h" />
+    <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
     <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
+    <ClInclude Include="Levels\NanoSuit0\DrawNanosuit.h" />
     <ClInclude Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.h" />
-    <ClInclude Include="Mesh\Box\Mesh_Box.h" />
+    <ClInclude Include="MeshData\Box\Mesh_Box.h" />
     <ClInclude Include="Objects\BoxWithLight.h" />
     <ClInclude Include="Engine\Core\Camera\Camera.h" />
     <ClInclude Include="Engine\Core\Texture2D\Texture2D.h" />
@@ -125,6 +131,8 @@
     <Content Include="Shaders\BoxV3.vsc" />
     <Content Include="Shaders\BoxWithMat.fsc" />
     <Content Include="Shaders\BoxWithMat.vsc" />
+    <Content Include="Shaders\NanoSuit0\NanoSuit0.fsc" />
+    <Content Include="Shaders\NanoSuit0\NanoSuit0.vsc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -243,7 +251,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp-vc143-mtd.lib;zlibstaticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -265,7 +273,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp-vc143-mt.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -2,6 +2,7 @@
 #include "../Header.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_img.h"
+
 Texture ImgToolKit::ReadImage(const char* path)
 {
     if (!FileToolKit::FileExist(path))
@@ -9,36 +10,45 @@ Texture ImgToolKit::ReadImage(const char* path)
         LOG("Img ", path, " Can not find");
         return NULL;
     }
-    stbi_set_flip_vertically_on_load(true);
     int width, height, nrChannels;
-    unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
-    if (data == nullptr)
+    stbi_set_flip_vertically_on_load(true);
+        
+    unsigned char* Data = stbi_load(path, &width, &height, &nrChannels, 0);
+    if (Data == nullptr)
     {
         LOG("Img ", path, " Can not find");
         return NULL;
     }
 
     LOG(path," w:",width, "h:",height,"c:",nrChannels);
-
-
-    return std::make_shared<m_Texture>(data, width, height, nrChannels);
+    
+    return std::make_shared<m_Texture>(Data, width, height, nrChannels);
 }
 
 bool m_Texture::IsValid() const
 {
-    return Texture != nullptr;
+    return Data != nullptr;
 }
 
-m_Texture::m_Texture(unsigned char* texture, int width, int height, int nrChannels)
+m_Texture::m_Texture(unsigned char* Data
+    , int width, int height, int nrChannels)
 {
-    Texture = texture;
+    this->Data = Data;
     this->width = width;
     this->height = height;
     this->nrChannels = nrChannels;
 }
 
+m_Texture::m_Texture(const m_Texture& other)
+{
+    Data = other.Data;
+    this->width = other.width;
+    this->height = other.height;
+    this->nrChannels = other.nrChannels;
+}
+
 m_Texture::~m_Texture()
 {
-    stbi_image_free(Texture); 
-    Texture = nullptr;
+    stbi_image_free(Data);
+    Data = nullptr;
 }

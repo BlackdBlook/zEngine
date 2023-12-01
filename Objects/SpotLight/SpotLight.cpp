@@ -1,7 +1,7 @@
 #include "SpotLight.h"
 
 #include "Engine/zEngine.h"
-#include "Mesh/Box/Mesh_Box.h"
+#include "MeshData/Box/Mesh_Box.h"
 
 void SpotLight::Init()
 {
