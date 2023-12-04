@@ -97,7 +97,7 @@ void AssetSystem::InitFileMap()
 
         if(it != FileMap.end() && it->first == name)
         {
-            LOG("发现重复的文件\n\t", p, "\n\t", it->second);
+            //LOG("发现重复的文件\n\t", p, "\n\t", it->second);
         }
         else
         {

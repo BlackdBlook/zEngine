@@ -1,7 +1,7 @@
 #include "BoxV3.h"
 #include "Header.h"
 #include "Engine/Core/Camera/Camera.h"
-#include "Mesh/Box/Mesh_Box.h"
+#include "MeshData/Box/Mesh_Box.h"
 #include "Objects/PointLightV2.h"
 
 static constexpr char indexChar[] = {'0','1','2','3'};
@@ -23,7 +23,6 @@ void BoxV3::initPointLight(int index)
     {
         LOG("错误，光源类型不能超过4个");
     }
-    auto pos = PointLight[index]->GetPos();
     std::string s = "pointLights[";
     s += indexChar[index];
     
@@ -104,8 +103,8 @@ void BoxV3::Start()
 
     Tex = Texture2D("container2.png");
     specular = Texture2D("container2_specular.png");
-    shader->setUniform("material.diffuse",0);
-    shader->setUniform("material.specular",1);
+    shader->setUniform("material.texture_diffuse0",0);
+    shader->setUniform("material.texture_specular0",1);
     shader->setUniform("material.shininess", 32.0f);
 
     for(int i = 0;i < PointLight.size();i++)

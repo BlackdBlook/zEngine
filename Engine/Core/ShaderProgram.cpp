@@ -3,11 +3,12 @@
 #include <glad/glad.h>
 #include <iostream>
 #include "../../Header.h"
+
 GLID ShaderProgram::getUniformFromCache(const std::string& name)
 {
     glUseProgram(programID);
-    auto value = uniformCache->find(name);
-    if (value == uniformCache->end())
+    auto value = uniformCache.find(name);
+    if (value == uniformCache.end())
     {
         GLID ans;
         ans = glGetUniformLocation(programID, name.c_str());
@@ -15,50 +16,91 @@ GLID ShaderProgram::getUniformFromCache(const std::string& name)
         {
             LOG("unifrom not find", shaderNameVer, shaderNameFar, name);
         }
-        uniformCache->insert(std::pair<std::string, GLID>(name, ans));
+        uniformCache.insert(std::pair<std::string, GLID>(name, ans));
         return ans;
     }
     else
     {
         return value->second;
     }
-    
+}
+
+void ShaderProgram::showAllActiveUnifrom()
+{
+    GLint maxUniformLen;
+    GLint numUniforms;
+    char* uniformName;
+    GLint index;
+    glGetProgramiv(programID, GL_ACTIVE_UNIFORMS, &numUniforms);
+    glGetProgramiv(programID, GL_ACTIVE_UNIFORM_MAX_LENGTH,
+                   &maxUniformLen);
+    uniformName = (char*)malloc(sizeof(char) * maxUniformLen);
+    for (index = 0; index < numUniforms; index++)
+    {
+        GLint size;
+        GLenum type;
+        GLint location;
+        // Get the uniform info
+        glGetActiveUniform(programID, index, maxUniformLen, NULL,
+            &size, &type, uniformName);
+        std::string s = uniformName;
+        LOG("unifroms:", s);
+    }
 }
 
 ShaderProgram::ShaderProgram()
 {
-    programID = glCreateProgram(); 
-    uniformCache = new std::unordered_map<std::string, GLID>();
+    programID = glCreateProgram();
+}
+
+ShaderProgram::ShaderProgram(ShaderProgram&& other)
+    noexcept
+{
+    programID = other.programID;
+    shaderNameVer = std::move(other.shaderNameVer);
+    shaderNameFar = std::move(other.shaderNameFar);
+    // 拷贝和移动时放弃缓存
+    //uniformCache = std::move(other.uniformCache);
+}
+
+ShaderProgram::ShaderProgram(const ShaderProgram& other)
+{
+    programID = other.programID;
+    shaderNameVer = other.shaderNameVer;
+    shaderNameFar = other.shaderNameFar;
+    // 拷贝和移动时放弃缓存
+    //uniformCache = other.uniformCache;
 }
 
 ShaderProgram::ShaderProgram(std::string&& ver)
 {
     programID = glCreateProgram();
-    uniformCache = new std::unordered_map<std::string, GLID>();
     shaderNameVer = ver;
     shaderNameFar = shaderNameVer;
     use();
     Shader vs(shaderNameVer, EShaderType::VertexShader);
     Shader fs(shaderNameFar, EShaderType::FragmentShader);
-    
+
     Attach(vs);
     Attach(fs);
     link();
+
+    //showAllActiveUnifrom();
 }
 
 ShaderProgram::ShaderProgram(std::string&& ver, std::string&& far)
 {
     programID = glCreateProgram();
-    uniformCache = new std::unordered_map<std::string, GLID>();
     shaderNameVer = ver;
     shaderNameFar = far;
     use();
     Shader vs(shaderNameVer, EShaderType::VertexShader);
     Shader fs(shaderNameFar, EShaderType::FragmentShader);
-    
+
     Attach(vs);
     Attach(fs);
     link();
+    //showAllActiveUnifrom();
 }
 
 void ShaderProgram::use()
@@ -90,7 +132,7 @@ void ShaderProgram::operator+=(Shader& s)
 void ShaderProgram::setUniform(const char* name, float x)
 {
     GLID id = getUniformFromCache(name);
-    
+
     glUniform1f(id, x);
 
     glCheckError(name);
@@ -112,7 +154,7 @@ void ShaderProgram::setUniform(const char* name, const glm::vec3& x)
 void ShaderProgram::setUniform(const char* name, const glm::mat4& x)
 {
     GLID id = getUniformFromCache(name);
-    glUniformMatrix4fv(id, 1,GL_FALSE,glm::value_ptr(x));
+    glUniformMatrix4fv(id, 1,GL_FALSE, glm::value_ptr(x));
 
     glCheckError(name);
 }
@@ -121,7 +163,7 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z)
 {
     GLID id = getUniformFromCache(name);
     glUniform3f(id, x, y, z);
-    
+
     glCheckError(name);
 }
 
@@ -135,6 +177,5 @@ void ShaderProgram::setUniform(const char* name, float x, float y, float z, floa
 
 ShaderProgram::~ShaderProgram()
 {
-    delete uniformCache;
     glDeleteProgram(programID);
 }

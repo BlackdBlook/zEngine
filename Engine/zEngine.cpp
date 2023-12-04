@@ -10,6 +10,7 @@
 #include "../Levels/TexBoxWithLight/DrawTexBoxWithLight.h"
 #include "Levels/BoxWithMat/DrawBoxWithMat.h"
 #include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
+#include "Levels/NanoSuit0/DrawNanosuit.h"
 #include "SubSystem/AssetSystem.h"
 
 #define makeLevel(s) \
@@ -83,6 +84,7 @@ void zEngine::Run()
 void zEngine::InitLevel()
 {
     addLevel(DrawSanjiaoxing);
+    addLevel(DrawNanosuit);
     addLevel(DrawRTSJX);
     addLevel(DrawBox);
     addLevel(DrawTexBox);
@@ -94,7 +96,7 @@ void zEngine::InitLevel()
 
 void zEngine::SetLevel(int index)
 {
-    levelList[index]();
+    levelList[index](); 
 }
 
 zEngine* zEngine::GetInstance()

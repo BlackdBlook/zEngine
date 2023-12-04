@@ -2,7 +2,7 @@
 #include "Engine/Core/Camera/Camera.h"
 #include "PointLight.h"
 #include "Engine/SubSystem/AssetSystem.h"
-#include "Mesh/Box/Mesh_Box.h"
+#include "MeshData/Box/Mesh_Box.h"
 
 
 BoxWithMaterial::BoxWithMaterial()

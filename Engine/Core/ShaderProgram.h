@@ -8,21 +8,25 @@ class Shader;
 class ShaderProgram
 {
     GLID programID;
-    std::unordered_map<std::string, GLID>* uniformCache;
+    std::unordered_map<std::string, GLID> uniformCache;
 
     GLID getUniformFromCache(const std::string& name);
+
+    void showAllActiveUnifrom();
 
     std::string shaderNameVer;
     std::string shaderNameFar;
 
-
-public:
-    ShaderProgram();
-    ShaderProgram(std::string&& ver);
-    ShaderProgram(std::string&& ver,std::string&& far);
-    void use();
     void link();
     void Attach(Shader& s);
+
+public:
+    void use();
+    ShaderProgram();
+    ShaderProgram(ShaderProgram&& other) noexcept;
+    ShaderProgram(const ShaderProgram& other);
+    ShaderProgram(std::string&& ver);
+    ShaderProgram(std::string&& ver,std::string&& far);
     void operator+=(Shader& s);
     void setUniform(const char* name,float x);
     void setUniform(const char* name,int x);

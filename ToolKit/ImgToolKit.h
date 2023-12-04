@@ -4,10 +4,12 @@
 class m_Texture
 {
 public:
+    unsigned char* Data;
     int width, height, nrChannels;
-    unsigned char* Texture;
     bool IsValid() const;
-    m_Texture(unsigned char* texture ,int width, int height, int nrChannels);
+    m_Texture(unsigned char* texture
+        ,int width, int height, int nrChannels);
+    m_Texture(const m_Texture& other);
     ~m_Texture();
 };
 

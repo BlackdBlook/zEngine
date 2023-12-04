@@ -2,7 +2,7 @@
 #include "PointLight.h"
 #include "../Engine/zEngine.h"
 #include "../Engine/Core/Camera/Camera.h"
-#include "Mesh/Box/Mesh_Box.h"
+#include "MeshData/Box/Mesh_Box.h"
 
 void PointLightV2::Init()
 {
@@ -60,9 +60,6 @@ void PointLightV2::Draw()
     mat4(model);
     mat4(view);
     mat4(projection);
-    model = glm::translate(model, GetPos());
-    model = glm::scale(model, glm::vec3(0.5));
-    shader->setUniform("model", model);
     
     model = glm::translate(model,GetPos());
     model = glm::scale(model, glm::vec3(0.5));
