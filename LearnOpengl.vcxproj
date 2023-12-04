@@ -26,6 +26,7 @@
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
     <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
+    <ClCompile Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.cpp" />
     <ClCompile Include="Levels\NanoSuit0\DrawNanosuit.cpp" />
     <ClCompile Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.cpp" />
     <ClCompile Include="MeshData\Box\Mesh_Box.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
     <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
+    <ClInclude Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.h" />
     <ClInclude Include="Levels\NanoSuit0\DrawNanosuit.h" />
     <ClInclude Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.h" />
     <ClInclude Include="MeshData\Box\Mesh_Box.h" />
@@ -233,6 +235,7 @@
     <Content Include="Shaders\BoxV3.vsc" />
     <Content Include="Shaders\BoxWithMat.fsc" />
     <Content Include="Shaders\BoxWithMat.vsc" />
+    <Content Include="Shaders\DepthTest\DepthTest.fsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.fsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.vsc" />
   </ItemGroup>

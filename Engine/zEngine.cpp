@@ -14,6 +14,7 @@
 #include "Core/InputSystem/InputSystem.h"
 #include "Levels/BoxWithMat/DrawBoxWithMat.h"
 #include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
+#include "Levels/DrawDepthTestBuffer/DrawDepthTestBuffer.h"
 #include "Levels/NanoSuit0/DrawNanosuit.h"
 #include "SubSystem/AssetSystem.h"
 #include "ToolKit/TimerToolkit.h"
@@ -109,6 +110,7 @@ void zEngine::Run()
 void zEngine::InitLevel()
 {
     addLevel(DrawSanjiaoxing);
+    addLevel(DrawDepthTestBuffer);
     addLevel(DrawNanosuit);
     addLevel(DrawRTSJX);
     addLevel(DrawBox);
