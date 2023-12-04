@@ -17,39 +17,37 @@ class PointScript : public Object
 {
     static constexpr char indexChar[] = {'0','1','2','3'};
     std::shared_ptr<ShaderProgram> shader;
-    std::shared_ptr<PointLightV2> PointLight[4];
+    std::vector<std::shared_ptr<PointLightV2>> PointLight;
 public:
     PointScript(std::shared_ptr<ShaderProgram> sp): shader (sp)
     {
-        PointLight[0] = std::make_shared<PointLightV2>(glm::vec3{0,-1,15});
+        PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{-3,3,0}));
+        PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{5,3,0}));
+        shader->setUniform("material.shininess", 1.f);
     }
     void Start() override
     {
         shader->use();
-        initSkyLight();
         initDirectLight();
-        shader->setUniform("PointLightCount", 1);
-        initPointLight(0);
+        
+        for(int i = 0;i < PointLight.size();i++)
+        {
+            initPointLight(i);
+        }
         initSpotLight();
-    }
-
-    void initSkyLight()
-    {
-        shader->setUniform("skyLight.color", glm::vec3{1.f});
-        shader->setUniform("skyLight.strength", 10.f);
     }
     
     void initDirectLight()
     {
         shader->setUniform("dirLight.direction", -0.2f, -1.0f, -0.3f);
-        shader->setUniform("dirLight.color", glm::vec3{1.f});
-        shader->setUniform("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-        shader->setUniform("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
-        shader->setUniform("dirLight.specular", 0.5f, 0.5f, 0.5f);
+        shader->setUniform("dirLight.ambient", glm::vec3{0.4f});
+        shader->setUniform("dirLight.diffuse", glm::vec3{0.4f});
+        shader->setUniform("dirLight.specular", glm::vec3{0.5f});
     }
 
     void initPointLight(int index)
     {
+        shader->setUniform("PointLightCount", index + 1);
         if(index > 4)
         {
             LOG("错误，光源类型不能超过4个");
@@ -57,10 +55,10 @@ public:
         std::string s = "pointLights[";
         s += indexChar[index];
         
-        shader->setUniform((s +"].color").c_str(),  glm::vec3{1});
-        shader->setUniform((s +"].ambient").c_str(),    0.05f, 0.05f, 0.05f);
-        shader->setUniform((s +"].diffuse").c_str(),     0.8f, 0.8f, 0.8f);
-        shader->setUniform((s +"].specular").c_str(),    1.0f, 1.0f, 1.0f);
+        shader->setUniform((s +"].color").c_str(),  glm::vec3{0});
+        shader->setUniform((s +"].ambient").c_str(),    glm::vec3{0.4f});
+        shader->setUniform((s +"].diffuse").c_str(),     glm::vec3{0.4f});
+        shader->setUniform((s +"].specular").c_str(),    glm::vec3{0.5f});
         shader->setUniform((s +"].constant").c_str(),  1.0f);
         shader->setUniform((s +"].linear").c_str(),    0.09f);
         shader->setUniform((s +"].quadratic").c_str(), 0.032f);
@@ -89,10 +87,9 @@ public:
         shader->setUniform("spotLight.linear",    0.0014f);
         // 二次衰减强度
         shader->setUniform("spotLight.quadratic", 0.000007f);
-        shader->setUniform("spotLight.color",  glm::vec3{1});
-        shader->setUniform("spotLight.ambient",  glm::vec3{0});
+        shader->setUniform("spotLight.ambient",  glm::vec3{0.4f});
         shader->setUniform("spotLight.diffuse",  glm::vec3{1}); // 将光照调暗了一些以搭配场景
-        shader->setUniform("spotLight.specular", glm::vec3{1});
+        shader->setUniform("spotLight.specular", glm::vec3{0.5f});
         shader->setUniform("spotLight.cutOff",   glm::cos(glm::radians(10.0f)));
         shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(15.0f)));
     }
@@ -107,14 +104,20 @@ public:
     void Update(float DeltaTime) override
     {
         PointLight[0]->Update(DeltaTime);
+        PointLight[1]->Update(DeltaTime);
         Camera::GetCamera()->Update(DeltaTime);
 
     }
     void Draw() override
     {
-        updatePointLight(0);
         updateSpotLight();
-        PointLight[0]->Draw();
+        for(int i = 0;i < PointLight.size();i++)
+        {
+            updatePointLight(i);
+            PointLight[0]->Draw();
+            PointLight[1]->Draw();
+        }
+        
     }
     ~PointScript() override = default;
 };
@@ -194,7 +197,6 @@ void DrawNanosuit::Init()
     m->SetRot(glm::vec3{0,0,0});
 
     objs.push_back(std::make_shared<PointScript>(sp));
-
     
     objs.push_back(std::make_shared<TurnModelScript>(m));
 }

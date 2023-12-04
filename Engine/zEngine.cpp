@@ -57,7 +57,7 @@ GLFWwindow* zEngine::GetWindow()
 zEngine::zEngine()
 {
     GLLib::GLInit();
-    window = GLLib::CreateWindow(1280,720);
+    window = GLLib::CreateWindow(2560,1440);
     
     glEnable(GL_DEPTH_TEST);
 

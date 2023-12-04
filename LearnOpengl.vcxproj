@@ -208,6 +208,27 @@
     <None Include="Shaders\texBoxWithLight.vsc" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MeshData\nanosuit\arm_dif.png" />
+    <Content Include="MeshData\nanosuit\arm_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\arm_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\body_dif.png" />
+    <Content Include="MeshData\nanosuit\body_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\body_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\glass_ddn.png" />
+    <Content Include="MeshData\nanosuit\glass_dif.png" />
+    <Content Include="MeshData\nanosuit\hand_dif.png" />
+    <Content Include="MeshData\nanosuit\hand_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\hand_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\helmet_diff.png" />
+    <Content Include="MeshData\nanosuit\helmet_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\helmet_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\leg_dif.png" />
+    <Content Include="MeshData\nanosuit\leg_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\leg_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\LICENSE.txt" />
+    <Content Include="MeshData\nanosuit\nanosuit.blend" />
+    <Content Include="MeshData\nanosuit\nanosuit.mtl" />
+    <Content Include="MeshData\nanosuit\nanosuit.obj" />
     <Content Include="Shaders\BoxV3.fsc" />
     <Content Include="Shaders\BoxV3.vsc" />
     <Content Include="Shaders\BoxWithMat.fsc" />
