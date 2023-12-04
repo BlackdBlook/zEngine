@@ -2,8 +2,11 @@
 
 #include <memory>
 
+#include "Engine/zEngine.h"
+#include "GLFW/glfw3.h"
 #include "Engine/Component/Model/Model.h"
 #include "Engine/Core/Camera/Camera.h"
+#include "Engine/Core/InputSystem/InputSystem.h"
 #include "Objects/PointLightV2.h"
 
 DrawNanosuit::~DrawNanosuit()
@@ -18,21 +21,28 @@ class PointScript : public Object
 public:
     PointScript(std::shared_ptr<ShaderProgram> sp): shader (sp)
     {
-        PointLight[0] = std::make_shared<PointLightV2>(glm::vec3{19,0,0});
+        PointLight[0] = std::make_shared<PointLightV2>(glm::vec3{0,-1,15});
     }
     void Start() override
     {
+        shader->use();
+        initSkyLight();
         initDirectLight();
         shader->setUniform("PointLightCount", 1);
         initPointLight(0);
         initSpotLight();
     }
 
+    void initSkyLight()
+    {
+        shader->setUniform("skyLight.color", glm::vec3{1.f});
+        shader->setUniform("skyLight.strength", 10.f);
+    }
+    
     void initDirectLight()
     {
-        shader->use();
         shader->setUniform("dirLight.direction", -0.2f, -1.0f, -0.3f);
-        shader->setUniform("dirLight.color", glm::vec3{0.2f});
+        shader->setUniform("dirLight.color", glm::vec3{1.f});
         shader->setUniform("dirLight.ambient", 0.05f, 0.05f, 0.05f);
         shader->setUniform("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
         shader->setUniform("dirLight.specular", 0.5f, 0.5f, 0.5f);
@@ -94,18 +104,78 @@ public:
     }
 
     
-    void Update() override
+    void Update(float DeltaTime) override
     {
-        PointLight[0]->Update();
-        Camera::GetCamera()->Update();
-        updatePointLight(0);
-        updateSpotLight();
+        PointLight[0]->Update(DeltaTime);
+        Camera::GetCamera()->Update(DeltaTime);
+
     }
     void Draw() override
     {
+        updatePointLight(0);
+        updateSpotLight();
         PointLight[0]->Draw();
     }
     ~PointScript() override = default;
+};
+
+
+class TurnModelScript : public Object
+{
+    struct POINT
+    {
+        double x;
+        double y;
+    };
+
+public:
+    TurnModelScript(std::shared_ptr<Object> Target) : Target(Target)
+    {
+        
+    }
+    void Start() override
+    {
+        input = InputSystem::GetInstance();
+        //window = Engine::GetInstance()->GetWindow();
+    }
+    void Update(float DeltaTime) override
+    {
+        if(input)
+        {
+            if(input->GetMouseButtonDown(true))
+            {
+                if(window == nullptr)
+                {
+                    window = Engine::GetInstance()->GetWindow();
+                    glfwGetCursorPos(window,&tempPoint.x ,&tempPoint.y);
+                    return;
+                }
+                POINT x;
+                glfwGetCursorPos(window,&x.x ,&x.y);
+
+                Target->SetRot(Target->GetRot() + glm::vec3{0, x.x - tempPoint.x, 0});
+                
+                tempPoint = x;
+            }else
+            {
+                if(window)
+                {
+                    window = nullptr;
+                }
+            }
+        }
+    }
+    void Draw() override
+    {
+        
+    }
+    ~TurnModelScript() override = default;
+
+private:
+    POINT tempPoint = { 10,10 };
+    InputSystem* input = nullptr;
+    GLFWwindow* window = nullptr;
+    std::shared_ptr<Object> Target;
 };
 
 void DrawNanosuit::Init()
@@ -113,19 +183,18 @@ void DrawNanosuit::Init()
     Level::Init();
 
     Camera::GetCamera()->Reset();
-    Camera::GetCamera()->SetPos(glm::vec3(20,0,0));
-    Camera::GetCamera()->SetFont(glm::vec3(1,0,0));
+    Camera::GetCamera()->SetPos(glm::vec3(0,0,20));
     
     std::string name = std::string{"nanosuit.obj"};
-    std::shared_ptr<ShaderProgram> sp = std::make_shared<ShaderProgram>("BoxV3");
+    std::shared_ptr<ShaderProgram> sp = std::make_shared<ShaderProgram>("NanoSuit0");
 
     auto m = std::make_shared<Model>(std::move(name), sp);
-    m->SetPos(glm::vec3{0,-10,0});
-    m->SetRot(glm::vec3{0,90,0});
     objs.push_back(m);
+    m->SetPos(glm::vec3{0,-10,0});
+    m->SetRot(glm::vec3{0,0,0});
 
     objs.push_back(std::make_shared<PointScript>(sp));
 
     
-    // objs.push_back(std::make_shared<PointLightV2>(glm::vec3{0, 0, 0}));
+    objs.push_back(std::make_shared<TurnModelScript>(m));
 }

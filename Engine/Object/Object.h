@@ -10,7 +10,7 @@ public:
     void* operator new(size_t s);
     Object();
     virtual void Start();
-    virtual void Update();
+    virtual void Update(float DeltaTime);
     virtual void Draw();
     virtual ~Object();
     void SetPos(glm::vec3 newPos);

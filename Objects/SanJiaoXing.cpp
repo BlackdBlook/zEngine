@@ -36,7 +36,7 @@ void SanJiaoXing::Draw()
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-void SanJiaoXing::Update()
+void SanJiaoXing::Update(float DeltaTime)
 {
     
 }

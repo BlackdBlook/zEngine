@@ -8,7 +8,7 @@ class PointLight : public Object
 
 public:
     void Init();
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
     virtual void Draw() override;
     PointLight(glm::vec3 pos);
     ~PointLight();

@@ -17,11 +17,11 @@ void Level::Start()
 	}
 }
 
-void Level::Update()
+void Level::Update(float DeltaTime)
 {
 	for (auto o : objs)
 	{
-		o->Update();
+		o->Update(DeltaTime);
 	}
 }
 

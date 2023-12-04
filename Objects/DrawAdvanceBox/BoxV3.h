@@ -28,7 +28,7 @@ public:
 
     BoxV3();
     void Start() override;
-    void Update() override;
+    void Update(float DeltaTime) override;
     void Draw() override;
     ~BoxV3() override;
     void addLight(std::shared_ptr<PointLightV2> light);

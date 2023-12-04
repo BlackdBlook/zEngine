@@ -9,7 +9,7 @@ class PointLightV2 : public Object
 
 public:
     void Init();
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
     virtual void Draw() override;
     PointLightV2(glm::vec3 pos);
     ~PointLightV2() override;

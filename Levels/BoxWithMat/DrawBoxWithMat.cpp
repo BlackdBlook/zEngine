@@ -18,7 +18,7 @@ float random_float(float min, float max) {
 class LevelScript1 : public Object
 {
 public:
-    void Update() override
+    void Update(float DeltaTime) override
     {
         const float Distance = -15.f;
         const double time = glfwGetTime() * -1;
@@ -43,7 +43,7 @@ public:
     {
         
     }
-    void Update() override
+    void Update(float DeltaTime) override
     {
         const float Distance = 5.f;
         const double time = glfwGetTime() * -4;

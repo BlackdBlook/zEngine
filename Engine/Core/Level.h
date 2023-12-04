@@ -8,7 +8,7 @@ class Level
 public:
     Level();
     virtual ~Level();
-    void Update();
+    void Update(float DeltaTime);
     void Draw();
     void Start();
     virtual void Init() {}

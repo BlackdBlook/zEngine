@@ -19,34 +19,35 @@ void PointLightV2::Init()
     glEnableVertexAttribArray(0);
 }
 
-#define MOVE_SPEED 0.001
+#define MOVE_SPEED 10
 
-void PointLightV2::Update()
+void PointLightV2::Update(float DeltaTime)
 {
     glm::vec3 pos = GetPos();
+    const float MoveSpeed = MOVE_SPEED * DeltaTime;
     if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
     {
-        pos+= glm::vec3(0,MOVE_SPEED,0);
+        pos+= glm::vec3(0,0,-MoveSpeed);
     }
     if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_S) == GLFW_PRESS)
     {
-        pos+= glm::vec3(0,-MOVE_SPEED,0);
+        pos+= glm::vec3(0,0,MoveSpeed);
     }
     if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
     {
-        pos+= glm::vec3(0,0,MOVE_SPEED);
+        pos += glm::vec3(-MoveSpeed, 0, 0);
     }
     if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_D) == GLFW_PRESS)
     {
-        pos+= glm::vec3(0,0,-MOVE_SPEED);
+        pos += glm::vec3(MoveSpeed, 0, 0);
     }
     if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_E) == GLFW_PRESS)
     {
-        pos += glm::vec3(MOVE_SPEED, 0, 0);
+        pos+= glm::vec3(0,MoveSpeed,0);
     }
     if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_Q) == GLFW_PRESS)
     {
-        pos += glm::vec3(-MOVE_SPEED, 0, 0);
+        pos+= glm::vec3(0,-MoveSpeed,0);
     }
     if(GetPos() != pos)
     {

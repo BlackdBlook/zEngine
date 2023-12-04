@@ -57,7 +57,7 @@ ShaderProgram::ShaderProgram(ShaderProgram&& other)
     noexcept
 {
     programID = other.programID;
-    shaderNameVer = std::move(other.shaderNameVer);
+    shaderNameVer = std::move(other.shaderNameVer); 
     shaderNameFar = std::move(other.shaderNameFar);
     // 拷贝和移动时放弃缓存
     //uniformCache = std::move(other.uniformCache);

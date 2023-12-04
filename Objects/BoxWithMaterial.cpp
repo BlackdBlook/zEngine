@@ -47,9 +47,9 @@ void BoxWithMaterial::Start()
     shader->setUniform("light.specular", 1.0f, 1.0f, 1.0f); 
 }
 
-void BoxWithMaterial::Update()
+void BoxWithMaterial::Update(float DeltaTime)
 {
-    Object::Update();
+    Object::Update(DeltaTime);
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
     double lerp = glfwGetTime() / 5.0f;
     mat4(model);

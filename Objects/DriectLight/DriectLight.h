@@ -3,5 +3,5 @@
 
 class DriectLight : public Object
 {
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
 };

@@ -35,7 +35,7 @@ void roteSJX::Draw()
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-void roteSJX::Update()
+void roteSJX::Update(float DeltaTime)
 {
     double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
 

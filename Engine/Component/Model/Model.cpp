@@ -159,7 +159,7 @@ std::vector<Texture2D> Model::loadMaterialTextures(aiMaterial *mat, aiTextureTyp
     return textures;
 }
 
-void Model::Update()
+void Model::Update(float DeltaTime)
 {
-    Object::Update();
+    Object::Update(DeltaTime);
 }

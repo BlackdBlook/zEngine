@@ -31,6 +31,6 @@ private:
     std::vector<Texture2D> loadMaterialTextures(aiMaterial *mat, aiTextureType type);
 
 public:
-    void Update() override;
+    void Update(float DeltaTime) override;
     void Draw() override;
 };

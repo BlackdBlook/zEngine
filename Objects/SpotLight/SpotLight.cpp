@@ -21,7 +21,7 @@ void SpotLight::Init()
 
 #define MOVE_SPEED 0.001
 
-void SpotLight::Update()
+void SpotLight::Update(float DeltaTime)
 {
     glm::vec3 pos = GetPos();
     if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
