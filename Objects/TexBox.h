@@ -13,7 +13,7 @@ public:
     TexBox(glm::vec3 pos);
     TexBox();
     ~TexBox();
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
     virtual void Draw() override; 
 };
 

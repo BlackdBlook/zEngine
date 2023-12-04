@@ -4,10 +4,12 @@
 
 #include "../../Header.h"
 #include "../../ToolKit/FileToolKit.h"
+#include "ToolKit/stb_img.h"
 
 AssetSystem::AssetSystem()
 {
     InitFileMap();
+    stbi_set_flip_vertically_on_load(false);
 }
 
 std::string AssetSystem::GetFilePathByName(const std::string& s)

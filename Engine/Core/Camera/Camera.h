@@ -30,7 +30,7 @@ public:
     }
     static Camera* GetCamera();
 
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
 
     Camera();
     Camera(std::function<void(void)> update);

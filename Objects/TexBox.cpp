@@ -86,7 +86,7 @@ TexBox::~TexBox()
     glDeleteVertexArrays(1, &vao);
 }
 
-void TexBox::Update()
+void TexBox::Update(float DeltaTime)
 {
     
 }

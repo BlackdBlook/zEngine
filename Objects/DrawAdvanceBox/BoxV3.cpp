@@ -118,9 +118,9 @@ void BoxV3::Start()
     shader->setUniform("PointLightCount", (int)PointLight.size());
 }
 
-void BoxV3::Update()
+void BoxV3::Update(float DeltaTime)
 {
-    Object::Update();
+    Object::Update(DeltaTime);
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
     double lerp = glfwGetTime() / 5.0f;
     mat4(model);

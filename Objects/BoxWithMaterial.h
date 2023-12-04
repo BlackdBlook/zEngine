@@ -19,7 +19,7 @@ public:
 
     BoxWithMaterial();
     void Start() override;
-    void Update() override;
+    void Update(float DeltaTime) override;
     void Draw() override;
     ~BoxWithMaterial() override;
     void setLight(std::shared_ptr<PointLight> light);

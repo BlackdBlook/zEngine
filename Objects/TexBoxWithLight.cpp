@@ -79,7 +79,7 @@ TexBoxWithLight::~TexBoxWithLight()
     glDeleteVertexArrays(1, &vao);
 }
 
-void TexBoxWithLight::Update()
+void TexBoxWithLight::Update(float DeltaTime)
 {
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
     double lerp = glfwGetTime() / 5.0f;

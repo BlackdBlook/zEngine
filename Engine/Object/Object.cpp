@@ -10,14 +10,15 @@ void* Object::operator new(size_t s)
 
 Object::Object()
 {
-
+    SetPos(glm::vec3{0,0,0});
+    SetRot(glm::vec3{0,0,0});
 }
 
 void Object::Start()
 {
 }
 
-void Object::Update()
+void Object::Update(float DeltaTime)
 {
 }
 

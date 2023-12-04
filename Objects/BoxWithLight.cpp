@@ -79,7 +79,7 @@ BoxWithLight::~BoxWithLight()
     glDeleteVertexArrays(1, &vao);
 }
 
-void BoxWithLight::Update()
+void BoxWithLight::Update(float DeltaTime)
 {
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
     double lerp = glfwGetTime() / 5.0f;

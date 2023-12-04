@@ -11,7 +11,7 @@ Texture ImgToolKit::ReadImage(const char* path)
         return NULL;
     }
     int width, height, nrChannels;
-    stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(false);
         
     unsigned char* Data = stbi_load(path, &width, &height, &nrChannels, 0);
     if (Data == nullptr)

@@ -11,7 +11,7 @@ class roteSJX:public Object
 public:
     roteSJX(bool b);
     virtual void Draw()override;
-    virtual void Update()override;
+    virtual void Update(float DeltaTime)override;
     virtual ~roteSJX();
 
 };

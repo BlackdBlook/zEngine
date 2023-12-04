@@ -12,7 +12,7 @@ public:
     Box(glm::vec3 pos);
     Box();
     ~Box();
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
     virtual void Draw() override; 
 };
 

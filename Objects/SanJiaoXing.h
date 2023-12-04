@@ -8,6 +8,6 @@ class SanJiaoXing :public Object
 public:
     SanJiaoXing();
     virtual void Draw()override;
-    virtual void Update()override;
+    virtual void Update(float DeltaTime)override;
 };
 

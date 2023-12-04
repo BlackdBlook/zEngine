@@ -8,27 +8,28 @@ class zEngine;
 class zEngine
 {
 public:
-    void processInput(GLFWwindow* window);
-    GLFWwindow* GetWindow();
     zEngine();
+    GLFWwindow* GetWindow();
     void Run();
-    void InitLevel();
     void SetLevel(int index);
+    float GetDeltaTime();
     static zEngine* GetInstance();
-protected:
 
+protected:
+    void InitLevel();
+    void InitInput();
+    void processInput(GLFWwindow* window);
 
 private:
     GLFWwindow* window;
     std::shared_ptr<Camera> camera = nullptr;
     std::shared_ptr<Level> level = nullptr;
-
+    float DeltaTime = 0;
     std::vector<std::function<void()>> levelList;
 
     void Update();
     void Draw();
     static zEngine* ins;
 };
-
 
 typedef zEngine Engine;

@@ -15,7 +15,7 @@ public:
     TexBoxWithLight(glm::vec3 pos);
     TexBoxWithLight();
     virtual ~TexBoxWithLight() override;
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
     virtual void Draw() override; 
 
     void setLight(std::shared_ptr<PointLight> light);

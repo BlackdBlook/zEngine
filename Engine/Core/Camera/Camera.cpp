@@ -26,14 +26,14 @@ void Camera::Reset(std::function<void(void)> update)
 {
     pos = glm::vec3(0,0,0);
 
-    font = glm::vec3(1,0,0);
+    font = glm::vec3(0,0,1);
 
     needUpdateView = true;
 
     updateFun = update;
 }
 
-void Camera::Update()
+void Camera::Update(float DeltaTime)
 {
     updateFun();
 }

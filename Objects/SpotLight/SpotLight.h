@@ -10,7 +10,7 @@ public:
     SpotLight(glm::vec3 pos);
     ~SpotLight() override;
     void Init();
-    virtual void Update() override;
+    virtual void Update(float DeltaTime) override;
     virtual void Draw() override;
 
 };

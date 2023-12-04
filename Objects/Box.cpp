@@ -83,7 +83,7 @@ Box::~Box()
     glDeleteVertexArrays(1, &vao);
 }
 
-void Box::Update()
+void Box::Update(float DeltaTime)
 {
     mat4(model);
     model = glm::translate(model, vec);

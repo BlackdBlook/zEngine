@@ -1,8 +1,8 @@
 #include "DriectLight.h"
 
-void DriectLight::Update()
+void DriectLight::Update(float DeltaTime)
 {
-    Object::Update();
+    Object::Update(DeltaTime);
 
 
     

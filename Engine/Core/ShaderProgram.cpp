@@ -39,13 +39,13 @@ void ShaderProgram::showAllActiveUnifrom()
     {
         GLint size;
         GLenum type;
-        GLint location;
         // Get the uniform info
         glGetActiveUniform(programID, index, maxUniformLen, NULL,
             &size, &type, uniformName);
         std::string s = uniformName;
         LOG("unifroms:", s);
     }
+    free(uniformName);
 }
 
 ShaderProgram::ShaderProgram()
@@ -57,7 +57,7 @@ ShaderProgram::ShaderProgram(ShaderProgram&& other)
     noexcept
 {
     programID = other.programID;
-    shaderNameVer = std::move(other.shaderNameVer);
+    shaderNameVer = std::move(other.shaderNameVer); 
     shaderNameFar = std::move(other.shaderNameFar);
     // 拷贝和移动时放弃缓存
     //uniformCache = std::move(other.uniformCache);

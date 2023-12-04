@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Component\Model\Model.cpp" />
+    <ClCompile Include="Engine\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
@@ -49,6 +50,82 @@
     <ClCompile Include="Objects\DrawAdvanceBox\BoxV3.cpp" />
     <ClCompile Include="Objects\DriectLight\DriectLight.cpp" />
     <ClCompile Include="Objects\PointLightV2.cpp" />
+    <ClCompile Include="Objects\PointLight\PointLightV3.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\zEngine.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\zEngine.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 </AdditionalOptions>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
     <ClCompile Include="Objects\SanJiaoXing.cpp" />
     <ClCompile Include="Objects\roteSJX.cpp" />
     <ClCompile Include="Objects\SpotLight\SpotLight.cpp" />
@@ -61,9 +138,11 @@
     <ClCompile Include="ToolKit\FileToolKit.cpp" />
     <ClCompile Include="ToolKit\ImgToolKit.cpp" />
     <ClCompile Include="ToolKit\stb_img.cpp" />
+    <ClCompile Include="ToolKit\TimerToolkit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Component\Model\Model.h" />
+    <ClInclude Include="Engine\Core\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
@@ -96,6 +175,7 @@
     <ClInclude Include="Objects\DriectLight\DriectLight.h" />
     <ClInclude Include="Objects\ObjectHeader.h" />
     <ClInclude Include="Objects\PointLightV2.h" />
+    <ClInclude Include="Objects\PointLight\PointLightV3.h" />
     <ClInclude Include="Objects\roteSJX.h" />
     <ClInclude Include="Objects\SanJiaoXing.h" />
     <ClInclude Include="Objects\SpotLight\SpotLight.h" />
@@ -106,6 +186,7 @@
     <ClInclude Include="ToolKit\FileToolKit.h" />
     <ClInclude Include="ToolKit\ImgToolKit.h" />
     <ClInclude Include="ToolKit\stb_img.h" />
+    <ClInclude Include="ToolKit\TimerToolkit.h" />
     <ClInclude Include="ToolKit\Typedef.h" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +208,27 @@
     <None Include="Shaders\texBoxWithLight.vsc" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MeshData\nanosuit\arm_dif.png" />
+    <Content Include="MeshData\nanosuit\arm_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\arm_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\body_dif.png" />
+    <Content Include="MeshData\nanosuit\body_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\body_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\glass_ddn.png" />
+    <Content Include="MeshData\nanosuit\glass_dif.png" />
+    <Content Include="MeshData\nanosuit\hand_dif.png" />
+    <Content Include="MeshData\nanosuit\hand_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\hand_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\helmet_diff.png" />
+    <Content Include="MeshData\nanosuit\helmet_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\helmet_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\leg_dif.png" />
+    <Content Include="MeshData\nanosuit\leg_showroom_ddn.png" />
+    <Content Include="MeshData\nanosuit\leg_showroom_spec.png" />
+    <Content Include="MeshData\nanosuit\LICENSE.txt" />
+    <Content Include="MeshData\nanosuit\nanosuit.blend" />
+    <Content Include="MeshData\nanosuit\nanosuit.mtl" />
+    <Content Include="MeshData\nanosuit\nanosuit.obj" />
     <Content Include="Shaders\BoxV3.fsc" />
     <Content Include="Shaders\BoxV3.vsc" />
     <Content Include="Shaders\BoxWithMat.fsc" />
