@@ -39,13 +39,13 @@ void ShaderProgram::showAllActiveUnifrom()
     {
         GLint size;
         GLenum type;
-        GLint location;
         // Get the uniform info
         glGetActiveUniform(programID, index, maxUniformLen, NULL,
             &size, &type, uniformName);
         std::string s = uniformName;
         LOG("unifroms:", s);
     }
+    free(uniformName);
 }
 
 ShaderProgram::ShaderProgram()
