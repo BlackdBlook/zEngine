@@ -9,14 +9,14 @@
 #include "Engine/Component/Mesh/Mesh.h"
 #include "Engine/Object/Object.h"
 
-class Model : public Object
+class Model : public Component
 {
 public:
     Model(const std::string& name, const std::shared_ptr<ShaderProgram>& shader_program);
     explicit Model(std::string&& name, const std::shared_ptr<ShaderProgram>& shader_program);
     std::shared_ptr<ShaderProgram> GetShaderProgram();
 
-private:
+protected:
     // std::unordered_map<std::string, Texture2D> loadedTex;
     std::string name;
     std::vector<Mesh> meshes;

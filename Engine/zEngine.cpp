@@ -15,11 +15,13 @@
 #include "Levels/BoxWithMat/DrawBoxWithMat.h"
 #include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
 #include "Levels/DrawDepthTestBuffer/DrawDepthTestBuffer.h"
+#include "Levels/DrawStencilTest/DrawStencilTest.h"
 #include "Levels/NanoSuit0/DrawNanosuit.h"
 #include "SubSystem/AssetSystem.h"
 #include "ToolKit/TimerToolkit.h"
 
 #define makeLevel(s) \
+level.reset();\
 level = std::shared_ptr<s>(new s());\
 level->Init();\
 level->Start()
@@ -88,7 +90,7 @@ void zEngine::Run()
         Camera::GetCamera()->Update(DeltaTime);
         Update();
         glClearColor(0,0,0, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         Draw();
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -110,6 +112,7 @@ void zEngine::Run()
 void zEngine::InitLevel()
 {
     addLevel(DrawSanjiaoxing);
+    addLevel(DrawStencilTest);
     addLevel(DrawDepthTestBuffer);
     addLevel(DrawNanosuit);
     addLevel(DrawRTSJX);

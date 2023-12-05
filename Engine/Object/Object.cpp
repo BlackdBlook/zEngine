@@ -1,29 +1,66 @@
 #include "Object.h"
 #include "memory"
 #include "../zEngine.h"
-void* Object::operator new(size_t s)
-{
-    Object* obj = (Object*)malloc(s);
-    obj->Object::Object();
-    return obj;
-}
+#include "Engine/Component/Component.h"
 
 Object::Object()
 {
     SetPos(glm::vec3{0,0,0});
     SetRot(glm::vec3{0,0,0});
+    Components = {};
 }
 
 void Object::Start()
 {
+    
 }
 
 void Object::Update(float DeltaTime)
 {
+    for(auto& c : Components)
+    {
+        c->Update(DeltaTime);
+    }
 }
 
 void Object::Draw()
 {
+    for(auto& c : Components)
+    {
+        c->Draw();
+    }
+}
+
+void Object::Attach(std::shared_ptr<Component> Target)
+{
+    if(!Target->Parent.expired())
+    {
+        auto oldParent = Target->Parent.lock();
+        oldParent->Dettach(Target);
+    }
+    Target->Parent = Level::GetCurrentLevel()->GetObjectPtr(this); 
+    Components.emplace_back(Target);
+    Target->OnAttached();
+}
+
+void Object::Dettach(std::shared_ptr<Component> Target)
+{
+    auto it = Components.begin();
+    
+    while(it != Components.end())
+    {
+        if(*it == Target)
+        {
+            LOG(L"移除组件");
+            Target->OnDettached();
+            Components.erase(it);
+            Target->Parent.reset();
+            return;
+        }
+    }
+    
+    LOG(L"尝试移除不存在的组件");
+    
 }
 
 Object::~Object()

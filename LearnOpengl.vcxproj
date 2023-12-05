@@ -27,6 +27,7 @@
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
     <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
     <ClCompile Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.cpp" />
+    <ClCompile Include="Levels\DrawStencilTest\DrawStencilTest.cpp" />
     <ClCompile Include="Levels\NanoSuit0\DrawNanosuit.cpp" />
     <ClCompile Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.cpp" />
     <ClCompile Include="MeshData\Box\Mesh_Box.cpp" />
@@ -50,6 +51,7 @@
     <ClCompile Include="Objects\BoxWithMaterial.cpp" />
     <ClCompile Include="Objects\DrawAdvanceBox\BoxV3.cpp" />
     <ClCompile Include="Objects\DriectLight\DriectLight.cpp" />
+    <ClCompile Include="Objects\MeshOutline\MeshOutline.cpp" />
     <ClCompile Include="Objects\PointLightV2.cpp" />
     <ClCompile Include="Objects\PointLight\PointLightV3.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -133,6 +135,7 @@
     <ClCompile Include="Objects\TexBox.cpp" />
     <ClCompile Include="Objects\PointLight.cpp" />
     <ClCompile Include="Objects\TexBoxWithLight.cpp" />
+    <ClCompile Include="Objects\TurnModelScript\TurnModelScript.cpp" />
     <ClCompile Include="ToolKit\glad.c" />
     <ClCompile Include="ToolKit\GLLib.cpp" />
     <ClCompile Include="main.cpp" />
@@ -150,6 +153,7 @@
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
     <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
     <ClInclude Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.h" />
+    <ClInclude Include="Levels\DrawStencilTest\DrawStencilTest.h" />
     <ClInclude Include="Levels\NanoSuit0\DrawNanosuit.h" />
     <ClInclude Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.h" />
     <ClInclude Include="MeshData\Box\Mesh_Box.h" />
@@ -175,6 +179,7 @@
     <ClInclude Include="Objects\BoxWithMaterial.h" />
     <ClInclude Include="Objects\DrawAdvanceBox\BoxV3.h" />
     <ClInclude Include="Objects\DriectLight\DriectLight.h" />
+    <ClInclude Include="Objects\MeshOutline\MeshOutline.h" />
     <ClInclude Include="Objects\ObjectHeader.h" />
     <ClInclude Include="Objects\PointLightV2.h" />
     <ClInclude Include="Objects\PointLight\PointLightV3.h" />
@@ -184,6 +189,7 @@
     <ClInclude Include="Objects\TexBox.h" />
     <ClInclude Include="Objects\PointLight.h" />
     <ClInclude Include="Objects\TexBoxWithLight.h" />
+    <ClInclude Include="Objects\TurnModelScript\TurnModelScript.h" />
     <ClInclude Include="ToolKit\GLLib.h" />
     <ClInclude Include="ToolKit\FileToolKit.h" />
     <ClInclude Include="ToolKit\ImgToolKit.h" />
@@ -236,6 +242,8 @@
     <Content Include="Shaders\BoxWithMat.fsc" />
     <Content Include="Shaders\BoxWithMat.vsc" />
     <Content Include="Shaders\DepthTest\DepthTest.fsc" />
+    <Content Include="Shaders\MeshOutLine.fsc\MeshOutLine.fsc" />
+    <Content Include="Shaders\MeshOutLine.fsc\MeshOutLine.vsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.fsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.vsc" />
   </ItemGroup>

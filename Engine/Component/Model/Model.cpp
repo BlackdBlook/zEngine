@@ -11,18 +11,12 @@
 Model::Model(const std::string& MeshName, const std::shared_ptr<ShaderProgram>& shader_program)
 : name(MeshName), shader_program(shader_program)
 {
-    mat4(view);
-    view = Camera::GetCamera()->GetCameraView();
-    shader_program->setUniform("view", view);
     loadModel();
 }
 
 Model::Model(std::string&& MeshName, const std::shared_ptr<ShaderProgram>& shader_program)
 : name(std::move(MeshName)), shader_program(shader_program)
 {
-    mat4(view);
-    view = Camera::GetCamera()->GetCameraView();
-    shader_program->setUniform("view", view);
     loadModel();
 }
 
@@ -33,25 +27,26 @@ std::shared_ptr<ShaderProgram> Model::GetShaderProgram()
 
 void Model::Draw()
 {
+    const auto P = Parent.lock();
+
+    mat4(view);
+    view = Camera::GetCamera()->GetCameraView();
+    shader_program->setUniform("view", view);
+
+
     mat4(model);
-    model = glm::translate(model, GetPos());
-    const glm::vec3 rot = GetRot();
-    
-    model = glm::rotate(model,
-     glm::radians(rot.x),
-     glm::vec3(1.0, 0.0, 0.0));
-    model = glm::rotate(model,
-        glm::radians(rot.y),
-        glm::vec3(0.0, 1.0, 0.0));
-    model = glm::rotate(model,
-        glm::radians(rot.z),
-        glm::vec3(0.0, 0.0, 1.0));
+    model = glm::translate(model, P->GetPos());
+ 
+    model *= Object::getRotMat(P->GetRot());
     shader_program->setUniform("model", model);
+
     mat4(projection);
     projection = glm::perspective(
         glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
+
     shader_program->setUniform("projection", projection);
     shader_program->setUniform("viewPos", Camera::GetCamera()->GetPos());
+
     for(auto& m : meshes)
     {
         m.Draw(shader_program.get());
@@ -161,5 +156,5 @@ std::vector<Texture2D> Model::loadMaterialTextures(aiMaterial *mat, aiTextureTyp
 
 void Model::Update(float DeltaTime)
 {
-    Object::Update(DeltaTime);
+    Component::Update(DeltaTime);
 }

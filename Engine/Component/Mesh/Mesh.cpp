@@ -26,34 +26,37 @@ Mesh::Mesh(Mesh&& mesh) noexcept
 
 void Mesh::Draw(ShaderProgram* shader)
 {
-    static const size_t size = 4;
-    char* number = new char[size];
-    for(int i = 0; i < diffuseTextures.size(); i++)
+    if(shader != nullptr)
     {
-        // 获取纹理序号（diffuse_textureN 中的 N）
-        sprintf_s(number, size, "%d", i);
-        const char* name = "texture_diffuse";
-        static const std::string ms = "material.";
-        const std::string unifrom = (ms + name + number);
-        diffuseTextures[i].Bind(i);
-        shader->setUniform(unifrom.c_str(), i);
+        static const size_t size = 4;
+        char* number = new char[size];
+        for(int i = 0; i < diffuseTextures.size(); i++)
+        {
+            // 获取纹理序号（diffuse_textureN 中的 N）
+            sprintf_s(number, size, "%d", i);
+            const char* name = "texture_diffuse";
+            static const std::string ms = "material.";
+            const std::string unifrom = (ms + name + number);
+            diffuseTextures[i].Bind(i);
+            shader->setUniform(unifrom.c_str(), i);
+        }
+
+        const int diffNum = (int)diffuseTextures.size();
+        for(int i = 0;i < specularTextures.size();i++)
+        {
+            // 获取纹理序号（diffuse_textureN 中的 N）
+            sprintf_s(number, size, "%d", i);
+            const char* name = "texture_specular";
+            static const std::string ms = "material.";
+            const std::string unifrom = (ms + name + number);
+            specularTextures[i].Bind(diffNum + i);
+            shader->setUniform(unifrom.c_str(), diffNum + i);
+        }
+
+        delete[] number;
+
+        shader->use();
     }
-
-    const int diffNum = (int)diffuseTextures.size();
-    for(int i = 0;i < specularTextures.size();i++)
-    {
-        // 获取纹理序号（diffuse_textureN 中的 N）
-        sprintf_s(number, size, "%d", i);
-        const char* name = "texture_specular";
-        static const std::string ms = "material.";
-        const std::string unifrom = (ms + name + number);
-        specularTextures[i].Bind(diffNum + i);
-        shader->setUniform(unifrom.c_str(), diffNum + i);
-    }
-
-    delete[] number;
-
-    shader->use();
     glActiveTexture(GL_TEXTURE0);
 
     // 绘制网格
