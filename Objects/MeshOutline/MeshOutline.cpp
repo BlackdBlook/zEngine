@@ -54,5 +54,6 @@ void MeshOutline::Draw()
     }
     
     glStencilMask(0xFF);
-    glEnable(GL_DEPTH_TEST); 
+    glEnable(GL_DEPTH_TEST);
+    glStencilFunc(GL_ALWAYS, 1, 0xFF);
 }
