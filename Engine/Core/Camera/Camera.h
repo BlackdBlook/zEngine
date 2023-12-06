@@ -4,9 +4,8 @@
 class Camera :public Object
 {
     glm::mat4 viewmat;
-    glm::vec3 pos;
-    glm::vec3 font;
-    std::function<void(void)> updateFun;
+
+    std::function<void(float)> updateFun;
     bool needUpdateView = true;
     static Camera* malloc();
 public:
@@ -31,16 +30,26 @@ public:
     static Camera* GetCamera();
 
     virtual void Update(float DeltaTime) override;
+    void Attach(std::shared_ptr<Component> Target) override;
+    void Dettach(std::shared_ptr<Component> Target) override;
 
     Camera();
-    Camera(std::function<void(void)> update);
-    void Reset(std::function<void(void)> update = []() {});
+    Camera(std::function<void(float)> update);
+    void Reset(std::function<void(float)> update = [](float) {});
     glm::mat4 GetCameraView();
-    glm::vec3 GetPos();
-    void SetPos(glm::vec3 pos);
+    
+    void SetPos(const glm::vec3& pos)override;
+    void SetRot(const glm::vec3& newRot) override;
+    void SetRot(const glm::quat& newRot) override;
+    void AddRot(const glm::vec3& newRot) override;
+
+    void SetLookAt(const glm::vec3& pos);
+    
     /*glm::vec3 GetRot();
     void SetRot(glm::vec3 rot);*/
-    void SetFont(glm::vec3);
+
     glm::vec3 GetFont();
+    glm::vec3 GetRight();
+    glm::vec3 GetUp();
 };
 

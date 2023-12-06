@@ -3,6 +3,7 @@
 #include "PointLight.h"
 #include "Engine/SubSystem/AssetSystem.h"
 #include "MeshData/Box/Mesh_Box.h"
+#include "ToolKit/QuaternionUtils/QuaternionUtils.h"
 
 
 BoxWithMaterial::BoxWithMaterial()
@@ -54,7 +55,7 @@ void BoxWithMaterial::Update(float DeltaTime)
     double lerp = glfwGetTime() / 5.0f;
     mat4(model);
     model = glm::translate(model, GetPos());
-    const glm::vec3 rot = GetRot();
+    const glm::vec3 rot = QuaternionUtils::eulerAnglesFromQuat(GetRot());
     
     model = glm::rotate(model,
      glm::radians(rot.x),

@@ -85,10 +85,7 @@ Box::~Box()
 
 void Box::Update(float DeltaTime)
 {
-    mat4(model);
-    model = glm::translate(model, vec);
-    model *= getRotMat(GetRot());
-    shader->setUniform("model", model);
+    shader->setUniform("model", GetModelMat());
 
     mat4(view);
     view = Camera::GetCamera()->GetCameraView();

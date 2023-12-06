@@ -62,27 +62,27 @@ void BoxV3::initSpotLight()
     shader->setUniform("spotLight.ambient",  glm::vec3{0});
     shader->setUniform("spotLight.diffuse",  glm::vec3{1}); // 将光照调暗了一些以搭配场景
     shader->setUniform("spotLight.specular", glm::vec3{1});
-    shader->setUniform("spotLight.cutOff",   glm::cos(glm::radians(10.0f)));
-    shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(15.0f)));
+    shader->setUniform("spotLight.cutOff",   glm::cos(glm::radians(15.0f)));
+    shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(22.5f)));
 }
 
 void BoxV3::updateSpotLight()
 {
     shader->setUniform("spotLight.position", Camera::GetCamera()->GetPos());
-    shader->setUniform("spotLight.direction", -Camera::GetCamera()->GetFont());
+    shader->setUniform("spotLight.direction", Camera::GetCamera()->GetFont());
 }
 
-BoxV3::BoxV3()
+BoxV3::BoxV3() : Tex("container2.png"), specular("container2_specular.png")
 {
     vao = 0;
     vbo = 0;
+    shader = std::make_shared<ShaderProgram>("BoxV3");
 }
 
 void BoxV3::Start()
 {
     Object::Start();
 
-    shader = std::make_shared<ShaderProgram>("BoxV3");
 
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
@@ -99,10 +99,10 @@ void BoxV3::Start()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
+
     shader->use();
 
-    Tex = Texture2D("container2.png");
-    specular = Texture2D("container2_specular.png");
+
     shader->setUniform("material.texture_diffuse0",0);
     shader->setUniform("material.texture_specular0",1);
     shader->setUniform("material.shininess", 32.0f);
@@ -121,27 +121,14 @@ void BoxV3::Start()
 void BoxV3::Update(float DeltaTime)
 {
     Object::Update(DeltaTime);
-    //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
-    double lerp = glfwGetTime() / 5.0f;
-    mat4(model);
-    model = glm::translate(model, GetPos());
-    const glm::vec3 rot = GetRot();
-    
-    model = glm::rotate(model,
-     glm::radians(rot.x),
-     glm::vec3(1.0, 0.0, 0.0));
-    model = glm::rotate(model,
-        glm::radians(rot.y),
-        glm::vec3(0.0, 1.0, 0.0));
-    model = glm::rotate(model,
-        glm::radians(rot.z),
-        glm::vec3(0.0, 0.0, 1.0));
-    shader->setUniform("model", model);
+
+    shader->setUniform("model", GetModelMat());
 }
 
 void BoxV3::Draw()
 {
     Object::Draw();
+
     mat4(view);
     view = Camera::GetCamera()->GetCameraView();
 

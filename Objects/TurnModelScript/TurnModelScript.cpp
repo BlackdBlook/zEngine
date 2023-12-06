@@ -26,8 +26,12 @@ void TurnModelScript::Update(float DeltaTime)
             POINT x;
             glfwGetCursorPos(window,&x.x ,&x.y);
             const auto p = Parent.lock();
-            p->SetRot(p->GetRot() + glm::vec3{0, x.x - tempPoint.x, 0});
-                
+            
+            glm::vec3 inputR =
+                {0, x.x - tempPoint.x, 0};
+
+            p->AddRot(inputR * 0.5f);
+
             tempPoint = x;
         }else
         {

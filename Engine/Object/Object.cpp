@@ -2,11 +2,14 @@
 #include "memory"
 #include "../zEngine.h"
 #include "Engine/Component/Component.h"
+#include "ToolKit/QuaternionUtils/QuaternionUtils.h"
 
 Object::Object()
 {
-    SetPos(glm::vec3{0,0,0});
-    SetRot(glm::vec3{0,0,0});
+    pos = glm::vec3{0,0,0};
+    rot = glm::vec3{0,0,0};
+    scale = glm::vec3{1,1,1};
+    GetModelMat();
     Components = {};
 }
 
@@ -67,9 +70,10 @@ Object::~Object()
 {
 }
 
-void Object::SetPos(glm::vec3 newPos)
+void Object::SetPos(const glm::vec3& newPos)
 {
     pos = newPos;
+    needUpdateModelMat = true;
 }
 
 glm::vec3 Object::GetPos()
@@ -77,21 +81,76 @@ glm::vec3 Object::GetPos()
     return pos;
 }
 
-void Object::SetRot(glm::vec3 newRot)
+
+
+void Object::SetRot(const glm::quat& newRot)
 {
     rot = newRot;
+    needUpdateModelMat = true;
 }
 
-glm::vec3 Object::GetRot()
+void AddRotateToQuat(glm::quat& quat, const glm::vec3 axis, float angle)
+{
+    quat *= glm::angleAxis(glm::radians(angle), axis);
+}
+
+void Object::SetRot(const glm::vec3& newRot)
+{
+    // 传入应为角度制
+    rot = glm::vec3{0};
+    AddRotateToQuat(rot, glm::vec3{0,0,1}, newRot.z);
+    AddRotateToQuat(rot, glm::vec3{0,1,0}, newRot.y);
+    AddRotateToQuat(rot, glm::vec3{1,0,0}, newRot.x);
+    
+    needUpdateModelMat = true;
+}
+
+void Object::AddRot(const glm::vec3& newRot)
+{
+    AddRotateToQuat(rot, glm::vec3{0,0,1}, newRot.z);
+    AddRotateToQuat(rot, glm::vec3{0,1,0}, newRot.y);
+    AddRotateToQuat(rot, glm::vec3{1,0,0}, newRot.x);
+    
+    needUpdateModelMat = true;
+}
+
+glm::quat Object::GetRot()
 {
     return rot;
 }
 
-glm::mat4 Object::getRotMat(glm::vec3 r)
+void Object::SetScale(const glm::vec3& newScale)
 {
-    mat4(ans);
-    ans = glm::rotate(ans, glm::radians(r.x), glm::vec3(1, 0, 0));
-    ans = glm::rotate(ans, glm::radians(r.y), glm::vec3(0, 1, 0));
-    ans = glm::rotate(ans, glm::radians(r.z), glm::vec3(0, 0, 1));
-    return ans;   
+    scale = newScale;
+    needUpdateModelMat = true;
 }
+
+glm::vec3 Object::GetScale()
+{
+    return scale;
+}
+
+glm::mat4 Object::GetModelMat()
+{
+    if(needUpdateModelMat)
+    {
+        needUpdateModelMat = false;
+        
+        mat4(m);
+
+        // 平移
+        m = glm::translate(m, pos);
+
+        // 旋转
+        glm::mat4 rotationMatrix = glm::mat4_cast(rot);
+        m *= rotationMatrix;
+
+        // 缩放
+        m = glm::scale(m, scale);
+
+        this->model = m;
+    }
+
+    return model;
+}
+

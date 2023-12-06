@@ -33,12 +33,8 @@ void Model::Draw()
     view = Camera::GetCamera()->GetCameraView();
     shader_program->setUniform("view", view);
 
-
-    mat4(model);
-    model = glm::translate(model, P->GetPos());
- 
-    model *= Object::getRotMat(P->GetRot());
-    shader_program->setUniform("model", model);
+    
+    shader_program->setUniform("model", P->GetModelMat());
 
     mat4(projection);
     projection = glm::perspective(
@@ -149,7 +145,7 @@ std::vector<Texture2D> Model::loadMaterialTextures(aiMaterial *mat, aiTextureTyp
         aiString str;
         // 拿到图的名称
         mat->GetTexture(type, i, &str);
-        Texture2D t = textures.emplace_back(str.C_Str());
+        textures.emplace_back(str.C_Str());
     }
     return textures;
 }

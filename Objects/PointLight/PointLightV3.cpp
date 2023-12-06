@@ -1,19 +1,9 @@
 #include "PointLightV3.h"
 
-void PointScript::Start()
-{
-    shader->use();
-    initDirectLight();
-        
-    for(int i = 0;i < PointLight.size();i++)
-    {
-        initPointLight(i);
-    }
-    initSpotLight();
-}
 
 void PointScript::initDirectLight()
 {
+    auto shader = this->TargetShader.lock();
     shader->setUniform("dirLight.direction", -0.2f, -1.0f, -0.3f);
     shader->setUniform("dirLight.ambient", glm::vec3{0.4f});
     shader->setUniform("dirLight.diffuse", glm::vec3{0.4f});
@@ -22,6 +12,7 @@ void PointScript::initDirectLight()
 
 void PointScript::initPointLight(int index)
 {
+    auto shader = this->TargetShader.lock();
     shader->setUniform("PointLightCount", index + 1);
     if(index > 4)
     {
@@ -51,12 +42,13 @@ void PointScript::updatePointLight(int index)
         
     std::string s = "pointLights[";
     s += indexChar[index];
-
+    auto shader = this->TargetShader.lock();
     shader->setUniform((s + "].position").c_str(), pos);
 }
 
 void PointScript::initSpotLight()
 {
+    auto shader = this->TargetShader.lock();
     shader->setUniform("spotLight.constant",  1.0f);
     // 衰减强度
     shader->setUniform("spotLight.linear",    0.0014f);
@@ -71,14 +63,18 @@ void PointScript::initSpotLight()
 
 void PointScript::updateSpotLight()
 {
+    auto shader = this->TargetShader.lock();
     shader->setUniform("spotLight.position", Camera::GetCamera()->GetPos());
-    shader->setUniform("spotLight.direction", -Camera::GetCamera()->GetFont());
+    shader->setUniform("spotLight.direction", Camera::GetCamera()->GetFont());
 }
 
 void PointScript::Update(float DeltaTime)
 {
-    PointLight[0]->Update(DeltaTime);
-    PointLight[1]->Update(DeltaTime);
+    if(EnableMoveLight)
+    {
+        PointLight[0]->Update(DeltaTime);
+        PointLight[1]->Update(DeltaTime);   
+    }
     Camera::GetCamera()->Update(DeltaTime);
 }
 

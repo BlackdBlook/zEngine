@@ -125,7 +125,7 @@ string PathToolKit::GetCurrentPath()
     char* ans = nullptr;
     if ((ans = _getcwd(NULL, 0)) == nullptr)
     {
-        LOG(L"ÃÂ¨ÃÂÃÂ·ÃÂ¥ÃÂÃÂÃÂ¨ÃÂ·ÃÂ¯ÃÂ¥ÃÂ¾ÃÂÃÂ¥ÃÂ¤ÃÂ±ÃÂ¨ÃÂ´ÃÂ¥");
+        LOG(L"运行路径获取失败");
         return "";
     }
     string s(ans);

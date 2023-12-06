@@ -26,6 +26,7 @@
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
     <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
+    <ClCompile Include="Levels\DrawBlend\DrawBlend.cpp" />
     <ClCompile Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.cpp" />
     <ClCompile Include="Levels\DrawStencilTest\DrawStencilTest.cpp" />
     <ClCompile Include="Levels\NanoSuit0\DrawNanosuit.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ToolKit\FileToolKit.cpp" />
     <ClCompile Include="ToolKit\ImgToolKit.cpp" />
+    <ClCompile Include="ToolKit\QuaternionUtils\QuaternionUtils.cpp" />
     <ClCompile Include="ToolKit\stb_img.cpp" />
     <ClCompile Include="ToolKit\TimerToolkit.cpp" />
   </ItemGroup>
@@ -152,6 +154,7 @@
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
     <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
+    <ClInclude Include="Levels\DrawBlend\DrawBlend.h" />
     <ClInclude Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.h" />
     <ClInclude Include="Levels\DrawStencilTest\DrawStencilTest.h" />
     <ClInclude Include="Levels\NanoSuit0\DrawNanosuit.h" />
@@ -193,6 +196,7 @@
     <ClInclude Include="ToolKit\GLLib.h" />
     <ClInclude Include="ToolKit\FileToolKit.h" />
     <ClInclude Include="ToolKit\ImgToolKit.h" />
+    <ClInclude Include="ToolKit\QuaternionUtils\QuaternionUtils.h" />
     <ClInclude Include="ToolKit\stb_img.h" />
     <ClInclude Include="ToolKit\TimerToolkit.h" />
     <ClInclude Include="ToolKit\Typedef.h" />

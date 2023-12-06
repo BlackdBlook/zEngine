@@ -13,7 +13,7 @@ void DrawDepthTestBuffer::Init()
     Level::Init();
 
     Camera::GetCamera()->Reset();
-    Camera::GetCamera()->SetPos(glm::vec3(0,0,10));
+    Camera::GetCamera()->SetPos(glm::vec3(0,0,15));
     
     std::string name = std::string{"nanosuit.obj"};
     {
@@ -23,7 +23,7 @@ void DrawDepthTestBuffer::Init()
         auto m = NewObject();
         m->Attach(std::make_shared<Model>(name, sp));
         m->Attach(std::make_shared<TurnModelScript>());
-        m->SetPos(glm::vec3{5,-10,0});
+        m->SetPos(glm::vec3{5,-10,-0});
         m->SetRot(glm::vec3{0,0,0});
     }
 
@@ -34,7 +34,7 @@ void DrawDepthTestBuffer::Init()
         auto m = NewObject();
         m->Attach(std::make_shared<Model>(std::move(name), sp));
         m->Attach(std::make_shared<TurnModelScript>());
-        m->SetPos(glm::vec3{-5,-10,-10});
+        m->SetPos(glm::vec3{-5,-10,-30});
         m->SetRot(glm::vec3{0,0,0});
     }
     

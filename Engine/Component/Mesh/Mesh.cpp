@@ -28,6 +28,7 @@ void Mesh::Draw(ShaderProgram* shader)
 {
     if(shader != nullptr)
     {
+        shader->use();
         static const size_t size = 4;
         char* number = new char[size];
         for(int i = 0; i < diffuseTextures.size(); i++)
@@ -54,8 +55,6 @@ void Mesh::Draw(ShaderProgram* shader)
         }
 
         delete[] number;
-
-        shader->use();
     }
     glActiveTexture(GL_TEXTURE0);
 

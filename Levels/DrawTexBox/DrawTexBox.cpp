@@ -2,7 +2,7 @@
 #include "../../Objects/TexBox.h"
 void DrawTexBox::Init()
 {
-    std::function<void(void)> update = []() {
+    std::function<void(float)> update = [](float) {
         float radius = 10.0f;
         glm::vec3 pos(
             (float)(sin(glfwGetTime()) * radius),
@@ -14,7 +14,7 @@ void DrawTexBox::Init()
         );
         auto c = Camera::GetCamera();
         c->SetPos(pos);
-        c->SetFont(font);
+        c->SetRot(font);
     };
 
     Camera::GetCamera()->Reset(update);

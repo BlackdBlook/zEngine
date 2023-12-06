@@ -14,6 +14,7 @@
 #include "Core/InputSystem/InputSystem.h"
 #include "Levels/BoxWithMat/DrawBoxWithMat.h"
 #include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
+#include "Levels/DrawBlend/DrawBlend.h"
 #include "Levels/DrawDepthTestBuffer/DrawDepthTestBuffer.h"
 #include "Levels/DrawStencilTest/DrawStencilTest.h"
 #include "Levels/NanoSuit0/DrawNanosuit.h"
@@ -45,7 +46,7 @@ void zEngine::processInput(GLFWwindow* window)
         LOG(error);
     }
     
-    for (int i = GLFW_KEY_0; i < GLFW_KEY_0 + levelList.size(); i++)
+    for (int i = GLFW_KEY_0; i < GLFW_KEY_0 + levelList.size() + 1; i++)
     {
         if (glfwGetKey(window, i) == GLFW_PRESS)
         {
@@ -111,14 +112,15 @@ void zEngine::Run()
 
 void zEngine::InitLevel()
 {
-    addLevel(DrawSanjiaoxing);
+    //addLevel(DrawSanjiaoxing);
+    addLevel(DrawBlend); 
     addLevel(DrawStencilTest);
     addLevel(DrawDepthTestBuffer);
-    addLevel(DrawNanosuit);
-    addLevel(DrawRTSJX);
-    addLevel(DrawBox);
-    addLevel(DrawTexBox);
-    addLevel(DrawBoxWithLight);
+    //addLevel(DrawNanosuit);
+    // addLevel(DrawRTSJX);
+    // addLevel(DrawBox);
+    // addLevel(DrawTexBox);
+    // addLevel(DrawBoxWithLight);
     addLevel(DrawTexBoxWithLight);
     addLevel(DrawBoxWithMat);
     addLevel(DrawAdvanceLight);
@@ -131,7 +133,11 @@ void zEngine::InitInput()
 
 void zEngine::SetLevel(int index)
 {
-    levelList[index](); 
+    if(levelList.size() + 1 < index)
+    {
+        return;
+    }
+    levelList[index - 1](); 
 }
 
 float zEngine::GetDeltaTime()

@@ -1,10 +1,12 @@
 #pragma once
 #include <chrono>
 #include <iostream>
+#include <glm/fwd.hpp>
 #include <glm/vec3.hpp>
 
 std::ostream &operator<<(std::ostream &output, const glm::vec3 &D );
 std::ostream &operator<<(std::ostream &output, const std::chrono::microseconds &D );
+std::ostream &operator<<(std::ostream &output, const glm::quat &D );
 
 class Log 
 {

@@ -1,5 +1,9 @@
 #include "Camera.h"
 
+#include "Engine/Component/Component.h"
+#include "Engine/Core/Level.h"
+#include "ToolKit/QuaternionUtils/QuaternionUtils.h"
+
 Camera* Camera::malloc()
 {
     void* ans = ::malloc(sizeof(Camera));
@@ -17,16 +21,16 @@ Camera::Camera()
     Reset();
 }
 
-Camera::Camera(std::function<void(void)> update)
+Camera::Camera(std::function<void(float)> update)
 {
     Reset(update);
 }
 
-void Camera::Reset(std::function<void(void)> update)
+void Camera::Reset(std::function<void(float)> update)
 {
-    pos = glm::vec3(0,0,0);
+    pos = VEC3_ZERO;
 
-    font = glm::vec3(0,0,1);
+    rot = VEC3_ZERO;
 
     needUpdateView = true;
 
@@ -35,7 +39,19 @@ void Camera::Reset(std::function<void(void)> update)
 
 void Camera::Update(float DeltaTime)
 {
-    updateFun();
+    updateFun(DeltaTime);
+    Object::Update(DeltaTime);
+}
+
+void Camera::Attach(std::shared_ptr<Component> Target)
+{
+    // 相机禁止挂载组件
+    assert(false);
+}
+
+void Camera::Dettach(std::shared_ptr<Component> Target)
+{
+    assert(false);
 }
 
 glm::mat4 Camera::GetCameraView()
@@ -43,43 +59,71 @@ glm::mat4 Camera::GetCameraView()
     if (needUpdateView)
     {
         needUpdateView = false;
-        auto font = GetFont();
-        auto right = glm::normalize(glm::cross(glm::vec3(0, 1, 0), font));
-        auto up = glm::normalize(glm::cross(font, right));
-        viewmat = glm::lookAt(pos, pos - font, up);
+        // auto font = -GetFont();
+        // auto right = glm::normalize(glm::cross(glm::vec3(0, 1, 0), font));
+        // auto up = glm::normalize(glm::cross(font, right));
+        viewmat = glm::lookAt(pos, pos + GetFont(), GetUp());
     }
     return viewmat;
 }
 
-glm::vec3 Camera::GetPos()
-{
-    return pos;
-}
-
-void Camera::SetPos(glm::vec3 pos)
+void Camera::SetPos(const glm::vec3& pos)
 {
     needUpdateView = true;
-    this->pos = pos;
+    
+    Object::SetPos(pos);
 }
 
-//glm::vec3 Camera::GetRot()
-//{
-//    return rot;
-//}
-//
-//void Camera::SetRot(glm::vec3 rot)
-//{
-//    this->rot = rot;
-//    needUpdateView = true;
-//}
-
-void Camera::SetFont(glm::vec3 font)
+void Camera::SetRot(const glm::vec3& newRot)
 {
-    this->font = font;
     needUpdateView = true;
+    Object::SetRot(newRot);
+}
+
+void Camera::SetRot(const glm::quat& newRot)
+{
+    needUpdateView = true;
+    Object::SetRot(newRot);
+}
+
+void Camera::AddRot(const glm::vec3& newRot)
+{
+    Object::AddRot(newRot);
+    needUpdateView = true;
+}
+
+void Camera::SetLookAt(const glm::vec3& pos)
+{
+    auto f = pos -  GetPos();
+    glm::vec3 forward = glm::normalize(f);
+
+    // 将前向量转换为四元数
+    glm::quat quaternion = glm::quatLookAt(forward, glm::vec3(0, 1, 0));
+    
+    SetRot(quaternion);
 }
 
 glm::vec3 Camera::GetFont()
 {
-    return font;
+    return QuaternionUtils::forwardVectorFromQuat(rot);
+}
+
+glm::vec3 Camera::GetRight()
+{
+    return glm::normalize(
+        glm::cross(
+            glm::vec3{0,1,0}
+            ,
+            GetFont()
+    ));
+}
+
+glm::vec3 Camera::GetUp()
+{
+    return glm::normalize(
+        glm::cross(
+            GetFont()
+            ,
+            GetRight()
+    ));
 }

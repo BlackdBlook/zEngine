@@ -1,16 +1,24 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
+#include <glm/fwd.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 class Level;
 class Component;
 
 
 class Object
 {
+protected:
+    bool needUpdateModelMat = true;
     glm::vec3 pos;
-    glm::vec3 rot;
+    glm::quat rot;
+    glm::quat rotE;
+    glm::vec3 scale;
+    
+    glm::mat4 model;
 
     std::vector<std::shared_ptr<Component>> Components;
 
@@ -25,10 +33,15 @@ public:
 
     
     virtual ~Object();
-    void SetPos(glm::vec3 newPos);
-    glm::vec3 GetPos();
-    void SetRot(glm::vec3 newRot);
-    glm::vec3 GetRot();
-    static glm::mat4 getRotMat(glm::vec3 r);
+    virtual void SetPos(const glm::vec3& newPos);
+    virtual glm::vec3 GetPos();
+    virtual void SetRot(const glm::vec3& newRot);
+    virtual void SetRot(const glm::quat& newRot);
+    virtual void AddRot(const glm::vec3& newRot);
+    virtual glm::quat GetRot();
+    virtual void SetScale(const glm::vec3& newScale);
+    virtual glm::vec3 GetScale();
+
+    glm::mat4 GetModelMat();
 };
 

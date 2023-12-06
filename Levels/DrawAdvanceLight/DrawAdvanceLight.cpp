@@ -30,7 +30,7 @@ public:
         0,
         cos(time) * Distance));
         
-        Camera::GetCamera()->SetFont(glm::vec3(
+        Camera::GetCamera()->SetRot(glm::vec3(
         sin(time) * Distance,
         0,
         cos(time) * Distance));
@@ -69,8 +69,8 @@ void DrawAdvanceLight::Test2()
     Camera::GetCamera()->Reset();
 
     const float Distance = 15.f;
-    Camera::GetCamera()->SetPos(glm::vec3(Distance, 0, 0));
-    Camera::GetCamera()->SetFont(glm::vec3(1, 0, 0));
+    Camera::GetCamera()->SetPos(glm::vec3(0, 0, Distance));
+    
     srand((int)glfwGetTime());
     
     std::vector<std::shared_ptr<PointLightV2>> points;
@@ -80,7 +80,7 @@ void DrawAdvanceLight::Test2()
         const float x = random_float(-5, 5);
         const float y = random_float(-3,3);
         const float z = random_float(-5, 5);
-        points.emplace_back(std::make_shared<PointLightV2>(glm::vec3(x,y,z)));
+        points.emplace_back(std::make_shared<PointLightV2>(glm::vec3( x, y, z)));
         objs.push_back(points[i]);
     }
 
@@ -117,7 +117,6 @@ void DrawAdvanceLight::Test1()
 
     const float Distance = 3.f;
     Camera::GetCamera()->SetPos(glm::vec3(Distance, 0, 0));
-    Camera::GetCamera()->SetFont(glm::vec3(1, 0, 0));
     
     auto Light = std::make_shared<PointLightV2>(glm::vec3(Distance - 2,0,0.5f));
 

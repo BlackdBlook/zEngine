@@ -23,14 +23,19 @@ public:
         const float Distance = -15.f;
         const double time = glfwGetTime() * -1;
         Camera::GetCamera()->SetPos(glm::vec3(
-        sin(time) * Distance,
-        0,
-        cos(time) * Distance));
+        sin(time) * Distance
+        ,0,
+        cos(time) * Distance
+        ));
+
+        Camera::GetCamera()->SetLookAt(glm::vec3{0});
         
-        Camera::GetCamera()->SetFont(glm::vec3(
-        sin(time) * Distance,
-        0,
-        cos(time) * Distance));
+        // Camera::GetCamera()->SetRot(glm::vec3(
+        // 0
+        // ,sin(time)
+        // ,0
+        // ));
+        // LOG(sin(time));
     }
 };
 
@@ -63,8 +68,7 @@ void DrawBoxWithMat::Init()
     Camera::GetCamera()->Reset();
 
     const float Distance = 15.f;
-    Camera::GetCamera()->SetPos(glm::vec3(Distance, 0, 0));
-    Camera::GetCamera()->SetFont(glm::vec3(1, 0, 0));
+    Camera::GetCamera()->SetPos(glm::vec3(0, 0, Distance));
     
     auto Light = std::make_shared<PointLight>(glm::vec3(0,0,0));
     srand((int)glfwGetTime());

@@ -29,14 +29,10 @@ void MeshOutline::Draw()
     mat4(view);
     view = Camera::GetCamera()->GetCameraView();
     sp->setUniform("view", view);
-    
-    
-    mat4(model);
-    model = glm::translate(model, P->GetPos() - glm::vec3{ 0, 0.6f, 0});
-    
-    model *= Object::getRotMat(P->GetRot());
-    
-    model = glm::scale(model, glm::vec3{1 + OutlineSize});
+
+    auto model = P->GetModelMat();
+
+    model = glm::scale(model, glm::vec3{P->GetScale() + OutlineSize});
     
     sp->setUniform("model", model);
     

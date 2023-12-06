@@ -38,30 +38,30 @@ Texture2D::Texture2D()
 
 }
 
-Texture2D::Texture2D(const Texture2D& t)
-{
-    this->texture = t.texture;
-    this->unit = t.unit;
-    this->Image = std::move(t.Image);
-}
-
 Texture2D::Texture2D(Texture2D&& t) noexcept
 {
     this->texture = t.texture;
+    t.texture = 0;
     this->unit = t.unit;
+    t.unit = 0;
     this->Image = std::move(t.Image);
+    t.Image = nullptr;
 }
 
 Texture2D::~Texture2D()
 {
-    
+     glDeleteTextures(1, &texture);
 }
 
-void Texture2D::operator=(Texture2D&& t)noexcept
+Texture2D& Texture2D::operator=(Texture2D&& t)noexcept
 {
     this->texture = t.texture;
+    t.texture = 0;
     this->unit = t.unit;
+    t.unit = 0;
     this->Image = std::move(t.Image);
+    t.Image = nullptr;
+    return *this;
 }
 
 GLID Texture2D::GetTexture() const
@@ -71,6 +71,11 @@ GLID Texture2D::GetTexture() const
 
 void Texture2D::Bind(GLID unit)
 {
+    if(texture == 0)
+    {
+        LOG("Texture are already deleted");
+        return;
+    }
     glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(GL_TEXTURE_2D,texture);
 }

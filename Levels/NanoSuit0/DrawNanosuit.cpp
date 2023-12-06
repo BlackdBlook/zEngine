@@ -33,9 +33,9 @@ void DrawNanosuit::Init()
     auto m = NewObject();
     m->Attach(std::make_shared<Model>(std::move(name), sp));
     m->Attach(std::make_shared<TurnModelScript>());
+    m->Attach(std::make_shared<PointScript>(sp));
     m->SetPos(glm::vec3{0,-10,0});
     m->SetRot(glm::vec3{0,0,0});
-
-    objs.push_back(std::make_shared<PointScript>(sp));
+    
     
 }

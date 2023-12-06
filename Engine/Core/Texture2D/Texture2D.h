@@ -8,10 +8,10 @@ class Texture2D
 public:
     Texture2D(const char* name);
     Texture2D();
-    Texture2D(const Texture2D& t);
+    Texture2D(const Texture2D& t) = delete;
     Texture2D(Texture2D&& t)noexcept;
     ~Texture2D();
-    void operator=(Texture2D&& t)noexcept;
+    Texture2D& operator=(Texture2D&& t)noexcept;
     GLID GetTexture()const;
     void Bind(GLID unit = 0);
 };
