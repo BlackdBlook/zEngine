@@ -6,6 +6,7 @@
 #include "Engine/Object/Object.h"
 #include "MeshData/Box/Mesh_Box.h"
 #include "Objects/DrawAdvanceBox/BoxV3.h"
+#include "Objects/PlaneWithLight/PlaneWithLight.h"
 #include "Objects/PointLight/PointLightV3.h"
 #include "Objects/TurnModelScript/TurnModelScript.h"
 #include "ToolKit/Typedef.h"
@@ -74,7 +75,7 @@ void DrawBlend::Init()
     
     cam->Reset([cam](float DeltaTime)
     {
-        constexpr float MOVE_SPEED = 5;
+        constexpr float MOVE_SPEED = 20;
         glm::vec3 pos = cam->GetPos();
         const float MoveSpeed = MOVE_SPEED * DeltaTime;
         bool flag = false;
@@ -85,8 +86,6 @@ void DrawBlend::Init()
         u = glm::normalize(u);
         auto f = glm::cross(r,u);
         f = glm::normalize(f);
-
-        LOG(f);
         
         if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
         {
@@ -128,29 +127,48 @@ void DrawBlend::Init()
         
     });
     
-    cam->SetPos(glm::vec3{0,3, 0});
+    cam->SetPos(glm::vec3{0,10, 10});
     
-    auto plan = std::static_pointer_cast<BoxV3>(
-        objs.emplace_back(NewSPtr<BoxV3>()));
-    
-    plan->Tex = {"marble.jpg"};
-    plan->specular = {"marble.jpg"};
 
-    plan->SetPos(glm::vec3{0,0,0});
-    plan->SetScale(glm::vec3{100.f,0.01f,100.f});
-    
-    //plan->Attach(NewSPtr<PointScript>(plan->shader, false));
 
-    std::string name = std::string{"nanosuit.obj"};
-    std::shared_ptr<ShaderProgram> sp = std::make_shared<ShaderProgram>("NanoSuit0");
-
-    auto m = NewObject();
-    m->Attach(std::make_shared<Model>(std::move(name), sp));
-    m->Attach(std::make_shared<TurnModelScript>());
-    m->Attach(std::make_shared<PointScript>(sp));
-    m->SetPos(glm::vec3{0,-10,0});
-    m->SetRot(glm::vec3{0,0,0});
+    {
+        auto plan = std::static_pointer_cast<BoxV3>(
+        objs.emplace_back(NewSPtr<BoxV3>("marble.jpg", "marble.jpg")));
     
+        plan->SetPos(glm::vec3{0,0,0});
+        plan->SetScale(glm::vec3{100.f,0.01f,100.f});
+    }
+
+    {
+        std::shared_ptr<ShaderProgram> sp = std::make_shared<ShaderProgram>("NanoSuit0");
+            
+        std::string name = std::string{"nanosuit.obj"};
+        auto m = NewObject();
+        m->Attach(std::make_shared<Model>(std::move(name), sp));
+    
+        m->Attach(std::make_shared<PointScript>(sp, false));
+        m->SetPos(glm::vec3{0,0,-10});
+        m->SetRot(glm::vec3{0,0,0});
+    }
+
+
+    {
+        auto plan = std::static_pointer_cast<BoxV3>(
+        objs.emplace_back(NewSPtr<BoxV3>("marble.jpg", "marble.jpg")));
+
+        plan->SetPos(glm::vec3{-5,10,5});
+        plan->SetScale(glm::vec3{2,2,2});
+    }
+
+    {
+        auto plan = std::static_pointer_cast<PlaneWithLight>(
+        objs.emplace_back(NewSPtr<PlaneWithLight>("grass.png","grass.png")));
+        
+        //plan->SetPos(glm::vec3{5,10,5});
+        plan->SetPos(glm::vec3{5,10,5});
+        plan->SetRot(glm::vec3{-90,-180,0});
+        plan->SetScale(glm::vec3{1,1,1});
+    }
     
     
 }

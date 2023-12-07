@@ -67,6 +67,14 @@ glm::mat4 Camera::GetCameraView()
     return viewmat;
 }
 
+glm::mat4 Camera::GetCameraProjection()
+{
+    static const glm::mat4 projection =
+        glm::perspective(glm::radians(90.0f),
+        2560.0f / 1440, 0.1f, 100.0f);
+    return projection;
+}
+
 void Camera::SetPos(const glm::vec3& pos)
 {
     needUpdateView = true;

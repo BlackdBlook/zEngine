@@ -54,11 +54,12 @@ void PointScript::initSpotLight()
     shader->setUniform("spotLight.linear",    0.0014f);
     // 二次衰减强度
     shader->setUniform("spotLight.quadratic", 0.000007f);
-    shader->setUniform("spotLight.ambient",  glm::vec3{0.4f});
+    shader->setUniform("spotLight.color",  glm::vec3{1});
+    shader->setUniform("spotLight.ambient",  glm::vec3{0});
     shader->setUniform("spotLight.diffuse",  glm::vec3{1}); // 将光照调暗了一些以搭配场景
-    shader->setUniform("spotLight.specular", glm::vec3{0.5f});
-    shader->setUniform("spotLight.cutOff",   glm::cos(glm::radians(10.0f)));
-    shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(15.0f)));
+    shader->setUniform("spotLight.specular", glm::vec3{1});
+    shader->setUniform("spotLight.cutOff",   glm::cos(glm::radians(30.0f)));
+    shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(60.f)));
 }
 
 void PointScript::updateSpotLight()

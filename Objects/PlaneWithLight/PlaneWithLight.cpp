@@ -1,14 +1,15 @@
-#include "BoxV3.h"
+﻿#include "PlaneWithLight.h"
 #include "Header.h"
 #include "Engine/Core/Camera/Camera.h"
 #include "MeshData/Box/Mesh_Box.h"
+#include "MeshData/Plan/Mesh_Plan.h"
 #include "Objects/PointLightV2.h"
 
 static constexpr char indexChar[] = {'0','1','2','3'};
 
 //#define LightColor 10.f
 
-void BoxV3::initDirectLight()
+void PlaneWithLight::initDirectLight()
 {
     shader->setUniform("dirLight.direction", -0.2f, -1.0f, -0.3f);
     shader->setUniform("dirLight.color", glm::vec3{0.2f});
@@ -17,7 +18,7 @@ void BoxV3::initDirectLight()
     shader->setUniform("dirLight.specular", 0.5f, 0.5f, 0.5f);
 }
 
-void BoxV3::initPointLight(int index)
+void PlaneWithLight::initPointLight(int index)
 {
     if(index > 4)
     {
@@ -37,7 +38,7 @@ void BoxV3::initPointLight(int index)
     //shader->setUniform("light.color",  1.f, 1.f, 1.f);
 }
 
-void BoxV3::updatePointLight(int index)
+void PlaneWithLight::updatePointLight(int index)
 {
     if(index > 3)
     {
@@ -51,7 +52,7 @@ void BoxV3::updatePointLight(int index)
     shader->setUniform((s + "].position").c_str(), pos);
 }
 
-void BoxV3::initSpotLight()
+void PlaneWithLight::initSpotLight()
 {
     shader->setUniform("spotLight.constant",  1.0f);
     // 衰减强度
@@ -66,28 +67,21 @@ void BoxV3::initSpotLight()
     shader->setUniform("spotLight.outerCutOff",   glm::cos(glm::radians(60.0f)));
 }
 
-void BoxV3::updateSpotLight()
+void PlaneWithLight::updateSpotLight()
 {
     shader->setUniform("spotLight.position", Camera::GetCamera()->GetPos());
     shader->setUniform("spotLight.direction", Camera::GetCamera()->GetFont());
 }
 
-BoxV3::BoxV3() : Tex("container2.png"), specular("container2_specular.png")
-{
-    vao = 0;
-    vbo = 0;
-    shader = std::make_shared<ShaderProgram>("BoxV3");
-}
-
-BoxV3::BoxV3(const char* diff, const char* spec)
+PlaneWithLight::PlaneWithLight(const char* diff, const char* spec)
 : Tex(diff), specular(spec)
 {
     vao = 0;
     vbo = 0;
-    shader = std::make_shared<ShaderProgram>("BoxV3");
+    shader = std::make_shared<ShaderProgram>("DrawBlend");
 }
 
-void BoxV3::Start()
+void PlaneWithLight::Start()
 {
     Object::Start();
 
@@ -97,9 +91,9 @@ void BoxV3::Start()
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(BoxVertices), BoxVertices, GL_STATIC_DRAW);
-
-
+    glBufferData(GL_ARRAY_BUFFER,
+        sizeof(Mesh_Plan::planeVertices), Mesh_Plan::planeVertices, GL_STATIC_DRAW);
+    
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -114,26 +108,26 @@ void BoxV3::Start()
     shader->setUniform("material.texture_diffuse0",0);
     shader->setUniform("material.texture_specular0",1);
     shader->setUniform("material.shininess", 32.0f);
-    //
-    // for(int i = 0;i < PointLight.size();i++)
-    // {
-    //     initPointLight(i);
-    // }
-    //
-    // initDirectLight();
+    
+    for(int i = 0;i < PointLight.size();i++)
+    {
+        initPointLight(i);
+    }
+    
+    initDirectLight();
 
     initSpotLight();
     shader->setUniform("PointLightCount", (int)PointLight.size());
 }
 
-void BoxV3::Update(float DeltaTime)
+void PlaneWithLight::Update(float DeltaTime)
 {
     Object::Update(DeltaTime);
 
     shader->setUniform("model", GetModelMat());
 }
 
-void BoxV3::Draw()
+void PlaneWithLight::Draw()
 {
     Object::Draw();
 
@@ -159,13 +153,13 @@ void BoxV3::Draw()
     
 }
 
-BoxV3::~BoxV3()
+PlaneWithLight::~PlaneWithLight()
 {
     glDeleteBuffers(1,&vbo);
     glDeleteVertexArrays(1, &vao);
 }
 
-void BoxV3::addLight(std::shared_ptr<PointLightV2> light)
+void PlaneWithLight::addLight(std::shared_ptr<PointLightV2> light)
 {
     PointLight.push_back(light);
 }

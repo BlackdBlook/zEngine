@@ -27,7 +27,7 @@ Texture2D::Texture2D(const char* name)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Image->width, Image->height,
+        glTexImage2D(GL_TEXTURE_2D, 0, channel, Image->width, Image->height,
             0, channel, GL_UNSIGNED_BYTE, Image->Data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }

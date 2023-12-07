@@ -37,6 +37,7 @@ public:
     Camera(std::function<void(float)> update);
     void Reset(std::function<void(float)> update = [](float) {});
     glm::mat4 GetCameraView();
+    glm::mat4 GetCameraProjection();
     
     void SetPos(const glm::vec3& pos)override;
     void SetRot(const glm::vec3& newRot) override;

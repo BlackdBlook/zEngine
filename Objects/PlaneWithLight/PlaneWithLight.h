@@ -1,16 +1,13 @@
-#pragma once
-#include "Engine/Core/Texture2D/Texture2D.h"
-#include "Engine/Object/Object.h"
-#include "Objects/PointLight.h"
+﻿#pragma once
+#include "Objects/DrawAdvanceBox/BoxV3.h"
 
-class PointLightV2;
-
-class BoxV3 : public Object
+class PlaneWithLight : public Object
 {
 public:
     Texture2D Tex;
     Texture2D specular;
     GLID vao,vbo;
+
     std::shared_ptr<ShaderProgram> shader;
 
     std::vector<std::shared_ptr<PointLightV2>> PointLight;
@@ -22,14 +19,12 @@ public:
     
     void initSpotLight();
     void updateSpotLight();
-    
-public:
 
-    BoxV3();
-    BoxV3(const char* diff, const char* spec);
+    
+    PlaneWithLight(const char* diff, const char* spec);
     void Start() override;
     void Update(float DeltaTime) override;
     void Draw() override;
-    ~BoxV3() override;
+    ~PlaneWithLight() override;
     void addLight(std::shared_ptr<PointLightV2> light);
 };

@@ -59,16 +59,12 @@ void PointLightV2::Draw()
 {
     shader->use();
     mat4(model);
-    mat4(view);
-    mat4(projection);
     
     model = glm::translate(model,GetPos());
     model = glm::scale(model, glm::vec3(0.5));
     shader->setUniform("model", model);
-    view = Camera::GetCamera()->GetCameraView();
-    shader->setUniform("view", view);
-    projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
-    shader->setUniform("projection", projection);
+    shader->setUniform("view", Camera::GetCamera()->GetCameraView());
+    shader->setUniform("projection", Camera::GetCamera()->GetCameraProjection());
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }

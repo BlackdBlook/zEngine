@@ -16,7 +16,7 @@ public:
     {
         PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{-3,3,0}));
         PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{5,3,0}));
-        sp->setUniform("material.shininess", 1.f);
+        sp->setUniform("material.shininess", 32.f);
 
         auto shader = this->TargetShader.lock();
         shader->use();

@@ -28,19 +28,13 @@ std::shared_ptr<ShaderProgram> Model::GetShaderProgram()
 void Model::Draw()
 {
     const auto P = Parent.lock();
-
-    mat4(view);
-    view = Camera::GetCamera()->GetCameraView();
-    shader_program->setUniform("view", view);
+    
+    shader_program->setUniform("view", Camera::GetCamera()->GetCameraView());
 
     
     shader_program->setUniform("model", P->GetModelMat());
-
-    mat4(projection);
-    projection = glm::perspective(
-        glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
-
-    shader_program->setUniform("projection", projection);
+    
+    shader_program->setUniform("projection", Camera::GetCamera()->GetCameraProjection());
     shader_program->setUniform("viewPos", Camera::GetCamera()->GetPos());
 
     for(auto& m : meshes)
