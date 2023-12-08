@@ -11,7 +11,9 @@ typedef unsigned long long uint64;
 typedef float float32;
 typedef double float64;
 typedef char char8;
+typedef char int8;
 typedef unsigned char uchar8;
+typedef unsigned char uint8;
 
 // stl
 using string  = std::string;
@@ -22,6 +24,8 @@ typedef GLuint GLID;
 // shared_ptr
 template<typename T>
 using SPtr = std::shared_ptr<T>;
+template<typename T>
+using WPtr = std::weak_ptr<T>;
 
 template<typename T, typename ...Args>
 inline SPtr<T> NewSPtr(Args&&... args)

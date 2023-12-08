@@ -2,6 +2,7 @@
 #include "PointLight.h"
 #include "../Engine/zEngine.h"
 #include "../Engine/Core/Camera/Camera.h"
+#include "Engine/Core/DrawCommand/RenderCommandQueue.h"
 #include "MeshData/Box/Mesh_Box.h"
 
 void PointLightV2::Init()
@@ -65,8 +66,17 @@ void PointLightV2::Draw()
     shader->setUniform("model", model);
     shader->setUniform("view", Camera::GetCamera()->GetCameraView());
     shader->setUniform("projection", Camera::GetCamera()->GetCameraProjection());
-    glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    // glBindVertexArray(vao);
+    // glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    PushRenderCommand([this](RenderCommand& command)
+    {
+        command.vao = vao;
+        command.vertexNum = 36;
+        command.Shader = shader.get();
+        command.DrawType = DrawType::DrawArrays;
+        command.WorldPos = GetPos();
+    });
 }
 
 PointLightV2::PointLightV2(glm::vec3 pos)

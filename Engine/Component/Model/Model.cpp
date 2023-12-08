@@ -25,15 +25,28 @@ std::shared_ptr<ShaderProgram> Model::GetShaderProgram()
     return shader_program;
 }
 
+void Model::OnAttached()
+{
+    for(auto& m : meshes)
+    {
+        m.Parent = Parent;
+    }
+}
+
+void Model::OnDettached()
+{
+    for(auto& m : meshes)
+    {
+        m.Parent.reset();
+    }
+}
+
 void Model::Draw()
 {
     const auto P = Parent.lock();
     
     shader_program->setUniform("view", Camera::GetCamera()->GetCameraView());
-
-    
     shader_program->setUniform("model", P->GetModelMat());
-    
     shader_program->setUniform("projection", Camera::GetCamera()->GetCameraProjection());
     shader_program->setUniform("viewPos", Camera::GetCamera()->GetPos());
 

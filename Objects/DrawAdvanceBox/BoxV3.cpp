@@ -1,6 +1,8 @@
 #include "BoxV3.h"
 #include "Header.h"
+#include "Engine/Core/Shader.h"
 #include "Engine/Core/Camera/Camera.h"
+#include "Engine/Core/DrawCommand/RenderCommandQueue.h"
 #include "MeshData/Box/Mesh_Box.h"
 #include "Objects/PointLightV2.h"
 
@@ -114,13 +116,13 @@ void BoxV3::Start()
     shader->setUniform("material.texture_diffuse0",0);
     shader->setUniform("material.texture_specular0",1);
     shader->setUniform("material.shininess", 32.0f);
-    //
-    // for(int i = 0;i < PointLight.size();i++)
-    // {
-    //     initPointLight(i);
-    // }
-    //
-    // initDirectLight();
+    
+    for(int i = 0;i < PointLight.size();i++)
+    {
+        initPointLight(i);
+    }
+    
+    initDirectLight();
 
     initSpotLight();
     shader->setUniform("PointLightCount", (int)PointLight.size());
@@ -146,16 +148,27 @@ void BoxV3::Draw()
 
     shader->setUniform("viewPos", Camera::GetCamera()->GetPos());
 
-    // for(int i = 0;i < PointLight.size();i++)
-    // {
-    //     updatePointLight(i);
-    // }
+    for(int i = 0;i < PointLight.size();i++)
+    {
+        updatePointLight(i);
+    }
     updateSpotLight();
+
+    PushRenderCommand([this](RenderCommand& command)
+    {
+        command.vao = vao;
+        command.vertexNum = 36;
+        command.Shader = shader.get();
+        command.DrawType = DrawType::DrawArrays;
+        command.Textures.push_back(&Tex);
+        command.Textures.push_back(&specular);
+        command.WorldPos = GetPos();
+    });
     
-    Tex.Bind();
-    specular.Bind(1);
-    glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    // Tex.Bind();
+    // specular.Bind(1);
+    // glBindVertexArray(vao);
+    // glDrawArrays(GL_TRIANGLES, 0, 36);
     
 }
 

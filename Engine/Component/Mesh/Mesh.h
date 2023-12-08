@@ -29,4 +29,6 @@ private:
     unsigned int VAO, VBO, EBO;
     /*  函数  */
     void setupMesh();
+
+    void InitTexture(ShaderProgram* shader);
 };  

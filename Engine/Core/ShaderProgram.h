@@ -4,6 +4,15 @@
 #include <string>
 #include <unordered_map>
 #include <glm/glm.hpp>
+
+enum class BlendType
+{
+    Opaque,
+    Translucent,
+    Mask,
+};
+
+enum class BlendType;
 class Shader;
 class ShaderProgram
 {
@@ -21,6 +30,8 @@ class ShaderProgram
     void Attach(Shader& s);
 
 public:
+    BlendType BlendType = BlendType::Opaque;
+    std::string GetName();
     void use();
     ShaderProgram();
     ShaderProgram(ShaderProgram&& other) noexcept;

@@ -124,6 +124,11 @@ void ShaderProgram::Attach(Shader& vs)
     glCheckError();
 }
 
+std::string ShaderProgram::GetName()
+{
+    return shaderNameVer + "_" + shaderNameFar;
+}
+
 void ShaderProgram::operator+=(Shader& s)
 {
     Attach(s);

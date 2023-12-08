@@ -79,6 +79,7 @@ PlaneWithLight::PlaneWithLight(const char* diff, const char* spec)
     vao = 0;
     vbo = 0;
     shader = std::make_shared<ShaderProgram>("DrawBlend");
+    shader->BlendType = BlendType::Opaque;
 }
 
 void PlaneWithLight::Start()

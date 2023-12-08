@@ -11,6 +11,7 @@
 #include <GLFW/glfw3.h>
 
 #include "../Levels/TexBoxWithLight/DrawTexBoxWithLight.h"
+#include "Core/DrawCommand/RenderCommandQueue.h"
 #include "Core/InputSystem/InputSystem.h"
 #include "Levels/BoxWithMat/DrawBoxWithMat.h"
 #include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
@@ -64,6 +65,8 @@ zEngine::zEngine()
     window = GLLib::CreateWindow(2560,1440);
     
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     InputSystem::GetInstance()->Init(window);
     AssetSystem::GetInstance();
@@ -93,6 +96,7 @@ void zEngine::Run()
         glClearColor(0,0,0, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         Draw();
+        RenderCommandQueue::Flush();
         glfwSwapBuffers(window);
         glfwPollEvents();
 

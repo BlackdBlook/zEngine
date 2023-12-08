@@ -15,13 +15,14 @@ public:
     Model(const std::string& name, const std::shared_ptr<ShaderProgram>& shader_program);
     explicit Model(std::string&& name, const std::shared_ptr<ShaderProgram>& shader_program);
     std::shared_ptr<ShaderProgram> GetShaderProgram();
-
+    virtual void OnAttached() override;
+    virtual void OnDettached() override;
 protected:
     // std::unordered_map<std::string, Texture2D> loadedTex;
     std::string name;
     std::vector<Mesh> meshes;
     std::shared_ptr<ShaderProgram> shader_program;
-    
+        
     void loadModel();
 
     void processNode(aiNode* node, const aiScene* scene);

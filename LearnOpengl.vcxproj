@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Component\Model\Model.cpp" />
+    <ClCompile Include="Engine\Core\DrawCommand\RenderCommand.cpp" />
+    <ClCompile Include="Engine\Core\DrawCommand\RenderCommandQueue.cpp" />
     <ClCompile Include="Engine\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
@@ -145,11 +147,14 @@
     <ClCompile Include="ToolKit\FileToolKit.cpp" />
     <ClCompile Include="ToolKit\ImgToolKit.cpp" />
     <ClCompile Include="ToolKit\QuaternionUtils\QuaternionUtils.cpp" />
+    <ClCompile Include="ToolKit\Queue.cpp" />
     <ClCompile Include="ToolKit\stb_img.cpp" />
     <ClCompile Include="ToolKit\TimerToolkit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Component\Model\Model.h" />
+    <ClInclude Include="Engine\Core\DrawCommand\RenderCommand.h" />
+    <ClInclude Include="Engine\Core\DrawCommand\RenderCommandQueue.h" />
     <ClInclude Include="Engine\Core\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
@@ -201,6 +206,7 @@
     <ClInclude Include="ToolKit\FileToolKit.h" />
     <ClInclude Include="ToolKit\ImgToolKit.h" />
     <ClInclude Include="ToolKit\QuaternionUtils\QuaternionUtils.h" />
+    <ClInclude Include="ToolKit\Queue.h" />
     <ClInclude Include="ToolKit\stb_img.h" />
     <ClInclude Include="ToolKit\TimerToolkit.h" />
     <ClInclude Include="ToolKit\Typedef.h" />
