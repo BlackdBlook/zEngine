@@ -1,8 +1,8 @@
 ﻿#include "BoxWithMaterial.h"
 #include "Engine/Core/Camera/Camera.h"
-#include "PointLight.h"
 #include "Engine/SubSystem/AssetSystem.h"
 #include "MeshData/Box/Mesh_Box.h"
+#include "Objects/PointLight/PointLight.h"
 #include "ToolKit/QuaternionUtils/QuaternionUtils.h"
 
 

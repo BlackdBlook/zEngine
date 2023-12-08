@@ -14,7 +14,7 @@
 #include "Engine/Core/Texture2D/Texture2D.h"
 
 #define mat4(name) glm::mat4 name(1.0f)
-#define LOG(...) Log::printer(__FILE__, __LINE__, __VA_ARGS__)
+#define LOG(...) Log::NameSpacePrinter(__FILE__, __LINE__, __VA_ARGS__)
 #define VEC3_ZERO glm::vec3(0,0,0)
 
 template<typename ...T>

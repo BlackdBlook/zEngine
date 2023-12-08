@@ -3,8 +3,6 @@
 #include "Engine/zEngine.h"
 #include "Engine/Component/Model/Model.h"
 #include "Engine/Core/Camera/Camera.h"
-#include "Engine/Core/InputSystem/InputSystem.h"
-#include "Objects/PointLightV2.h"
 #include "Objects/TurnModelScript/TurnModelScript.h"
 
 

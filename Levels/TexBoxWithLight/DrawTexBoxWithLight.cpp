@@ -1,8 +1,8 @@
 #include "DrawTexBoxWithLight.h"
-#include "../../Objects/Box.h"
-#include "../../Objects/PointLight.h"
-#include "../../Engine/Core/Camera/Camera.h"
-#include "../../Objects/TexBoxWithLight.h"
+#include "Engine/Core/Camera/Camera.h"
+#include "Objects/Box/TexBoxWithLight.h"
+#include "Objects/PointLight/PointLight.h"
+
 void DrawTexBoxWithLight::Init()
 {
     Camera::GetCamera()->Reset();

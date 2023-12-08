@@ -4,7 +4,7 @@
 #include "Engine/Core/Camera/Camera.h"
 #include "Engine/Core/DrawCommand/RenderCommandQueue.h"
 #include "MeshData/Box/Mesh_Box.h"
-#include "Objects/PointLightV2.h"
+#include "Objects/PointLight/PointLightV2.h"
 
 static constexpr char indexChar[] = {'0','1','2','3'};
 

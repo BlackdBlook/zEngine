@@ -1,5 +1,7 @@
 #include "DrawBox.h"
-#include "../../Objects/Box.h"
+
+#include "Objects/Box/Box.h"
+
 void DrawBox::Init()
 {
     std::function<void(float)> update = [](float) {

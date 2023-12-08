@@ -1,8 +1,8 @@
 #include "DrawBoxWithLight.h"
-#include "../../Objects/Box.h"
-#include "../../Objects/PointLight.h"
 #include "../../Engine/Core/Camera/Camera.h"
-#include "../../Objects/BoxWithLight.h"
+#include "Objects/Box/BoxWithLight.h"
+#include "Objects/PointLight/PointLight.h"
+
 void DrawBoxWithLight::Init()
 {
     Camera::GetCamera()->Reset();

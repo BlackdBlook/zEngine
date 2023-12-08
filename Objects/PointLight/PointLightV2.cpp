@@ -1,7 +1,7 @@
 #include "PointLightV2.h"
 #include "PointLight.h"
-#include "../Engine/zEngine.h"
-#include "../Engine/Core/Camera/Camera.h"
+#include "Engine/zEngine.h"
+#include "Engine/Core/Camera/Camera.h"
 #include "Engine/Core/DrawCommand/RenderCommandQueue.h"
 #include "MeshData/Box/Mesh_Box.h"
 

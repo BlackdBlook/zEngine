@@ -3,7 +3,7 @@
 #include "Engine/Core/Camera/Camera.h"
 #include "MeshData/Box/Mesh_Box.h"
 #include "MeshData/Plan/Mesh_Plan.h"
-#include "Objects/PointLightV2.h"
+#include "Objects/PointLight/PointLightV2.h"
 
 static constexpr char indexChar[] = {'0','1','2','3'};
 

@@ -3,8 +3,8 @@
 #include <memory>
 
 #include "Engine/Core/Camera/Camera.h"
-#include "Objects/PointLightV2.h"
 #include "Objects/DrawAdvanceBox/BoxV3.h"
+#include "Objects/PointLight/PointLightV2.h"
 
 namespace
 {

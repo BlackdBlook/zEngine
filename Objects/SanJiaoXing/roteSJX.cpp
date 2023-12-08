@@ -1,6 +1,6 @@
 #include "roteSJX.h"
-#include "../Engine/Core/ShaderProgram.h"
-#include "../Header.h"
+#include "Engine/Core/ShaderProgram.h"
+#include "Header.h"
 #include <cmath>
 #define SHADERNAME "rtsjx"
 

@@ -1,5 +1,6 @@
 #include "DrawTexBox.h"
-#include "../../Objects/TexBox.h"
+#include "Objects/Box/TexBox.h"
+
 void DrawTexBox::Init()
 {
     std::function<void(float)> update = [](float) {

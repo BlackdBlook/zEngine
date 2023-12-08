@@ -1,6 +1,7 @@
 #include "DrawSanjiaoxing.h"
-#include "../../Objects/SanJiaoXing.h"
 #include <memory>
+
+#include "Objects/SanJiaoXing/SanJiaoXing.h"
 using namespace std;
 void DrawSanjiaoxing::Init()
 {

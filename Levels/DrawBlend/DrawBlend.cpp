@@ -12,7 +12,7 @@
 #include "ToolKit/Typedef.h"
 #include "ToolKit/QuaternionUtils/QuaternionUtils.h"
 
-
+  
 class CamRot
 {
     glm::vec3 rot {0};

@@ -1,5 +1,7 @@
 #include "DrawRTSJX.h"
-#include "../../Objects/roteSJX.h"
+
+#include "Objects/SanJiaoXing/roteSJX.h"
+
 void DrawRTSJX::Init()
 {
     objs.emplace_back(new roteSJX(true));

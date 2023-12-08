@@ -1,5 +1,25 @@
 #include "PointLightV3.h"
 
+#include "PointLightV2.h"
+#include "Engine/Core/Camera/Camera.h"
+
+
+PointScript::PointScript(std::shared_ptr<ShaderProgram> sp, bool EnableMoveLight): TargetShader (sp), EnableMoveLight(EnableMoveLight)
+{
+    PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{-3,3,0}));
+    PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{5,3,0}));
+    sp->setUniform("material.shininess", 32.f);
+
+    auto shader = this->TargetShader.lock();
+    shader->use();
+    //initDirectLight();
+        
+    for(int i = 0;i < PointLight.size();i++)
+    {
+        initPointLight(i);
+    }
+    initSpotLight();
+}
 
 void PointScript::initDirectLight()
 {

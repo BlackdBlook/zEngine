@@ -1,5 +1,6 @@
 #include "BoxWithLight.h"
-#include "../Engine/Core/Camera/Camera.h"
+#include "Engine/Core/Camera/Camera.h"
+#include "Objects/PointLight/PointLight.h"
 
 void BoxWithLight::Init()
 {

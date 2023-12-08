@@ -1,5 +1,5 @@
 #include "SanJiaoXing.h"
-#include "../Engine/Core/ShaderProgram.h"
+#include "Engine/Core/ShaderProgram.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

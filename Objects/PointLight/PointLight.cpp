@@ -1,6 +1,6 @@
 #include "PointLight.h"
-#include "../Engine/zEngine.h"
-#include "../Engine/Core/Camera/Camera.h"
+#include "Engine/zEngine.h"
+#include "Engine/Core/Camera/Camera.h"
 
 void PointLight::Init()
 {

@@ -1,9 +1,10 @@
 #pragma once
-#include "Engine/Object/Object.h"
+
 #include "Header.h"
 #include "Engine/Component/Component.h"
-#include "Engine/Core/Camera/Camera.h"
-#include "Objects/PointLightV2.h"
+
+
+class PointLightV2;
 
 class PointScript : public Component
 {
@@ -12,22 +13,7 @@ class PointScript : public Component
     std::weak_ptr<ShaderProgram> TargetShader;
     std::vector<std::shared_ptr<PointLightV2>> PointLight;
 public:
-    PointScript(std::shared_ptr<ShaderProgram> sp, bool EnableMoveLight = true): TargetShader (sp), EnableMoveLight(EnableMoveLight)
-    {
-        PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{-3,3,0}));
-        PointLight.emplace_back(std::make_shared<PointLightV2>(glm::vec3{5,3,0}));
-        sp->setUniform("material.shininess", 32.f);
-
-        auto shader = this->TargetShader.lock();
-        shader->use();
-        //initDirectLight();
-        
-        for(int i = 0;i < PointLight.size();i++)
-        {
-            initPointLight(i);
-        }
-        initSpotLight();
-    }
+    PointScript(std::shared_ptr<ShaderProgram> sp, bool EnableMoveLight = true);
     
     void initDirectLight();
 

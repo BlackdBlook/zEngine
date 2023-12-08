@@ -3,8 +3,8 @@
 #include <memory>
 
 #include "Engine/Core/Camera/Camera.h"
-#include "Objects/BoxWithMaterial.h"
-#include "Objects/PointLight.h"
+#include "Objects/Box/BoxWithMaterial.h"
+#include "Objects/PointLight/PointLight.h"
 
 float random_float(float min, float max) {
     // 生成0到1之间的随机浮点数

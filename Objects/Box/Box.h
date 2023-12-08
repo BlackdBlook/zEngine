@@ -1,6 +1,6 @@
 #pragma once
-#include "../Engine/Object/Object.h"
-#include "../Header.h"
+#include "Engine/Object/Object.h"
+#include "Header.h"
 class Box :public Object
 {
     GLID vao,vbo;

@@ -1,7 +1,6 @@
 #pragma once
 #include "Engine/Core/Texture2D/Texture2D.h"
 #include "Engine/Object/Object.h"
-#include "Objects/PointLight.h"
 
 class PointLightV2;
 

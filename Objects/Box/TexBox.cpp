@@ -1,5 +1,5 @@
 #include "TexBox.h"
-#include "../Engine/Core/Camera/Camera.h"
+#include "Engine/Core/Camera/Camera.h"
 
 void TexBox::Init()
 {
