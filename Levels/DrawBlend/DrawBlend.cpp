@@ -127,7 +127,7 @@ void DrawBlend::Init()
         
     });
     
-    cam->SetPos(glm::vec3{0,10, 10});
+    cam->SetPos(glm::vec3{0,0, 20});
     
 
 
@@ -147,7 +147,7 @@ void DrawBlend::Init()
         m->Attach(std::make_shared<Model>(std::move(name), sp));
     
         m->Attach(std::make_shared<PointScript>(sp, false));
-        m->SetPos(glm::vec3{0,0,-10});
+        m->SetPos(glm::vec3{0,-10,-10});
         m->SetRot(glm::vec3{0,0,0});
     }
 
@@ -158,7 +158,7 @@ void DrawBlend::Init()
             "blending_transparent_window.png", "blending_transparent_window.png")));
         plan->shader = NewSPtr<ShaderProgram>("DrawBlend");
         plan->shader->BlendType = BlendType::Translucent;
-        plan->SetPos(glm::vec3{-5,10,5});
+        plan->SetPos(glm::vec3{0,10,0});
         plan->SetRot(glm::vec3{0,0,0});
         plan->SetScale(glm::vec3{8,8,0.001});
     }
@@ -169,7 +169,7 @@ void DrawBlend::Init()
             "blending_transparent_window.png", "blending_transparent_window.png")));
         plan->shader = NewSPtr<ShaderProgram>("DrawBlend");
         plan->shader->BlendType = BlendType::Translucent;
-        plan->SetPos(glm::vec3{-5,10,-5});
+        plan->SetPos(glm::vec3{0,10,10});
         plan->SetRot(glm::vec3{0,0,0});
         plan->SetScale(glm::vec3{8,8,0.001});
     }
@@ -177,9 +177,9 @@ void DrawBlend::Init()
     {
         auto plan = std::static_pointer_cast<BoxV3>(
         objs.emplace_back(NewSPtr<BoxV3>("grass.png","grass.png")));
-        
+        plan->shader = NewSPtr<ShaderProgram>("DrawBlend");
         //plan->SetPos(glm::vec3{5,10,5});
-        plan->SetPos(glm::vec3{5,10,5});
+        plan->SetPos(glm::vec3{-2,10,5});
         plan->SetRot(glm::vec3{0,0,0});
         plan->SetScale(glm::vec3{1,1,1});
     }

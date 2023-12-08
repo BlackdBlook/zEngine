@@ -21,24 +21,37 @@ class ShaderProgram
 
     GLID getUniformFromCache(const std::string& name);
 
-    void showAllActiveUnifrom();
 
     std::string shaderNameVer;
     std::string shaderNameFar;
 
     void link();
     void Attach(Shader& s);
+    void RegistGlobalUniformBlock();
 
 public:
+    void showAllActiveUnifrom();
+    std::vector<std::string> GetAllUniformBlockName();
+    void GetAllUniformBlockName(std::vector<std::string>& out);
+    
+    
     BlendType BlendType = BlendType::Opaque;
     std::string GetName();
+
+
     void use();
+    GLID getProgramID(){return programID;}
+
+
     ShaderProgram();
     ShaderProgram(ShaderProgram&& other) noexcept;
     ShaderProgram(const ShaderProgram& other);
     ShaderProgram(std::string&& ver);
     ShaderProgram(std::string&& ver,std::string&& far);
     void operator+=(Shader& s);
+
+
+    
     void setUniform(const char* name,float x);
     void setUniform(const char* name,int x);
     void setUniform(const char* name, const glm::vec3& x);

@@ -140,11 +140,11 @@ void BoxV3::Draw()
     Object::Draw();
 
     shader->use();
-    mat4(view);
-    view = Camera::GetCamera()->GetCameraView();
-    shader->setUniform("view", view);
-    
-    shader->setUniform("projection", Camera::GetCamera()->GetCameraProjection());
+    // mat4(view);
+    // view = Camera::GetCamera()->GetCameraView();
+    // shader->setUniform("view", view);
+    //
+    // shader->setUniform("projection", Camera::GetCamera()->GetCameraProjection());
 
     shader->setUniform("viewPos", Camera::GetCamera()->GetPos());
 

@@ -1,4 +1,4 @@
-﻿#version 460 core
+#version 460 core
 out vec4 FragColor;
 
 struct Material {
@@ -66,12 +66,6 @@ void main()
     vec3 norm = normalize(Normal);
     vec3 viewDir = normalize(viewPos - FragPos);
 
-    vec4 diff = texture(material.texture_diffuse0, TexCoords);
-    if(diff.a < 0.1)
-    {
-        discard;
-    }
-
     // == =====================================================
     // Our lighting is set up in 3 phases: directional, point lights and an optional flashlight
     // For each phase, a calculate function is defined that calculates the corresponding color
@@ -88,7 +82,7 @@ void main()
     // phase 3: spot light
     result += CalcSpotLight(spotLight, norm, FragPos, viewDir);
 
-    FragColor = vec4(result, diff.a);
+    FragColor = vec4(result, 1.0);
 }
 
 // calculates the color when using a directional light.

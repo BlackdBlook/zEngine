@@ -22,6 +22,7 @@
     <ClCompile Include="Engine\Component\Model\Model.cpp" />
     <ClCompile Include="Engine\Core\DrawCommand\RenderCommand.cpp" />
     <ClCompile Include="Engine\Core\DrawCommand\RenderCommandQueue.cpp" />
+    <ClCompile Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.cpp" />
     <ClCompile Include="Engine\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
@@ -830,6 +831,7 @@
     <ClInclude Include="Engine\Component\Model\Model.h" />
     <ClInclude Include="Engine\Core\DrawCommand\RenderCommand.h" />
     <ClInclude Include="Engine\Core\DrawCommand\RenderCommandQueue.h" />
+    <ClInclude Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.h" />
     <ClInclude Include="Engine\Core\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
@@ -937,6 +939,8 @@
     <Content Include="Shaders\MeshOutLine\MeshOutLine.vsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.fsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.vsc" />
+    <Content Include="Shaders\Test\TestShader.fsc" />
+    <Content Include="Shaders\Test\TestShader.vsc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

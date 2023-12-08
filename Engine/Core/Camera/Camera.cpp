@@ -2,7 +2,14 @@
 
 #include "Engine/Component/Component.h"
 #include "Engine/Core/Level.h"
+#include "Engine/Core/GlobalUnifromBuffer/GlobalUniformBuffer.h"
 #include "ToolKit/QuaternionUtils/QuaternionUtils.h"
+
+struct CameraUniformBuffer
+{
+    glm::mat4 view;
+    glm::mat4 projection;
+};
 
 Camera* Camera::malloc()
 {
@@ -35,12 +42,19 @@ void Camera::Reset(std::function<void(float)> update)
     needUpdateView = true;
 
     updateFun = update;
+
+    auto projection = GetCameraProjection();
+    
+    SetGlobalUniformBuffer("Matrices", projection, offsetof(CameraUniformBuffer, projection));    
 }
 
 void Camera::Update(float DeltaTime)
 {
-    updateFun(DeltaTime);
     Object::Update(DeltaTime);
+    updateFun(DeltaTime);
+    auto view = GetCameraView();
+
+    SetGlobalUniformBuffer("Matrices", view, offsetof(CameraUniformBuffer, view));
 }
 
 void Camera::Attach(std::shared_ptr<Component> Target)

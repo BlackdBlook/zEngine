@@ -96,7 +96,6 @@ void PointScript::Update(float DeltaTime)
         PointLight[0]->Update(DeltaTime);
         PointLight[1]->Update(DeltaTime);   
     }
-    Camera::GetCamera()->Update(DeltaTime);
 }
 
 void PointScript::Draw()

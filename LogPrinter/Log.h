@@ -1,12 +1,16 @@
 #pragma once
 #include <chrono>
 #include <iostream>
+#include <vector>
 #include <glm/fwd.hpp>
 #include <glm/vec3.hpp>
 
 std::ostream &operator<<(std::ostream &output, const glm::vec3 &D );
+std::ostream &operator<<(std::ostream &output, const glm::vec4 &D );
+std::ostream &operator<<(std::ostream &output, const glm::mat4 &D );
 std::ostream &operator<<(std::ostream &output, const std::chrono::microseconds &D );
 std::ostream &operator<<(std::ostream &output, const glm::quat &D );
+std::ostream &operator<<(std::ostream &output, const std::vector<std::string> &D );
 
 constexpr static const char* get_filename(const char* path) {
     const char* file = path;
@@ -40,8 +44,7 @@ public:
     template<typename ... TS>
     static void NameSpacePrinter(const char* FileName, int Line, TS ... args)
     {
-        print(get_filename(FileName));
-        print(Line);
+        std::cout << get_filename(FileName) << " Line:" << Line << ' ';
         printer(args...);
     }
     

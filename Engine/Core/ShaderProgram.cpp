@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <iostream>
 #include "../../Header.h"
+#include "GlobalUnifromBuffer/GlobalUniformBuffer.h"
 
 GLID ShaderProgram::getUniformFromCache(const std::string& name)
 {
@@ -27,25 +28,82 @@ GLID ShaderProgram::getUniformFromCache(const std::string& name)
 
 void ShaderProgram::showAllActiveUnifrom()
 {
-    GLint maxUniformLen;
-    GLint numUniforms;
-    char* uniformName;
-    GLint index;
-    glGetProgramiv(programID, GL_ACTIVE_UNIFORMS, &numUniforms);
-    glGetProgramiv(programID, GL_ACTIVE_UNIFORM_MAX_LENGTH,
-                   &maxUniformLen);
-    uniformName = (char*)malloc(sizeof(char) * maxUniformLen);
-    for (index = 0; index < numUniforms; index++)
+    // GLint maxUniformLen;
+    // GLint numUniforms;
+    // char* uniformName;
+    // GLint index;
+    // glGetProgramiv(programID, GL_ACTIVE_UNIFORMS, &numUniforms);
+    // glGetProgramiv(programID, GL_ACTIVE_UNIFORM_MAX_LENGTH,
+    //                &maxUniformLen);
+    // uniformName = (char*)malloc(sizeof(char) * maxUniformLen);
+    // for (index = 0; index < numUniforms; index++)
+    // {
+    //     GLint size;
+    //     GLenum type;
+    //     // Get the uniform info
+    //     glGetActiveUniform(programID, index, maxUniformLen, NULL,
+    //         &size, &type, uniformName);
+    //     std::string s = uniformName;
+    //     LOG("unifroms:", s);
+    // }
+    // free(uniformName);
+
+    GLint i;
+    GLint count;
+    GLint size; // 变量的大小
+    GLenum type; // 变量的类型（float，vec3或mat4等）
+    const GLsizei bufSize = 16; // 最大名称长度
+    GLchar name[bufSize]; // GLSL中的变量名
+    GLsizei length; // 名称长度
+
+    // 获取Attributes
+    glGetProgramiv(programID, GL_ACTIVE_ATTRIBUTES, &count);
+    LOG("Active Attributes: ", count);
+
+    for (i = 0; i < count; i++)
     {
-        GLint size;
-        GLenum type;
-        // Get the uniform info
-        glGetActiveUniform(programID, index, maxUniformLen, NULL,
-            &size, &type, uniformName);
-        std::string s = uniformName;
-        LOG("unifroms:", s);
+        glGetActiveAttrib(programID, (GLuint)i, bufSize, &length, &size, &type, name);
+        LOG("Attribute #" ,i , " Type: " , type , " Name: " , name);
     }
-    free(uniformName);
+
+    // 获取Uniforms
+    glGetProgramiv(programID, GL_ACTIVE_UNIFORMS, &count);
+    LOG("Active Uniforms: ", count);
+
+    for (i = 0; i < count; i++)
+    {
+        glGetActiveUniform(programID, (GLuint)i, bufSize, &length, &size, &type, name);
+        LOG("Uniform #", i , " Type: " , type , " Name: " , name);
+    }
+    
+    for (auto& s : GetAllUniformBlockName())
+    {
+        LOG("UniformBlockName: ",s);
+    }
+    
+}
+
+std::vector<std::string> ShaderProgram::GetAllUniformBlockName()
+{
+    std::vector<std::string> vs;
+    GetAllUniformBlockName(vs);
+    return vs;
+}
+
+void ShaderProgram::GetAllUniformBlockName(std::vector<std::string>& out)
+{
+    GLint i;
+    GLint count;
+    const GLsizei bufSize = GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH; // 最大名称长度
+    GLchar name[bufSize]; // GLSL中的变量名
+    GLsizei length; // 名称长度
+    glGetProgramiv(programID, GL_ACTIVE_UNIFORM_BLOCKS, &count);
+    for (i = 0; i < count; i++)
+    {
+        glGetActiveUniformBlockName(programID,
+            (GLuint)i, bufSize, &length, name);
+        out.emplace_back(name);
+    }
 }
 
 ShaderProgram::ShaderProgram()
@@ -84,7 +142,7 @@ ShaderProgram::ShaderProgram(std::string&& ver)
     Attach(vs);
     Attach(fs);
     link();
-
+    RegistGlobalUniformBlock();
     //showAllActiveUnifrom();
 }
 
@@ -100,6 +158,7 @@ ShaderProgram::ShaderProgram(std::string&& ver, std::string&& far)
     Attach(vs);
     Attach(fs);
     link();
+    RegistGlobalUniformBlock();
     //showAllActiveUnifrom();
 }
 
@@ -122,6 +181,11 @@ void ShaderProgram::Attach(Shader& vs)
     }
     glAttachShader(programID, *vs);
     glCheckError();
+}
+
+void ShaderProgram::RegistGlobalUniformBlock()
+{
+    GlobalUniformBuffer::GetInstance()->RegistUniformBlock(this);
 }
 
 std::string ShaderProgram::GetName()
