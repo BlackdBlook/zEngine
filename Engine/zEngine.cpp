@@ -17,6 +17,7 @@
 #include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
 #include "Levels/DrawBlend/DrawBlend.h"
 #include "Levels/DrawDepthTestBuffer/DrawDepthTestBuffer.h"
+#include "Levels/DrawSkyBox/DrawSkyBox.h"
 #include "Levels/DrawStencilTest/DrawStencilTest.h"
 #include "Levels/NanoSuit0/DrawNanosuit.h"
 #include "SubSystem/AssetSystem.h"
@@ -117,6 +118,7 @@ void zEngine::Run()
 void zEngine::InitLevel()
 {
     //addLevel(DrawSanjiaoxing);
+    addLevel(DrawSkyBox); 
     addLevel(DrawBlend); 
     addLevel(DrawStencilTest);
     addLevel(DrawDepthTestBuffer);

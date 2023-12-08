@@ -59,7 +59,7 @@ void PointLightV2::Update(float DeltaTime)
 void PointLightV2::Draw()
 {
     shader->use();
-    mat4(model);
+    MAT4(model);
     
     model = glm::translate(model,GetPos());
     model = glm::scale(model, glm::vec3(0.5));

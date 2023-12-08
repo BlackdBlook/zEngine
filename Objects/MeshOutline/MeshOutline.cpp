@@ -26,7 +26,7 @@ void MeshOutline::Draw()
     
     const auto P = Parent.lock();
     
-    mat4(view);
+    MAT4(view);
     view = Camera::GetCamera()->GetCameraView();
     sp->setUniform("view", view);
 
@@ -36,7 +36,7 @@ void MeshOutline::Draw()
     
     sp->setUniform("model", model);
     
-    mat4(projection);
+    MAT4(projection);
     projection = glm::perspective(
         glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
     

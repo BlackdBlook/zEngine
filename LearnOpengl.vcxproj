@@ -31,6 +31,7 @@
     <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
     <ClCompile Include="Levels\DrawBlend\DrawBlend.cpp" />
     <ClCompile Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.cpp" />
+    <ClCompile Include="Levels\DrawSkyBox\DrawSkyBox.cpp" />
     <ClCompile Include="Levels\DrawStencilTest\DrawStencilTest.cpp" />
     <ClCompile Include="Levels\NanoSuit0\DrawNanosuit.cpp" />
     <ClCompile Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.cpp" />
@@ -815,6 +816,7 @@
       <AdditionalOptions>/utf-8 </AdditionalOptions>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Objects\SkyBox\SkyBox.cpp" />
     <ClCompile Include="Objects\SpotLight\SpotLight.cpp" />
     <ClCompile Include="Objects\TurnModelScript\TurnModelScript.cpp" />
     <ClCompile Include="ToolKit\glad.c" />
@@ -840,6 +842,7 @@
     <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
     <ClInclude Include="Levels\DrawBlend\DrawBlend.h" />
     <ClInclude Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.h" />
+    <ClInclude Include="Levels\DrawSkyBox\DrawSkyBox.h" />
     <ClInclude Include="Levels\DrawStencilTest\DrawStencilTest.h" />
     <ClInclude Include="Levels\NanoSuit0\DrawNanosuit.h" />
     <ClInclude Include="Levels\TexBoxWithLight\DrawTexBoxWithLight.h" />
@@ -877,6 +880,7 @@
     <ClInclude Include="Objects\PointLight\PointLightV3.h" />
     <ClInclude Include="Objects\SanJiaoXing\roteSJX.h" />
     <ClInclude Include="Objects\SanJiaoXing\SanJiaoXing.h" />
+    <ClInclude Include="Objects\SkyBox\SkyBox.h" />
     <ClInclude Include="Objects\SpotLight\SpotLight.h" />
     <ClInclude Include="Objects\TurnModelScript\TurnModelScript.h" />
     <ClInclude Include="ToolKit\GLLib.h" />
@@ -939,6 +943,8 @@
     <Content Include="Shaders\MeshOutLine\MeshOutLine.vsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.fsc" />
     <Content Include="Shaders\NanoSuit0\NanoSuit0.vsc" />
+    <Content Include="Shaders\SkyBox\SkyBox.fsc" />
+    <Content Include="Shaders\SkyBox\SkyBox.vsc" />
     <Content Include="Shaders\Test\TestShader.fsc" />
     <Content Include="Shaders\Test\TestShader.vsc" />
   </ItemGroup>

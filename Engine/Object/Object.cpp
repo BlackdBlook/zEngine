@@ -136,7 +136,7 @@ glm::mat4 Object::GetModelMat()
     {
         needUpdateModelMat = false;
         
-        mat4(m);
+        MAT4(m);
 
         // 平移
         m = glm::translate(m, pos);

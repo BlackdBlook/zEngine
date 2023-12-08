@@ -84,7 +84,7 @@ void BoxWithLight::Update(float DeltaTime)
 {
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
     double lerp = glfwGetTime() / 5.0f;
-    mat4(model);
+    MAT4(model);
     model = glm::translate(model, vec);
     model = glm::rotate(model,
         glm::radians((float)(360.0f * lerp)),
@@ -99,11 +99,11 @@ void BoxWithLight::Update(float DeltaTime)
 
 
 
-    mat4(view);
+    MAT4(view);
     view = Camera::GetCamera()->GetCameraView();
     shader->setUniform("view", view);
 
-    mat4(projection);
+    MAT4(projection);
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
     shader->setUniform("projection", projection);
 

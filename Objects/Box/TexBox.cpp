@@ -98,11 +98,11 @@ void TexBox::Draw()
     shader->use();
     glBindVertexArray(vao);
     
-    mat4(view);
+    MAT4(view);
     view = Camera::GetCamera()->GetCameraView();
     shader->setUniform("view", view);
 
-    mat4(projection);
+    MAT4(projection);
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
     shader->setUniform("projection", projection);
     t.Bind();

@@ -53,7 +53,7 @@ void BoxWithMaterial::Update(float DeltaTime)
     Object::Update(DeltaTime);
     //double lerp = (sin(glfwGetTime())) / 2.0f + 0.5;
     double lerp = glfwGetTime() / 5.0f;
-    mat4(model);
+    MAT4(model);
     model = glm::translate(model, GetPos());
     const glm::vec3 rot = QuaternionUtils::eulerAnglesFromQuat(GetRot());
     
@@ -72,11 +72,11 @@ void BoxWithMaterial::Update(float DeltaTime)
 void BoxWithMaterial::Draw()
 {
     Object::Draw();
-    mat4(view);
+    MAT4(view);
     view = Camera::GetCamera()->GetCameraView();
     shader->setUniform("view", view);
 
-    mat4(projection);
+    MAT4(projection);
     projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
     shader->setUniform("projection", projection);
     

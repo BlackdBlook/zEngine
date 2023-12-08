@@ -96,9 +96,9 @@ void PointLight::Update(float DeltaTime)
 void PointLight::Draw()
 {
     shader->use();
-    mat4(model);
-    mat4(view);
-    mat4(projection);
+    MAT4(model);
+    MAT4(view);
+    MAT4(projection);
     model = glm::translate(model, GetPos());
     model = glm::scale(model, glm::vec3(0.5));
     shader->setUniform("model", model);

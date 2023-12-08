@@ -133,7 +133,7 @@ void PlaneWithLight::Draw()
     Object::Draw();
 
     shader->use();
-    mat4(view);
+    MAT4(view);
     view = Camera::GetCamera()->GetCameraView();
     shader->setUniform("view", view);
     
