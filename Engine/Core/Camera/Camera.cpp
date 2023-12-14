@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+#include "Engine/zEngine.h"
 #include "Engine/Component/Component.h"
 #include "Engine/Core/Level.h"
 #include "Engine/Core/GlobalUnifromBuffer/GlobalUniformBuffer.h"
@@ -85,7 +86,8 @@ glm::mat4 Camera::GetCameraProjection()
 {
     static const glm::mat4 projection =
         glm::perspective(glm::radians(90.0f),
-        2560.0f / 1440, 0.1f, 100.0f);
+        (float)Engine::GetInstance()->WindowX /
+        (float)Engine::GetInstance()->WindowY, 0.1f, 100.0f);
     return projection;
 }
 

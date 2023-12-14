@@ -13,10 +13,11 @@ public:
     ~m_Texture();
 };
 
-typedef std::shared_ptr<m_Texture> Texture;
+typedef std::shared_ptr<m_Texture> TexturePtr;
 
 class ImgToolKit
 {
-public:
-    static Texture ReadImage(const char* path);
+private:
+    friend class AssetSystem;
+    static TexturePtr ReadImage(const char* path);
 };

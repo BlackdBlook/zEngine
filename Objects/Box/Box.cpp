@@ -92,7 +92,7 @@ void Box::Update(float DeltaTime)
     shader->setUniform("view", view);
 
     MAT4(projection);
-    projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720, 0.1f, 100.0f);
+    projection = Camera::GetCamera()->GetCameraProjection();
     shader->setUniform("projection", projection);
 }
 

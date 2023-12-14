@@ -17,7 +17,7 @@ public:
     
     std::string GetFilePathByName(const std::string& s);
 
-    Texture LoadImage(const std::string& ImageName);
+    TexturePtr LoadImage(const std::string& ImageName);
 
     std::string LoadTextFile(const std::string& TextName);
 
@@ -40,3 +40,5 @@ private:
     // 忽略表
     std::unordered_set<std::string> IgnoreMap;
 };
+
+#define AssetSystemIns AssetSystem::GetInstance()

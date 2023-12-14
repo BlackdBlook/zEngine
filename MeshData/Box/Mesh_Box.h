@@ -8,4 +8,4 @@ public:
 };
 
 #define BoxVertices Box::BoxVertices
-#define SkyBoxVertices Box::SkyBoxVertices
+#define SkyBoxVertices Box::SkyBoxVertices 

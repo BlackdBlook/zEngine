@@ -15,11 +15,14 @@ public:
     float GetDeltaTime();
     static zEngine* GetInstance();
 
+    uint32 WindowX = 2560;
+    uint32 WindowY = 1440;
 protected:
     void InitLevel();
     void InitInput();
     void processInput(GLFWwindow* window);
 
+    
 private:
     GLFWwindow* window;
     std::shared_ptr<Camera> camera = nullptr;

@@ -3,7 +3,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_img.h"
 
-Texture ImgToolKit::ReadImage(const char* path)
+TexturePtr ImgToolKit::ReadImage(const char* path)
 {
     if (!FileToolKit::FileExist(path))
     {

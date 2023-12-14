@@ -141,9 +141,19 @@ void DrawSkyBox::Init()
         objs.emplace_back(NewSPtr<BoxV3>("marble.jpg", "marble.jpg")));
     
         plan->SetPos(glm::vec3{0,0,0});
+        plan->SetRot(glm::vec3{0,0,180});
         plan->SetScale(glm::vec3{100.f,0.01f,100.f});
     }
 
+    {
+        auto plan = std::static_pointer_cast<BoxV3>(
+        objs.emplace_back(NewSPtr<BoxV3>()));
+    
+        plan->SetPos(glm::vec3{-5,10,0});
+        plan->SetRot(glm::vec3{0,0,0});
+        plan->SetScale(glm::vec3{10.f});
+    }
+    
     {
         std::shared_ptr<ShaderProgram> sp = std::make_shared<ShaderProgram>("NanoSuit0");
             
@@ -165,7 +175,7 @@ void DrawSkyBox::Init()
         plan->shader->BlendType = BlendType::Translucent;
         plan->SetPos(glm::vec3{-3,10,0});
         plan->SetRot(glm::vec3{0,0,0});
-        plan->SetScale(glm::vec3{8,8,0.001});
+        plan->SetScale(glm::vec3{10,10,0.001});
     }
 
     {
@@ -176,14 +186,13 @@ void DrawSkyBox::Init()
         plan->shader->BlendType = BlendType::Translucent;
         plan->SetPos(glm::vec3{0,10,10});
         plan->SetRot(glm::vec3{0,0,0});
-        plan->SetScale(glm::vec3{8,8,0.001});
+        plan->SetScale(glm::vec3{10,10,0.001});
     }
 
     {
         auto plan = std::static_pointer_cast<BoxV3>(
         objs.emplace_back(NewSPtr<BoxV3>("grass.png","grass.png")));
         plan->shader = NewSPtr<ShaderProgram>("DrawBlend");
-        //plan->SetPos(glm::vec3{5,10,5});
         plan->SetPos(glm::vec3{-2,10,5});
         plan->SetRot(glm::vec3{0,0,0});
         plan->SetScale(glm::vec3{1,1,1});

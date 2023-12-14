@@ -63,10 +63,12 @@ GLFWwindow* zEngine::GetWindow()
 zEngine::zEngine()
 {
     GLLib::GLInit();
-    window = GLLib::CreateWindow(2560,1440);
+    window = GLLib::CreateWindow(WindowX,WindowY);
     
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
+    glEnable(GL_CULL_FACE);
+    // glCullFace(GL_FRONT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     InputSystem::GetInstance()->Init(window);

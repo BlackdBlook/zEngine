@@ -22,15 +22,93 @@
     <ClCompile Include="Engine\Component\Model\Model.cpp" />
     <ClCompile Include="Engine\Core\DrawCommand\RenderCommand.cpp" />
     <ClCompile Include="Engine\Core\DrawCommand\RenderCommandQueue.cpp" />
+    <ClCompile Include="Engine\Core\FrameBuffer\FrameBuffer.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\zEngine.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\zEngine.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 </AdditionalOptions>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
     <ClCompile Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.cpp" />
     <ClCompile Include="Engine\Core\InputSystem\InputSystem.cpp" />
     <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
+    <ClCompile Include="Engine\Core\TextureCube\TextureCube.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
     <ClCompile Include="Levels\DrawAdvanceLight\DrawAdvanceLight.cpp" />
     <ClCompile Include="Levels\DrawBlend\DrawBlend.cpp" />
     <ClCompile Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.cpp" />
+    <ClCompile Include="Levels\DrawFreamBuffer\DrawFrameBuffer.cpp" />
     <ClCompile Include="Levels\DrawSkyBox\DrawSkyBox.cpp" />
     <ClCompile Include="Levels\DrawStencilTest\DrawStencilTest.cpp" />
     <ClCompile Include="Levels\NanoSuit0\DrawNanosuit.cpp" />
@@ -436,6 +514,7 @@
     <ClCompile Include="Objects\DriectLight\DriectLight.cpp" />
     <ClCompile Include="Objects\MeshOutline\MeshOutline.cpp" />
     <ClCompile Include="Objects\PlaneWithLight\PlaneWithLight.cpp" />
+    <ClCompile Include="Objects\PointLightCompoent\PointLightComponent.cpp" />
     <ClCompile Include="Objects\PointLight\PointLight.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -833,15 +912,18 @@
     <ClInclude Include="Engine\Component\Model\Model.h" />
     <ClInclude Include="Engine\Core\DrawCommand\RenderCommand.h" />
     <ClInclude Include="Engine\Core\DrawCommand\RenderCommandQueue.h" />
+    <ClInclude Include="Engine\Core\FrameBuffer\FrameBuffer.h" />
     <ClInclude Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.h" />
     <ClInclude Include="Engine\Core\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
+    <ClInclude Include="Engine\Core\TextureCube\TextureCube.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
     <ClInclude Include="Levels\DrawAdvanceLight\DrawAdvanceLight.h" />
     <ClInclude Include="Levels\DrawBlend\DrawBlend.h" />
     <ClInclude Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.h" />
+    <ClInclude Include="Levels\DrawFreamBuffer\DrawFrameBuffer.h" />
     <ClInclude Include="Levels\DrawSkyBox\DrawSkyBox.h" />
     <ClInclude Include="Levels\DrawStencilTest\DrawStencilTest.h" />
     <ClInclude Include="Levels\NanoSuit0\DrawNanosuit.h" />
@@ -875,6 +957,7 @@
     <ClInclude Include="Objects\MeshOutline\MeshOutline.h" />
     <ClInclude Include="Objects\ObjectHeader.h" />
     <ClInclude Include="Objects\PlaneWithLight\PlaneWithLight.h" />
+    <ClInclude Include="Objects\PointLightCompoent\PointLightComponent.h" />
     <ClInclude Include="Objects\PointLight\PointLight.h" />
     <ClInclude Include="Objects\PointLight\PointLightV2.h" />
     <ClInclude Include="Objects\PointLight\PointLightV3.h" />

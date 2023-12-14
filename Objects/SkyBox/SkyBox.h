@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Engine/Core/TextureCube/TextureCube.h"
 #include "Engine/Object/Object.h"
 #include "ToolKit/Typedef.h"
 
@@ -7,7 +8,7 @@ class ShaderProgram;
 class SkyBox : public Object
 {
     SPtr<ShaderProgram> shader;
-    unsigned int cubemapTexture;
+    TextureCube cubemapTexture;
     unsigned int skyboxVAO, skyboxVBO;
 
 public:

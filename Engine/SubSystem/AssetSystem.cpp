@@ -24,7 +24,7 @@ std::string AssetSystem::GetFilePathByName(const std::string& s)
     return it->second;
 }
 
-Texture AssetSystem::LoadImage(const std::string& ImageName)
+TexturePtr AssetSystem::LoadImage(const std::string& ImageName)
 {
     auto cache = AssetCache.find(ImageName);
 
@@ -46,7 +46,7 @@ Texture AssetSystem::LoadImage(const std::string& ImageName)
         return NULL;
     }
 
-    Texture ans = ImgToolKit::ReadImage(Path.c_str());
+    TexturePtr ans = ImgToolKit::ReadImage(Path.c_str());
     std::weak_ptr tex {ans};
     if(cache != AssetCache.end())
     {
