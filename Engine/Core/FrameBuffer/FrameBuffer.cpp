@@ -13,7 +13,7 @@ FrameBuffer::FrameBuffer(GLsizei sizeX, GLsizei sizeY)
     {
         glGenTextures(1, &texColorBuffer);
         glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, sizeX,
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, sizeX,
             sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

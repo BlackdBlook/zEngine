@@ -13,7 +13,7 @@ float quadVertices[] = { // vertex attributes for a quad that fills the entire s
 
 ScreenProcessingManager::ScreenProcessingManager(GLsizei WindowX, GLsizei WindowY):
 MainFrameBuffer(WindowX, WindowY),
-Shader(NewSPtr<ShaderProgram>("PostProcessing", "PostProcessing-None"))
+Shader(NewSPtr<ShaderProgram>("PostProcessing", "PostProcessing-GammaCorrection"))
 {
     // screen quad VAO
     unsigned int quadVBO;
@@ -62,11 +62,13 @@ void ScreenProcessingManager::PostProcessing()
 void ScreenProcessingManager::Enable()
 {
     Enabled = true;
+    LOG("ScreenProcessingManager Enable Shader:", Shader->GetName());
 }
 
 void ScreenProcessingManager::Disable()
 {
     Enabled = false;
+    LOG("ScreenProcessingManager Disable Shader:", Shader->GetName());
 }
 
 void ScreenProcessingManager::SetPostProcessingShader(const SPtr<ShaderProgram>& shader)

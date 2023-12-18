@@ -1,0 +1,14 @@
+ #version 460 core
+ 
+ out vec4 FragColor;
+
+ in vec2 TexCoords;
+
+ uniform sampler2D screenTexture;
+
+ void main()
+ {
+     FragColor = texture(screenTexture, TexCoords);
+     float gamma = 2.2;
+     FragColor.rgb = pow(vec3(texture(screenTexture, TexCoords)), vec3(1.0/gamma));
+ }
