@@ -44,10 +44,7 @@ void Model::OnDettached()
 void Model::Draw()
 {
     const auto P = Parent.lock();
-    
-    shader_program->setUniform("view", Camera::GetCamera()->GetCameraView());
     shader_program->setUniform("model", P->GetModelMat());
-    shader_program->setUniform("projection", Camera::GetCamera()->GetCameraProjection());
     shader_program->setUniform("viewPos", Camera::GetCamera()->GetPos());
 
     for(auto& m : meshes)

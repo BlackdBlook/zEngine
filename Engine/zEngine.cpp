@@ -12,11 +12,14 @@
 
 #include "../Levels/TexBoxWithLight/DrawTexBoxWithLight.h"
 #include "Core/DrawCommand/RenderCommandQueue.h"
+#include "Core/FrameBuffer/FrameBuffer.h"
 #include "Core/InputSystem/InputSystem.h"
+#include "Core/ScreenProcessingManager/ScreenProcessingManager.h"
 #include "Levels/BoxWithMat/DrawBoxWithMat.h"
 #include "Levels/DrawAdvanceLight/DrawAdvanceLight.h"
 #include "Levels/DrawBlend/DrawBlend.h"
 #include "Levels/DrawDepthTestBuffer/DrawDepthTestBuffer.h"
+#include "Levels/DrawFreamBuffer/DrawFrameBuffer.h"
 #include "Levels/DrawSkyBox/DrawSkyBox.h"
 #include "Levels/DrawStencilTest/DrawStencilTest.h"
 #include "Levels/NanoSuit0/DrawNanosuit.h"
@@ -72,7 +75,8 @@ zEngine::zEngine()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     InputSystem::GetInstance()->Init(window);
-    AssetSystem::GetInstance();
+
+    ScreenProcessingManagerPtr = NewSPtr<ScreenProcessingManager>(WindowX, WindowY);
     
     zEngine::ins = this;
 
@@ -92,14 +96,18 @@ void zEngine::Run()
     Timer t{"MainLoop"};
     while (!glfwWindowShouldClose(window))
     {
+
         t.Reset();
         processInput(window);
         Camera::GetCamera()->Update(DeltaTime);
+
         Update();
+        
         glClearColor(0,0,0, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        
         Draw();
-        RenderCommandQueue::Flush();
+
         glfwSwapBuffers(window);
         glfwPollEvents();
 
@@ -119,12 +127,13 @@ void zEngine::Run()
 
 void zEngine::InitLevel()
 {
-    //addLevel(DrawSanjiaoxing);
+    // addLevel(DrawSanjiaoxing);
+    addLevel(DrawFrameBuffer); 
     addLevel(DrawSkyBox); 
     addLevel(DrawBlend); 
     addLevel(DrawStencilTest);
     addLevel(DrawDepthTestBuffer);
-    //addLevel(DrawNanosuit);
+    // addLevel(DrawNanosuit);
     // addLevel(DrawRTSJX);
     // addLevel(DrawBox);
     // addLevel(DrawTexBox);
@@ -153,6 +162,11 @@ float zEngine::GetDeltaTime()
     return DeltaTime;
 }
 
+SPtr<ScreenProcessingManager> zEngine::GetScreenProcessingManagerPtr()
+{
+    return ScreenProcessingManagerPtr;
+}
+
 zEngine* zEngine::GetInstance()
 {
     return ins;
@@ -160,12 +174,25 @@ zEngine* zEngine::GetInstance()
 
 void zEngine::Draw()
 {
+    DrawPreProcessing();
     level->Draw();
+    RenderCommandQueue::Flush();
+    DrawPostProcessing();
 }
 
 void zEngine::Update()
 {
     GLLib::processECSInput(window);
     level->Update(DeltaTime);
+}
+
+void zEngine::DrawPreProcessing()
+{
+    ScreenProcessingManagerPtr->PreProcessing();
+}
+
+void zEngine::DrawPostProcessing()
+{
+    ScreenProcessingManagerPtr->PostProcessing();
 }
 

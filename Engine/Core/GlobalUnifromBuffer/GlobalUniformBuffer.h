@@ -92,6 +92,7 @@ public:
         //         Name, target->second.size, sizeof(T));
         //     return;
         // }
+        // LOG("Set Uniform block data", Name);
         glBindBuffer(GL_UNIFORM_BUFFER,
             target->second.uniformBufferID);
         glBufferSubData(GL_UNIFORM_BUFFER, Offset, sizeof(T), Data);
@@ -122,6 +123,7 @@ public:
         //         Name, target->second.size, sizeof(T));
         //     return;
         // }
+        // LOG("Set Uniform block data", Name);
         glBindBuffer(GL_UNIFORM_BUFFER,target->second.uniformBufferID);
         glBufferSubData(GL_UNIFORM_BUFFER, targetMember->second.offset, sizeof(T), Data);
     }
@@ -181,4 +183,10 @@ template<typename T>
 static void SetGlobalUniformBuffer(const char* Name,T& Data, GLintptr Offset = 0)
 {
     GlobalUniformBuffer::GetInstance()->SetUniformBuffer(Name, &Data, Offset);
+}
+
+template<typename T>
+static void SetGlobalUniformBuffer(const char* Name,T& Data, const char* member)
+{
+    GlobalUniformBuffer::GetInstance()->SetUniformBuffer(Name, &Data, member);
 }

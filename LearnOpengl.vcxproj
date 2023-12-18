@@ -100,6 +100,7 @@
     </ClCompile>
     <ClCompile Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.cpp" />
     <ClCompile Include="Engine\Core\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="Engine\Core\ScreenProcessingManager\ScreenProcessingManager.cpp" />
     <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
     <ClCompile Include="Engine\Core\TextureCube\TextureCube.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
@@ -915,6 +916,7 @@
     <ClInclude Include="Engine\Core\FrameBuffer\FrameBuffer.h" />
     <ClInclude Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.h" />
     <ClInclude Include="Engine\Core\InputSystem\InputSystem.h" />
+    <ClInclude Include="Engine\Core\ScreenProcessingManager\ScreenProcessingManager.h" />
     <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
     <ClInclude Include="Engine\Core\TextureCube\TextureCube.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
@@ -984,6 +986,9 @@
     <None Include="Shaders\Light\pointLight.vsc" />
     <None Include="Shaders\Light\SpotLight.fsc" />
     <None Include="Shaders\Light\SpotLight.vsc" />
+    <None Include="Shaders\PostProcessing\PostProcessing-Core.fsc" />
+    <None Include="Shaders\PostProcessing\PostProcessing-None.fsc" />
+    <None Include="Shaders\PostProcessing\PostProcessing.vsc" />
     <None Include="Shaders\rtsjx.fsc" />
     <None Include="Shaders\rtsjx.vsc" />
     <None Include="Shaders\SanJiaoXing.fsc" />

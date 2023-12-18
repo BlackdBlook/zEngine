@@ -19,7 +19,7 @@ void RenderCommandQueue::FlushImpl()
 {
     std::multimap<float, RenderCommand> Temp;
     const auto pos = Camera::GetCamera()->GetPos();
-    // LOG("sort start");
+    
     while(!commands.IsEmpty())
     {
         RenderCommand tempCommand;
