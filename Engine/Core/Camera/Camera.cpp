@@ -46,7 +46,7 @@ void Camera::Reset(std::function<void(float)> update)
 
     auto projection = GetCameraProjection();
     
-    SetGlobalUniformBuffer("Matrices", projection, "projection");    
+    SetGlobalUniformBuffer("Matrices", "projection", projection);    
 }
 
 void Camera::Update(float DeltaTime)
@@ -55,7 +55,7 @@ void Camera::Update(float DeltaTime)
     updateFun(DeltaTime);
     auto view = GetCameraView();
 
-    SetGlobalUniformBuffer("Matrices", view, "view");
+    SetGlobalUniformBuffer("Matrices", "view", view);
 }
 
 void Camera::Attach(std::shared_ptr<Component> Target)

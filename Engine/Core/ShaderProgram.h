@@ -30,20 +30,29 @@ class ShaderProgram
     void RegistGlobalUniformBlock();
 
 public:
+
+    // 使用方式详见GlobalUniformBuffer.cpp
     void showAllActiveUnifrom();
     std::vector<std::string> GetAllUniformBlockName();
     void GetAllUniformBlockName(std::vector<std::string>& out);
-    
+    GLsizei glGetActiveUniformBlockSize(GLID blockIndex);
+    GLID GetUniformBlockIndex(const std::string& s);
+    GLint GetUniformBlockMemberNumbers(GLID blockIndex);
+    std::string GetUniformBlockMemberName(GLID UniformBlockMemberId);
+    GLint GetUniformBlockMemberSize(GLID UniformBlockMemberId);
+    GLint GetUniformBlockMemberOffset(GLID UniformBlockMemberId);
+    GLenum GetUniformBlockMemberType(GLID UniformBlockMemberId);
+    void GetUniformBlockMemberId(
+        GLint number, GLID BlockNumberId, std::vector<GLID>& Ids);
     
     BlendType BlendType = BlendType::Opaque;
     std::string GetName();
-
-
-    void use();
+    
+    inline void use();
     GLID getProgramID(){return programID;}
 
 
-    ShaderProgram();
+    ShaderProgram() = delete;
     ShaderProgram(ShaderProgram&& other) noexcept;
     ShaderProgram(const ShaderProgram& other);
     ShaderProgram(std::string&& ver);

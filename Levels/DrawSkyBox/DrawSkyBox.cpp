@@ -149,7 +149,7 @@ void DrawSkyBox::Init()
         auto plan = std::static_pointer_cast<BoxV3>(
         objs.emplace_back(NewSPtr<BoxV3>()));
     
-        plan->SetPos(glm::vec3{-5,10,0});
+        plan->SetPos(glm::vec3{-10,10,0});
         plan->SetRot(glm::vec3{0,0,0});
         plan->SetScale(glm::vec3{10.f});
     }

@@ -40,3 +40,10 @@ std::ostream& operator<<(std::ostream& output, const std::vector<std::string>& D
     }
     return output;
 }
+
+template <>
+void Log::print<bool>(bool arg)
+{
+    const char* c = arg?"True":"False";
+    std::cout << c << ' ';
+}

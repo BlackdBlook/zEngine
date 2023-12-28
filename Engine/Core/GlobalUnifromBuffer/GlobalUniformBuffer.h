@@ -76,30 +76,7 @@ public:
     void RegistUniformBlock(ShaderProgram* program);
 
     template<typename T>
-    void SetUniformBuffer(const char* Name, T* Data, GLintptr Offset)
-    {
-        auto target = UniformBlockMap.find(Name);
-        if(target == UniformBlockMap.end())
-        {
-            LOG("Error Uniform Buffer Not Find:", Name);
-            CacheMissingBufferSetOperation<T>(Name, Data, Offset);
-            return;
-        }
-
-        // if(target->second.size != sizeof(T))
-        // {
-        //     LOG("Error Uniform Buffer Size Not Match",
-        //         Name, target->second.size, sizeof(T));
-        //     return;
-        // }
-        // LOG("Set Uniform block data", Name);
-        glBindBuffer(GL_UNIFORM_BUFFER,
-            target->second.uniformBufferID);
-        glBufferSubData(GL_UNIFORM_BUFFER, Offset, sizeof(T), Data);
-    }
-
-    template<typename T>
-    void SetUniformBuffer(const char* Name, T* Data, const char* memberName)
+    void SetUniformBuffer(const char* Name, const char* memberName, T* Data)
     {
         auto target = UniformBlockMap.find(Name);
         if(target == UniformBlockMap.end())
@@ -180,13 +157,7 @@ public:
 };
 
 template<typename T>
-static void SetGlobalUniformBuffer(const char* Name,T& Data, GLintptr Offset = 0)
+static void SetGlobalUniformBuffer(const char* Name, const char* Member, T&& Data)
 {
-    GlobalUniformBuffer::GetInstance()->SetUniformBuffer(Name, &Data, Offset);
-}
-
-template<typename T>
-static void SetGlobalUniformBuffer(const char* Name,T& Data, const char* member)
-{
-    GlobalUniformBuffer::GetInstance()->SetUniformBuffer(Name, &Data, member);
+    GlobalUniformBuffer::GetInstance()->SetUniformBuffer(Name, Member, &Data);
 }

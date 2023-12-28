@@ -8,56 +8,40 @@ void GlobalUniformBuffer::RegistUniformBlock(ShaderProgram* program)
 {
     std::vector<std::string> ss;
     program->GetAllUniformBlockName(ss);
-    const GLID programID = program->getProgramID();
     GLID BindPort = -1;
     for (auto& s : ss)
     {
         
         // 获取块索引
-        GLID blockIndex = glGetUniformBlockIndex(
-            program->getProgramID(), s.c_str());
+        GLID blockIndex = program->GetUniformBlockIndex(s);
         auto UniformBlockMapCache = UniformBlockMap.find(s);
         if (UniformBlockMapCache == UniformBlockMap.end())
         {
             UniformBufferInfo info;
             // 获取块大小
-            glGetActiveUniformBlockiv(programID, blockIndex,
-                GL_UNIFORM_BLOCK_DATA_SIZE, &info.size);
+            info.size = program->glGetActiveUniformBlockSize(blockIndex);
             // 获取成员名和偏移
             {
-                GLint numUniforms;
-                glGetActiveUniformBlockiv(programID, blockIndex,
-                    GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS, &numUniforms);
+                GLint numUniforms = program->GetUniformBlockMemberNumbers(blockIndex);
 
-                GLuint* uniformIndices = new GLuint[numUniforms];
-                glGetActiveUniformBlockiv(programID, blockIndex,
-                    GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES, (GLint*)uniformIndices);
-
+                std::vector<GLID> Ids;
+                program->GetUniformBlockMemberId(numUniforms, blockIndex, Ids);
 
                 for (GLint i = 0; i < numUniforms; ++i) {
-                    char uniformName[256];
-                    glGetActiveUniformName(programID, uniformIndices[i],
-                        sizeof(uniformName), NULL, uniformName);
+                    std::string name = program->GetUniformBlockMemberName(Ids[i]);
 
-                    GLint size;
-                    glGetActiveUniformsiv(programID, 1, &uniformIndices[i],
-                        GL_UNIFORM_SIZE, &size);
+                    GLint size = program->GetUniformBlockMemberSize(Ids[i]);
 
-                    GLenum type;
-                    glGetActiveUniformsiv(programID, 1, &uniformIndices[i],
-                        GL_UNIFORM_TYPE, (GLint*)&type);
+                    GLenum type = program->GetUniformBlockMemberType(Ids[i]);
                     
-                    GLint offset;
-                    glGetActiveUniformsiv(programID, 1, &uniformIndices[i],
-                        GL_UNIFORM_OFFSET, &offset);
+                    GLint offset = program->GetUniformBlockMemberOffset(Ids[i]);
 
                     // LOG("Uniform ",uniformName," has offset ",offset,"\n");
                     info.offsetMap.insert({
-                        std::string(uniformName),
+                        name,
                         {type, size, offset}
                     });
                 }
-                delete[] uniformIndices;
             }
 
             
@@ -75,11 +59,9 @@ void GlobalUniformBuffer::RegistUniformBlock(ShaderProgram* program)
         }
         else
         {
-            GLsizei size;
+            const GLsizei size = program->glGetActiveUniformBlockSize(blockIndex);
 
-            glGetActiveUniformBlockiv(program->getProgramID(), blockIndex,
-                                      GL_UNIFORM_BLOCK_DATA_SIZE, &size);
-
+            // 简单检查一下
             if (UniformBlockMapCache->second.size != size)
             {
                 LOG("Error: Uniform Size Not Match", s);

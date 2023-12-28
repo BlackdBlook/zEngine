@@ -56,9 +56,5 @@ public:
     }
     
     template<>
-    static void print<bool>(bool arg)
-    {
-        const char* c = arg?"True":"False";
-        std::cout << c << ' ';
-    }
+    static void print<bool>(bool arg);
 };

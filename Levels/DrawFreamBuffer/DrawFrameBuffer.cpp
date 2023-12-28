@@ -14,7 +14,7 @@ public:
 
     bool KeyDown = false;
 
-    bool PostProcessingEnable = false;
+    bool PostProcessingEnable = true;
 };
 
 void SwitchPostProcessing::Update(float DeltaTime)

@@ -11,7 +11,7 @@ class ScreenProcessingManager
 
     GLID VAO;
 
-    bool Enabled = false;
+    bool Enabled = true;
     
 public:
     ScreenProcessingManager(GLsizei WindowX, GLsizei WindowY);

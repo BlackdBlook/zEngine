@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-
+#include "Header.h"
 class Object;
 
 class Component
@@ -13,6 +13,9 @@ public:
     bool operator==(const char* c);
     virtual void OnAttached();
     virtual void OnDettached();
+    virtual glm::vec3 GetPos();
+    virtual glm::quat GetRot();
+    virtual glm::vec3 GetScale();
     virtual void Draw() {}
     virtual void Update(float DeltaTime) {}
     virtual void Destory() {}

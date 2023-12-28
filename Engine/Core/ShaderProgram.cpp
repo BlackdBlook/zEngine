@@ -102,14 +102,75 @@ void ShaderProgram::GetAllUniformBlockName(std::vector<std::string>& out)
     {
         glGetActiveUniformBlockName(programID,
             (GLuint)i, bufSize, &length, name);
-        out.emplace_back(name);
+        out.emplace_back(std::string(name));
     }
 }
 
-ShaderProgram::ShaderProgram()
+GLsizei ShaderProgram::glGetActiveUniformBlockSize(GLID blockIndex)
 {
-    programID = glCreateProgram();
+    GLsizei size;
+    glGetActiveUniformBlockiv(programID, blockIndex,
+                GL_UNIFORM_BLOCK_DATA_SIZE, &size);
+    return size;
 }
+
+GLID ShaderProgram::GetUniformBlockIndex(const std::string& s)
+{
+    return glGetUniformBlockIndex(programID, s.c_str());
+}
+
+GLint ShaderProgram::GetUniformBlockMemberNumbers(GLID blockIndex)
+{
+    GLint numUniforms;
+    glGetActiveUniformBlockiv(programID, blockIndex,
+        GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS, &numUniforms);
+    return numUniforms;
+}
+
+std::string ShaderProgram::GetUniformBlockMemberName(GLID UniformBlockMemberId)
+{
+    char uniformName[256];
+    glGetActiveUniformName(programID, UniformBlockMemberId,
+        sizeof(uniformName), NULL, uniformName);
+    return std::string{uniformName};
+}
+
+GLint ShaderProgram::GetUniformBlockMemberSize(GLID UniformBlockMemberId)
+{
+    GLint size;
+    glGetActiveUniformsiv(programID, 1, &UniformBlockMemberId,
+        GL_UNIFORM_SIZE, &size);
+    return size;
+}
+
+GLint ShaderProgram::GetUniformBlockMemberOffset(GLID UniformBlockMemberId)
+{
+    GLint offset;
+    glGetActiveUniformsiv(programID, 1, &UniformBlockMemberId,
+        GL_UNIFORM_OFFSET, &offset);
+    return offset;
+}
+
+GLenum ShaderProgram::GetUniformBlockMemberType(GLID UniformBlockMemberId)
+{
+    GLenum type;
+    glGetActiveUniformsiv(programID, 1, &UniformBlockMemberId,
+        GL_UNIFORM_TYPE, (GLint*)&type);
+    return type;
+}
+
+void ShaderProgram::GetUniformBlockMemberId(
+    GLint number, GLID BlockNumberId, std::vector<GLID>& Ids)
+{
+    Ids = std::vector<GLID>(number);
+    glGetActiveUniformBlockiv(programID, BlockNumberId,
+        GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES, (GLint*)Ids.data());
+}
+
+// ShaderProgram::ShaderProgram()
+// {
+//     programID = glCreateProgram();
+// }
 
 ShaderProgram::ShaderProgram(ShaderProgram&& other)
     noexcept
