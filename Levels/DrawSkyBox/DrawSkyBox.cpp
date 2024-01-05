@@ -5,6 +5,7 @@
 #include "Engine/Core/InputSystem/InputSystem.h"
 #include "Engine/Object/Object.h"
 #include "MeshData/Box/Mesh_Box.h"
+#include "Objects/CamRot/CamRot.h"
 #include "Objects/DrawAdvanceBox/BoxV3.h"
 #include "Objects/PlaneWithLight/PlaneWithLight.h"
 #include "Objects/PointLight/PointLightV3.h"
@@ -15,60 +16,6 @@
 
 class InputSystem;
 class BoxV3;
-
-class CamRot
-{
-    glm::vec3 rot {0};
-    Camera* cam = Camera::GetCamera();
-    GLFWwindow* window = nullptr;
-    double tempX, tempY;
-public:
-    void Update()
-    {
-       
-        InputSystem* input = InputSystem::GetInstance();
-
-        if(input->GetMouseButtonDown(true))
-        {
-            if(window == nullptr)
-            {
-                window = Engine::GetInstance()->GetWindow();
-                glfwGetCursorPos(window,&tempX ,&tempY);
-                return;
-            }
-            double x,y;
-            glfwGetCursorPos(window,&x ,&y);
-            
-            glm::vec3 inputR ={ (y - tempY) * -0.2,  (x - tempX) * -0.2, 0};
-
-            if(inputR.x != 0)
-            {
-                constexpr float minP = -80.0f;
-                constexpr float maxP = 80.0f;
-                const float tX = rot.x + inputR.x;
-                if(tX < minP || tX > maxP)
-                {
-                    inputR.x = 0;
-                }
-            }
-            
-            rot += inputR;
-            rot.z = 0;
-
-            cam->SetRot(rot);
-
-            tempX = x;
-            tempY = y;
-        }else
-        {
-            if(window)
-            {
-                window = nullptr;
-            }
-        }
-        
-    }
-};
 
 
 void DrawSkyBox::Init()

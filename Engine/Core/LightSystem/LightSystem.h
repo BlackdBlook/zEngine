@@ -5,7 +5,7 @@
 #include "ToolKit/Typedef.h"
 
 class LightComponent;
-class SkyLightWithUbo;
+class SkyLight;
 class SpotLightWithUbo;
 class DirectLightWithUbo;
 class PointLightWithUbo;

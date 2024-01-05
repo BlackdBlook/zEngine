@@ -86,7 +86,7 @@ void GlobalUniformBuffer::RetrySetOperation(const std::string& name,
     glBindBuffer(GL_UNIFORM_BUFFER,info.uniformBufferID);
     for(SetUniformCommand& c : m->second)
     {
-        if(c.memberName == nullptr)
+        if(c.memberName.empty())
         {
             glBufferSubData(GL_UNIFORM_BUFFER,
                 c.Offset,

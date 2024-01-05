@@ -87,6 +87,8 @@ public:
     }
 
 private:
+    GLID vao,vbo;
+    SPtr<ShaderProgram> sp;
     glm::vec3 color = glm::vec3{1};
     glm::vec3 ambient = glm::vec3{0.05f, 0.05f, 0.05f};
     glm::vec3 diffuse = glm::vec3{0.8f, 0.8f, 0.8f};
@@ -98,12 +100,18 @@ private:
     uint8 PointLightIndexMask = 0;
 
     static uint8 PointLightGlobalMask;
+    static std::string GetUniformObjectName(uint8 Mask);
 public:
-    void initPointLight(int index);
+    PointLightWithUbo();
+    void initPointLight(int mask);
     void updatePointLight(int index);
+
+    
     void OnAttached() override;
     void OnDettached() override;
+    void Draw() override;
     
     void InitLightBuffer() override;
     void UpdateLightBuffer() override;
+    void DisableLight() override;
 };

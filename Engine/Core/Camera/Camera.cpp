@@ -56,6 +56,7 @@ void Camera::Update(float DeltaTime)
     auto view = GetCameraView();
 
     SetGlobalUniformBuffer("Matrices", "view", view);
+    SetGlobalUniformBuffer("LightData", "viewPos", GetPos());
 }
 
 void Camera::Attach(std::shared_ptr<Component> Target)

@@ -68,6 +68,12 @@ void Object::Dettach(std::shared_ptr<Component> Target)
 
 Object::~Object()
 {
+    for(auto it : Components)
+    {
+        it->OnDettached();
+        it->Parent.reset();
+    }
+    Components = {};
 }
 
 void Object::SetPos(const glm::vec3& newPos)
@@ -80,8 +86,6 @@ glm::vec3 Object::GetPos()
 {
     return pos;
 }
-
-
 
 void Object::SetRot(const glm::quat& newRot)
 {

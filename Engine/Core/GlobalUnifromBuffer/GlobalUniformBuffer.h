@@ -52,7 +52,7 @@ struct SetUniformCommand
 {
     std::string name;
     GLintptr Offset;
-    const char* memberName = nullptr;
+    std::string memberName;
     std::vector<uint8> Data;
     SetUniformCommand() = default;
     SetUniformCommand(const SetUniformCommand& other) = delete;
@@ -60,7 +60,7 @@ struct SetUniformCommand
     SetUniformCommand(SetUniformCommand&& other) noexcept
     {
         name = std::move(other.name);
-        memberName = other.memberName;
+        memberName = std::move(other.memberName);
         Offset = other.Offset;
         Data = std::move(other.Data);
     }
@@ -76,13 +76,14 @@ public:
     void RegistUniformBlock(ShaderProgram* program);
 
     template<typename T>
-    void SetUniformBuffer(const char* Name, const char* memberName, T* Data)
+    void SetUniformBuffer(string&& Name, string&& memberName, T* Data)
     {
         auto target = UniformBlockMap.find(Name);
         if(target == UniformBlockMap.end())
         {
             LOG("Error Uniform Buffer Not Find:", Name);
-            CacheMissingBufferSetOperation<T>(Name, Data, memberName);
+            CacheMissingBufferSetOperation<T>(
+                std::forward<string>(Name), Data, std::forward<string>(memberName));
             return;
         }
         auto targetMember =
@@ -90,7 +91,8 @@ public:
         if(targetMember == target->second.offsetMap.end())
         {
             LOG("Error Uniform Buffer Not Find:", Name);
-            CacheMissingBufferSetOperation<T>(Name, Data, memberName);
+            CacheMissingBufferSetOperation<T>(
+                std::forward<string>(Name), Data, std::forward<string>(memberName));
             return;
         }
 
@@ -101,12 +103,15 @@ public:
         //     return;
         // }
         // LOG("Set Uniform block data", Name);
+
+        // LOG("SetUniformBuffer", Name, memberName);
+        
         glBindBuffer(GL_UNIFORM_BUFFER,target->second.uniformBufferID);
         glBufferSubData(GL_UNIFORM_BUFFER, targetMember->second.offset, sizeof(T), Data);
     }
 
     template<typename T>
-    void CacheMissingBufferSetOperation(const char* Name,void* Data, GLintptr Offset)
+    void CacheMissingBufferSetOperation(string&& Name,void* Data, GLintptr Offset)
     {
         SetUniformCommand command;
         command.name = std::string{Name};
@@ -128,8 +133,8 @@ public:
     }
     
     template<typename T>
-    void CacheMissingBufferSetOperation(const char* Name,
-        void* Data, const char* memberName)
+    void CacheMissingBufferSetOperation(string&& Name,
+        void* Data, string&& memberName)
     {
         SetUniformCommand command;
         command.name = std::string{Name};
@@ -157,7 +162,8 @@ public:
 };
 
 template<typename T>
-static void SetGlobalUniformBuffer(const char* Name, const char* Member, T&& Data)
+static void SetGlobalUniformBuffer(string&& Name, string&& Member, T&& Data)
 {
-    GlobalUniformBuffer::GetInstance()->SetUniformBuffer(Name, Member, &Data);
+    GlobalUniformBuffer::GetInstance()->SetUniformBuffer(
+        std::forward<string>(Name), std::forward<string>(Member), &Data);
 }

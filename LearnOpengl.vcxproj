@@ -112,6 +112,7 @@
     <ClCompile Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.cpp" />
     <ClCompile Include="Levels\DrawFreamBuffer\DrawFrameBuffer.cpp" />
     <ClCompile Include="Levels\DrawLightWithUbo\DrawLightWithUbo.cpp" />
+    <ClCompile Include="Levels\DrawShadow\DrawShadow.cpp" />
     <ClCompile Include="Levels\DrawSkyBox\DrawSkyBox.cpp" />
     <ClCompile Include="Levels\DrawStencilTest\DrawStencilTest.cpp" />
     <ClCompile Include="Levels\NanoSuit0\DrawNanosuit.cpp" />
@@ -209,6 +210,7 @@
       <AdditionalOptions>/utf-8 </AdditionalOptions>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Objects\Box\BoxV4\BoxV4.cpp" />
     <ClCompile Include="Objects\Box\BoxWithLight.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -513,6 +515,7 @@
       <AdditionalOptions>/utf-8 </AdditionalOptions>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Objects\CamRot\CamRot.cpp" />
     <ClCompile Include="Objects\DrawAdvanceBox\BoxV3.cpp" />
     <ClCompile Include="Objects\DriectLight\DirectLightWithUbo\DirectLightWithUbo.cpp" />
     <ClCompile Include="Objects\DriectLight\DriectLight.cpp" />
@@ -902,7 +905,6 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="Objects\SkyBox\SkyBox.cpp" />
-    <ClCompile Include="Objects\SkyLightWithUbo\SkyLightWithUbo.cpp" />
     <ClCompile Include="Objects\SpotLight\SpotLight.cpp" />
     <ClCompile Include="Objects\SpotLight\SpotLightWithUbo\SpotLightWithUbo.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1010,6 +1012,7 @@
     <ClInclude Include="Levels\DrawDepthTestBuffer\DrawDepthTestBuffer.h" />
     <ClInclude Include="Levels\DrawFreamBuffer\DrawFrameBuffer.h" />
     <ClInclude Include="Levels\DrawLightWithUbo\DrawLightWithUbo.h" />
+    <ClInclude Include="Levels\DrawShadow\DrawShadow.h" />
     <ClInclude Include="Levels\DrawSkyBox\DrawSkyBox.h" />
     <ClInclude Include="Levels\DrawStencilTest\DrawStencilTest.h" />
     <ClInclude Include="Levels\NanoSuit0\DrawNanosuit.h" />
@@ -1034,10 +1037,12 @@
     <ClInclude Include="Levels\LevelHeader.h" />
     <ClInclude Include="LogPrinter\Log.h" />
     <ClInclude Include="Objects\Box\Box.h" />
+    <ClInclude Include="Objects\Box\BoxV4\BoxV4.h" />
     <ClInclude Include="Objects\Box\BoxWithLight.h" />
     <ClInclude Include="Objects\Box\BoxWithMaterial.h" />
     <ClInclude Include="Objects\Box\TexBox.h" />
     <ClInclude Include="Objects\Box\TexBoxWithLight.h" />
+    <ClInclude Include="Objects\CamRot\CamRot.h" />
     <ClInclude Include="Objects\DrawAdvanceBox\BoxV3.h" />
     <ClInclude Include="Objects\DriectLight\DirectLightWithUbo\DirectLightWithUbo.h" />
     <ClInclude Include="Objects\DriectLight\DriectLight.h" />
@@ -1053,7 +1058,6 @@
     <ClInclude Include="Objects\SanJiaoXing\roteSJX.h" />
     <ClInclude Include="Objects\SanJiaoXing\SanJiaoXing.h" />
     <ClInclude Include="Objects\SkyBox\SkyBox.h" />
-    <ClInclude Include="Objects\SkyLightWithUbo\SkyLightWithUbo.h" />
     <ClInclude Include="Objects\SpotLight\SpotLight.h" />
     <ClInclude Include="Objects\SpotLight\SpotLightWithUbo\SpotLightWithUbo.h" />
     <ClInclude Include="Objects\TurnModelScript\TurnModelScript.h" />

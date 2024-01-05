@@ -29,13 +29,6 @@ public:
         ));
 
         Camera::GetCamera()->SetLookAt(glm::vec3{0});
-        
-        // Camera::GetCamera()->SetRot(glm::vec3(
-        // 0
-        // ,sin(time)
-        // ,0
-        // ));
-        // LOG(sin(time));
     }
 };
 

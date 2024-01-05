@@ -8,6 +8,8 @@ struct Material {
 };
 
 struct DirLight {
+    float strength;
+    
     vec3 direction;
     vec3 color;
     vec3 ambient;
@@ -16,6 +18,8 @@ struct DirLight {
 };
 
 struct PointLight {
+    float strength;
+    
     vec3 position;
     vec3 color;
     float constant;
@@ -28,6 +32,8 @@ struct PointLight {
 };
 
 struct SpotLight {
+    float strength;
+    
     vec3 position;
     vec3 direction;
     float cutOff;
@@ -48,15 +54,12 @@ in vec3 FragPos;
 in vec3 Normal;
 in vec2 TexCoords;
 
-uniform vec3 viewPos;
-uniform DirLight dirLight;
-//uniform PointLight pointLights[NR_POINT_LIGHTS];
-uniform SpotLight spotLight;
 uniform Material material;
-uniform int PointLightCount;
 
 layout (shared) uniform LightData
 {
+    vec3 viewPos;
+    // int PointLightCount;
     DirLight dirLight;
     PointLight pointLights[NR_POINT_LIGHTS];
     SpotLight spotLight;
@@ -80,17 +83,20 @@ void main()
     // this fragment's final color.
     // == =====================================================
     // phase 1: directional lighting
-    vec3 result = CalcDirLight(dirLight, norm, viewDir);
-    // phase 2: point lights
-    for(int i = 0; i < PointLightCount; i++)
+    vec3 result = vec3(0);
+//    result = CalcDirLight(dirLight, norm, viewDir);
+//    // phase 2: point lights
+    for(int i = 0; i < NR_POINT_LIGHTS; i++)
     {
         result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
     }
-
-    // phase 3: spot light
+//
+//    // phase 3: spot light
     result += CalcSpotLight(spotLight, norm, FragPos, viewDir);
 
     FragColor = vec4(result, 1.0);
+//    FragColor = vec4(dirLight.specular, 1);
+//    FragColor = vec4(1,1,1,1);
 }
 
 // calculates the color when using a directional light.
@@ -106,7 +112,8 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
     vec3 ambient = light.ambient * vec3(texture(material.texture_diffuse0, TexCoords));
     vec3 diffuse = light.diffuse * diff * vec3(texture(material.texture_diffuse0, TexCoords));
     vec3 specular = light.specular * spec * vec3(texture(material.texture_specular0, TexCoords));
-    return (ambient + diffuse + specular) * light.color;
+    return (ambient + diffuse + specular) * light.color * light.strength;
+//    return vec3(light.strength);
 }
 
 // calculates the color when using a point light.
@@ -128,7 +135,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;
-    return (ambient + diffuse + specular) * light.color;
+    return (ambient + diffuse + specular) * light.color  * light.strength;
 }
 
 // calculates the color when using a spot light.
@@ -154,5 +161,5 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     ambient *= attenuation * intensity;
     diffuse *= attenuation * intensity;
     specular *= attenuation * intensity;
-    return (ambient + diffuse + specular) * light.color;
+    return (ambient + diffuse + specular) * light.color  * light.strength;
 }

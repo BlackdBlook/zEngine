@@ -20,6 +20,7 @@
 #include "Levels/DrawBlend/DrawBlend.h"
 #include "Levels/DrawDepthTestBuffer/DrawDepthTestBuffer.h"
 #include "Levels/DrawFreamBuffer/DrawFrameBuffer.h"
+#include "Levels/DrawShadow/DrawShadow.h"
 #include "Levels/DrawSkyBox/DrawSkyBox.h"
 #include "Levels/DrawStencilTest/DrawStencilTest.h"
 #include "Levels/NanoSuit0/DrawNanosuit.h"
@@ -128,6 +129,7 @@ void zEngine::Run()
 void zEngine::InitLevel()
 {
     // addLevel(DrawSanjiaoxing);
+    addLevel(DrawShadow); 
     addLevel(DrawFrameBuffer); 
     addLevel(DrawSkyBox); 
     addLevel(DrawBlend); 
@@ -174,6 +176,10 @@ zEngine* zEngine::GetInstance()
 
 void zEngine::Draw()
 {
+
+    
+
+    
     DrawPreProcessing();
     level->Draw();
     RenderCommandQueue::Flush();

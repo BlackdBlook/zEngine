@@ -2,8 +2,14 @@
 
 #include "Engine/Core/GlobalUnifromBuffer/GlobalUniformBuffer.h"
 
+void DirectLightWithUbo::DisableLight()
+{
+    SetGlobalUniformBuffer("LightData", "dirLight.strength", 1.f);
+}
+
 void DirectLightWithUbo::InitLightBuffer()
 {
+    SetGlobalUniformBuffer("LightData", "dirLight.strength", 1.f);
     SetGlobalUniformBuffer("LightData", "dirLight.direction", direction);
     SetGlobalUniformBuffer("LightData", "dirLight.color", color);
     SetGlobalUniformBuffer("LightData", "dirLight.ambient", ambient);
