@@ -15,11 +15,13 @@ void LightComponent::Draw()
 void LightComponent::OnAttached()
 {
     Component::OnAttached();
+    
     InitLightBuffer();
 }
 
 void LightComponent::OnDettached()
 {
     Component::OnDettached();
+    
     DisableLight();
 }

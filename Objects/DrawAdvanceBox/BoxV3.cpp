@@ -162,7 +162,7 @@ void BoxV3::Draw()
         command.DrawType = DrawType::DrawArrays;
         command.Textures.push_back(&Tex);
         command.Textures.push_back(&specular);
-        command.WorldPos = GetPos();
+        command.TargetObject = this;
     });
     
     // Tex.Bind();

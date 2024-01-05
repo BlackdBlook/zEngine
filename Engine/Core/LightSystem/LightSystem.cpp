@@ -22,4 +22,5 @@ void LightSystem::UpdateLightBufferData()
 
 void LightSystem::DrawShadow()
 {
+    
 }

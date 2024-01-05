@@ -2,13 +2,14 @@
 #include <string>
 #include <vector>
 
+#include "Engine/Core/IBindableTexture/IBindableTexture.h"
 #include "ToolKit/ImgToolKit.h"
 #include "ToolKit/Typedef.h"
 
 
 
 
-class TextureCube
+class TextureCube : public IBindableTexture
 {
 public:
     std::vector<TexturePtr> ts;
@@ -24,4 +25,5 @@ public:
 private:
 
     void loadCubemap(const std::vector<std::string>& faces);
+    void Bind(GLID unit) override;
 };

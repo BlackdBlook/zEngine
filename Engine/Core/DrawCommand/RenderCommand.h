@@ -5,6 +5,8 @@
 
 #include "ToolKit/Typedef.h"
 
+class Object;
+class IBindableTexture;
 class Texture2D;
 class ShaderProgram;
 
@@ -36,15 +38,19 @@ public:
 
     GLsizei vertexNum = 0;
 
-    glm::vec3 WorldPos {0};
+    // glm::vec3 WorldPos {0};
 
-    std::vector<Texture2D*> Textures;
+    Object* TargetObject = nullptr;
+
+    std::vector<IBindableTexture*> Textures;
 
     std::function<void(RenderCommand*)> PreExcute = {};
     
     std::function<void(RenderCommand*)> PostExcute = {};
     
     virtual void Excute();
+
+    virtual void ExcuteByShadowPass(ShaderProgram* shader);
 
     virtual bool IsVaild();
 

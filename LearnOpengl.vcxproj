@@ -104,6 +104,7 @@
     <ClCompile Include="Engine\Core\ScreenProcessingManager\ScreenProcessingManager.cpp" />
     <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
     <ClCompile Include="Engine\Core\TextureCube\TextureCube.cpp" />
+    <ClCompile Include="Engine\Core\TextureSceneDepth\SceneDepthFrameBuffer.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
@@ -999,11 +1000,13 @@
     <ClInclude Include="Engine\Core\DrawCommand\RenderCommandQueue.h" />
     <ClInclude Include="Engine\Core\FrameBuffer\FrameBuffer.h" />
     <ClInclude Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.h" />
+    <ClInclude Include="Engine\Core\IBindableTexture\IBindableTexture.h" />
     <ClInclude Include="Engine\Core\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\Core\LightSystem\LightSystem.h" />
     <ClInclude Include="Engine\Core\ScreenProcessingManager\ScreenProcessingManager.h" />
     <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
     <ClInclude Include="Engine\Core\TextureCube\TextureCube.h" />
+    <ClInclude Include="Engine\Core\TextureSceneDepth\SceneDepthFrameBuffer.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />
@@ -1081,11 +1084,14 @@
     <None Include="Shaders\Light\SpotLight.vsc" />
     <None Include="Shaders\PostProcessing\PostProcessing-Core.fsc" />
     <None Include="Shaders\PostProcessing\PostProcessing-GammaCorrection.fsc" />
+    <None Include="Shaders\PostProcessing\PostProcessing-SceneDepth.fsc" />
     <None Include="Shaders\PostProcessing\PostProcessing.vsc" />
     <None Include="Shaders\rtsjx.fsc" />
     <None Include="Shaders\rtsjx.vsc" />
     <None Include="Shaders\SanJiaoXing.fsc" />
     <None Include="Shaders\SanJiaoXing.vsc" />
+    <None Include="Shaders\ShadowMap\ShadowMap.fsc" />
+    <None Include="Shaders\ShadowMap\ShadowMap.vsc" />
     <None Include="Shaders\TexBox.fsc" />
     <None Include="Shaders\TexBox.vsc" />
     <None Include="Shaders\texBoxWithLight.fsc" />

@@ -123,7 +123,7 @@ void PointLightWithUbo::Draw()
         command.vertexNum = 36;
         command.Shader = sp.get();
         command.DrawType = DrawType::DrawArrays;
-        command.WorldPos = GetPos();
+        command.TargetObject = Parent.lock().get();
     });
 }
 

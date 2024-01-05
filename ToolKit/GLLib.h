@@ -1,4 +1,5 @@
 #pragma once
+#include "Typedef.h"
 
 struct GLFWwindow;
 
@@ -13,5 +14,9 @@ public:
 
     static void framebuffer_size_callback
         (GLFWwindow* window, int width, int height);
+
+    // 获取最大纹理单元数量
+    static uint32 GetMaxTextureUnitCount();
+    
     void GLADinit();
 };

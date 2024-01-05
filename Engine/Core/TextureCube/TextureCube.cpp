@@ -33,6 +33,12 @@ void TextureCube::loadCubemap(const std::vector<std::string>& faces)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 }
 
+void TextureCube::Bind(GLID unit)
+{
+    glActiveTexture(GL_TEXTURE0 + unit);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+}
+
 
 TextureCube::TextureCube()
 {

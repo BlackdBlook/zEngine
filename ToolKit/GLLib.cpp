@@ -41,6 +41,19 @@ void GLLib::framebuffer_size_callback
 	glViewport(0, 0, width, height);
 }
 
+uint32 InitMaxTextureUnitCount()
+{
+	int count = 0;
+	glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &count);
+	return count;
+}
+
+uint32 GLLib::GetMaxTextureUnitCount()
+{
+	static uint32 ans = InitMaxTextureUnitCount();
+	return ans;
+}
+
 void GLLib::GLADinit()
 {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

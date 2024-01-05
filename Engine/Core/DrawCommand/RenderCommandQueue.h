@@ -14,6 +14,8 @@ public:
     {
         RenderCommand tmp;
         task(tmp);
+        assert(tmp.IsVaild());
+        
         EnqueueCommand(std::move(tmp));
     }
 
@@ -24,9 +26,13 @@ private:
     void FlushImpl();
     void ExecuteCommand(RenderCommand& command);
 
+    void RenderShadow();
+    void RenderScene();
+    void ClearQueue();
     
     RenderCommandQueue();
     TQueue<RenderCommand> commands;
+    SPtr<ShaderProgram> ShadowPass;
     static RenderCommandQueue& GetInstance();
 };
 

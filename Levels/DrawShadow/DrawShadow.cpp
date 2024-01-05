@@ -45,65 +45,17 @@ void DrawShadow::Init()
     
     cam->Reset([cam](float DeltaTime)
     {
-        constexpr float MOVE_SPEED = 5;
-        glm::vec3 pos = cam->GetPos();
-        const float MoveSpeed = MOVE_SPEED * DeltaTime;
-        bool flag = false;
-        auto r = cam->GetRight();
-        r.y = 0;
-        r = glm::normalize(r);
-        auto u = glm::vec3{0, 1, 0};
-        u = glm::normalize(u);
-        auto f = glm::cross(r,u);
-        f = glm::normalize(f);
-        
-        if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_W) == GLFW_PRESS)
-        {
-            pos+= MoveSpeed * f;
-            flag = true;
-        }
-        if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_S) == GLFW_PRESS)
-        {
-            pos+= -MoveSpeed * f;
-            flag = true;
-        }
-        if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_A) == GLFW_PRESS)
-        {
-            pos += MoveSpeed * r;
-            flag = true;
-        }
-        if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_D) == GLFW_PRESS)
-        {
-            pos += -MoveSpeed * r;
-            flag = true;
-        }
-        if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_E) == GLFW_PRESS)
-        {
-            pos+= MoveSpeed * u;
-            flag = true;
-        }
-        if (glfwGetKey(Engine::GetInstance()->GetWindow(), GLFW_KEY_Q) == GLFW_PRESS)
-        {
-            pos+= -MoveSpeed * u;
-            flag = true;
-        }
-        if(flag)
-        {
-            cam->SetPos(pos);
-        }
-
         static CamRot rot;
-        rot.Update();
-        
+        rot.Update(DeltaTime);
     });
     Camera::GetCamera()->SetPos(glm::vec3{0,0,5});
 
     
-    {
-        auto Light = NewObject();
-        auto DirLight = NewSPtr<DirectLightWithUbo>();
-        Light->Attach(DirLight);
-    }
+    // {
+    //     auto Light = NewObject();
+    //     auto DirLight = NewSPtr<DirectLightWithUbo>();
+    //     Light->Attach(DirLight);
+    // }
 
     {
         
@@ -134,6 +86,7 @@ void DrawShadow::Init()
         auto obj = NewObject();
         auto box = NewSPtr<BoxV4>();
         obj->Attach(box);
+        obj->SetPos(glm::vec3{0,0,-5});
     }
 
     {

@@ -16,6 +16,7 @@
 
 #include <algorithm>
 #include <intrin.h>
+#include <functional>
 
 /**
  * Enumerates concurrent queue modes.
@@ -109,7 +110,7 @@ public:
 
 		TNode* OldHead;
 
-		if (Mode == EQueueMode::Mpsc)
+		if constexpr  (Mode == EQueueMode::Mpsc)
 		{
             OldHead = (TNode*)InterlockedExchangePtr((void**)&Head, NewNode);
 			InterlockedExchangePtr((void**)&OldHead->NextNode, NewNode);
@@ -144,7 +145,7 @@ public:
 
 		TNode* OldHead;
 
-		if (Mode == EQueueMode::Mpsc)
+		if constexpr (Mode == EQueueMode::Mpsc)
 		{
             OldHead = (TNode*)::_InterlockedExchangePointer((void**)&Head, NewNode);
             ::_InterlockedExchangePointer((void**)&OldHead->NextNode, NewNode);
@@ -230,8 +231,6 @@ public:
 		{
 			return false;
 		}
-		
-		TSAN_AFTER(&Tail->NextNode);
 
 		TNode* OldTail = Tail;
 		Tail = Popped;
@@ -239,6 +238,17 @@ public:
 		delete OldTail;
 
 		return true;
+	}
+
+	void ForLoop(std::function<void(ItemType&)> func)
+	{
+		TNode* head = Tail->NextNode;
+		
+		while (head != nullptr)
+		{
+			func(head->Item);
+			head = head->NextNode;
+		}
 	}
 
 private:

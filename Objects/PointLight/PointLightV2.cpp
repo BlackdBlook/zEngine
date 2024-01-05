@@ -75,7 +75,7 @@ void PointLightV2::Draw()
         command.vertexNum = 36;
         command.Shader = shader.get();
         command.DrawType = DrawType::DrawArrays;
-        command.WorldPos = GetPos();
+        command.TargetObject = this;
     });
 }
 

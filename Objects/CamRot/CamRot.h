@@ -14,5 +14,5 @@ class CamRot
     GLFWwindow* window = nullptr;
     double tempX, tempY;
 public:
-    void Update();
+    void Update(float DeltaTime);
 };

@@ -4,14 +4,16 @@
 #include "Core/Level.h"
 #include "Core/Camera/Camera.h"
 #include "Core/FrameBuffer/FrameBuffer.h"
+#include "Core/TextureSceneDepth/SceneDepthFrameBuffer.h"
 class ScreenProcessingManager;
 struct GLFWwindow;
 class zEngine;
 class zEngine
 {
 public:
-    uint32 WindowX = 2560;
-    uint32 WindowY = 1440;
+    inline static uint32 WindowX = 2560;
+    inline static uint32 WindowY = 1440;
+
 
     
     zEngine();
@@ -34,10 +36,12 @@ private:
     float DeltaTime = 0;
     std::vector<std::function<void()>> levelList;
     SPtr<ScreenProcessingManager> ScreenProcessingManagerPtr;
+    SPtr<SceneDepthFrameBuffer> SceneDepthFrameBufferPtr;
 
     void Update();
     void DrawPreProcessing();
     void DrawPostProcessing();
+    void DrawShadowMap();
     void Draw();
     static zEngine* ins;
 };

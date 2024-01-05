@@ -1,5 +1,6 @@
 ﻿#include "SkyBox.h"
 
+#include "Engine/Core/DrawCommand/RenderCommandQueue.h"
 #include "Engine/SubSystem/AssetSystem.h"
 #include "Levels/DrawTexBox/DrawTexBox.h"
 #include "MeshData/Box/Mesh_Box.h"
@@ -20,6 +21,7 @@ void SkyBox::Start()
     cubemapTexture = TextureCube(faces);
     shader = NewSPtr<ShaderProgram>("SkyBox");
     shader->setUniform("skybox",0);
+    shader->BlendType = BlendType::Skybox;
     // skybox VAO
     glGenVertexArrays(1, &skyboxVAO);
     glGenBuffers(1, &skyboxVBO);
@@ -38,13 +40,34 @@ void SkyBox::Update(float DeltaTime)
 void SkyBox::Draw()
 {
     Object::Draw();
-    //glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-    shader->use();
-    glBindVertexArray(skyboxVAO);
-    cubemapTexture.use();
-    glDepthMask(GL_FALSE);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    glDepthMask(GL_TRUE);
+    // shader->use();
+    // glBindVertexArray(skyboxVAO);
+    // cubemapTexture.use();
+    // glDepthMask(GL_FALSE);
+    // glDrawArrays(GL_TRIANGLES, 0, 36);
+    // glDepthMask(GL_TRUE);
+
+    PushRenderCommand([this](RenderCommand& command)
+    {
+        command.vao = skyboxVAO;
+        command.Shader = shader.get();
+        command.DrawType = DrawType::DrawArrays;
+        command.vertexNum = 36;
+        command.Textures = {
+            &cubemapTexture
+        };
+        command.TargetObject = this;
+        command.PreExcute = [](RenderCommand* c)
+        {
+            glDepthMask(GL_FALSE);
+        };
+
+        command.PostExcute = [](RenderCommand* c)
+        {
+            glDepthMask(GL_TRUE);
+        };
+    });
+    
 }
 
 SkyBox::~SkyBox()

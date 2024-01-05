@@ -2,6 +2,7 @@
 
 #include "Engine/Core/ShaderProgram.h"
 #include "Engine/Core/Texture2D/Texture2D.h"
+#include "Engine/Object/Object.h"
 
 RenderCommand::RenderCommand()
 {
@@ -45,6 +46,31 @@ void RenderCommand::Excute()
     }
 }
 
+void RenderCommand::ExcuteByShadowPass(ShaderProgram* shader)
+{
+    if(TargetObject == nullptr)
+    {
+        LOG(GetName(), "Is Null");
+        return;
+    }
+    shader->use();
+    shader->setUniform("model", TargetObject->GetModelMat());
+    glBindVertexArray(vao);
+
+    switch (DrawType)
+    {
+    case DrawType::DrawArrays:
+        glDrawArrays(GL_TRIANGLES, 0, vertexNum);
+        break;
+    case DrawType::DrawElements:
+        glDrawElements(GL_TRIANGLES, vertexNum, GL_UNSIGNED_INT, nullptr);
+        break;
+    case DrawType::None:
+    default:
+        LOG("Render Command Error: None Draw Type");
+    }
+}
+
 bool RenderCommand::IsVaild()
 {
     if(DrawType == DrawType::None)
@@ -63,6 +89,11 @@ bool RenderCommand::IsVaild()
     }
 
     if(vertexNum == 0)
+    {
+        return false;
+    }
+
+    if(TargetObject == nullptr)
     {
         return false;
     }

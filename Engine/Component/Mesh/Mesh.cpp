@@ -52,7 +52,7 @@ void Mesh::Draw(ShaderProgram* shader)
         command.vao = VAO;
         command.Shader = shader;
         command.DrawType = DrawType::DrawElements;
-        command.WorldPos = Parent.lock()->GetPos();
+        command.TargetObject = Parent.lock().get();
         command.vertexNum = (GLsizei)indices.size();
         command.PreExcute = std::move(t);
     });

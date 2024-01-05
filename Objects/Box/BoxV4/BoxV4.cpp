@@ -57,7 +57,7 @@ void BoxV4::Draw()
         command.DrawType = DrawType::DrawArrays;
         command.Textures.push_back(&Tex);
         command.Textures.push_back(&Tex2);
-        command.WorldPos = GetPos();
+        command.TargetObject = Parent.lock().get();
     });
 }
 

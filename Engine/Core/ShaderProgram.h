@@ -10,6 +10,7 @@ enum class BlendType
     Opaque,
     Translucent,
     Mask,
+    Skybox
 };
 
 enum class BlendType;

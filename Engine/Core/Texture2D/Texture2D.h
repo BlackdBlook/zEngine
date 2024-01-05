@@ -1,6 +1,8 @@
 #pragma once
 #include "../../../Header.h"
-class Texture2D
+#include "Engine/Core/IBindableTexture/IBindableTexture.h"
+
+class Texture2D : public IBindableTexture
 {
     GLID unit = 0;
     GLID texture = -1;
@@ -13,6 +15,6 @@ public:
     ~Texture2D();
     Texture2D& operator=(Texture2D&& t)noexcept;
     GLID GetTexture()const;
-    void Bind(GLID unit = 0);
+    void Bind(GLID unit = 0) override;
 };
 
