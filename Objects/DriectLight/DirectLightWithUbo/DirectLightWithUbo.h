@@ -1,13 +1,13 @@
 ﻿#pragma once
 #include "Objects/Light/LightComponent.h"
 
-#define LightNumber 0.5f
+#define LightNumber 0.8f
 
 class DirectLightWithUbo : public LightComponent
 {
     glm::vec3 direction = {-0.2f, -1.0f, -0.3f};
     glm::vec3 color = {1.f, 1.f, 1.f};
-    glm::vec3 ambient = {0, 0, 0};
+    glm::vec3 ambient = {0.2,0.2,0.2};
     glm::vec3 diffuse = {LightNumber, LightNumber, LightNumber};
     glm::vec3 specular = {LightNumber, LightNumber, LightNumber};
 

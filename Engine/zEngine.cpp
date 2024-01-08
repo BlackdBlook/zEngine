@@ -173,7 +173,7 @@ SPtr<ScreenProcessingManager> zEngine::GetScreenProcessingManagerPtr()
 zEngine* zEngine::GetInstance()
 {
     return ins;
-}
+} 
 
 void zEngine::Draw()
 {

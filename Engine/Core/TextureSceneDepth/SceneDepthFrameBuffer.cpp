@@ -12,12 +12,12 @@ SceneDepthFrameBuffer::SceneDepthFrameBuffer()
     glGenTextures(1, &depthMap);
     glBindTexture(GL_TEXTURE_2D, depthMap);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 
-                 (GLsizei)Engine::WindowX, (GLsizei)Engine::WindowY,
+                 (GLsizei)Engine::WindowX * 2, (GLsizei)Engine::WindowY * 2,
                  0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER); 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
     glDrawBuffer(GL_NONE);
@@ -28,7 +28,7 @@ SceneDepthFrameBuffer::SceneDepthFrameBuffer()
     GLfloat near_plane = 10.0f, far_plane = 25.5f;
     lightProjection = glm::ortho(-25.0f, 25.0f, -25.0f, 25.0f, near_plane, far_plane);
     
-    lightView = glm::lookAt(glm::vec3{-2.0f, 14.0f, -1.0f}, glm::vec3(0.0f),
+    lightView = glm::lookAt(glm::vec3{-5.0f, 14.0f, -1.0f}, glm::vec3(0.0f),
         glm::vec3(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;
     

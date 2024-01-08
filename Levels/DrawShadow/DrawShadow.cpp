@@ -86,7 +86,7 @@ void DrawShadow::Init()
         auto obj = NewObject();
         auto box = NewSPtr<BoxV4>();
         obj->Attach(box);
-        obj->SetPos(glm::vec3{-1,2,0});
+        obj->SetPos(glm::vec3{-1,2,0.5});
     }
 
     {
@@ -94,6 +94,12 @@ void DrawShadow::Init()
         auto box = NewSPtr<BoxV4>();
         obj->Attach(box);
         obj->SetPos(glm::vec3{0,0,0});
+    }
+    {
+        auto obj = NewObject();
+        auto box = NewSPtr<BoxV4>();
+        obj->Attach(box);
+        obj->SetPos(glm::vec3{0,-1,2});
     }
 
     {

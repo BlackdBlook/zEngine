@@ -1,6 +1,7 @@
 ﻿#include "RenderCommandQueue.h"
 
 #include "Header.h"
+#include "Engine/zEngine.h"
 #include "Engine/Core/Camera/Camera.h"
 
 #define INSTANCE (RenderCommandQueue::GetInstance())
@@ -46,10 +47,16 @@ void RenderCommandQueue::ExecuteCommand(RenderCommand& command)
 
 void RenderCommandQueue::RenderShadow()
 {
+    glCullFace(GL_FRONT);
+    glViewport(0,0,(GLsizei)Engine::WindowX * 2,
+        (GLsizei)Engine::WindowY * 2);
     commands.ForLoop([this](RenderCommand& c)
     {
         c.ExcuteByShadowPass(ShadowPass.get());
     });
+    glCullFace(GL_BACK); //
+    glViewport(0, 0, (GLsizei)Engine::WindowX,
+        (GLsizei)Engine::WindowY);
     // glClear(GL_DEPTH_BUFFER_BIT);
 }
 
