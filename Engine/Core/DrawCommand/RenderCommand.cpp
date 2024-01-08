@@ -1,6 +1,8 @@
 ﻿#include "RenderCommand.h"
 
+#include "Engine/zEngine.h"
 #include "Engine/Core/ShaderProgram.h"
+#include "Engine/Core/LightSystem/LightSystem.h"
 #include "Engine/Core/Texture2D/Texture2D.h"
 #include "Engine/Object/Object.h"
 
@@ -24,6 +26,8 @@ void RenderCommand::Excute()
 {
     Shader->use();
 
+    LightSystem::GetInstance()->ActiveSceneDepthFrameBufferTexture();
+    
     uint8 ti = 0;
     for(auto t : Textures)
     {
@@ -42,7 +46,7 @@ void RenderCommand::Excute()
         break;
     case DrawType::None:
     default:
-        LOG("Render Command Error: None Draw Type");
+        ERROR("Render Command Error: None Draw Type");
     }
 }
 

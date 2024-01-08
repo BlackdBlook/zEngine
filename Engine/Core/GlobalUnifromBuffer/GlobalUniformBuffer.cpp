@@ -93,8 +93,14 @@ void GlobalUniformBuffer::RetrySetOperation(const std::string& name,
                 c.Data.size(), c.Data.data());
         }else
         {
+            auto offset = info.offsetMap.find(c.memberName);
+            if(info.offsetMap.end() == offset)
+            {
+                LOG(name, "has no nummber named ", c.memberName);
+                continue;
+            }
             glBufferSubData(GL_UNIFORM_BUFFER,
-                info.offsetMap.find(c.memberName)->second.offset,
+                offset->second.offset,
                 c.Data.size(), c.Data.data());
         }
     }

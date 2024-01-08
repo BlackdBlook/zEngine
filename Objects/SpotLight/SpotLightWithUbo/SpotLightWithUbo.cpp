@@ -25,9 +25,9 @@ void initSpotLight()
     SetGlobalUniformBuffer("LightData",
         "spotLight.specular", glm::vec3{1});
     SetGlobalUniformBuffer("LightData",
-        "spotLight.cutOff",   glm::cos(glm::radians(16.0f)));
+        "spotLight.cutOff",   glm::cos(glm::radians(64.0f)));
     SetGlobalUniformBuffer("LightData",
-        "spotLight.outerCutOff",   glm::cos(glm::radians(32.0f)));
+        "spotLight.outerCutOff",   glm::cos(glm::radians(128.0f)));
 }
 
 void SpotLightWithUbo::InitLightBuffer()

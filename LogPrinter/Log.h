@@ -58,3 +58,39 @@ public:
     template<>
     static void print<bool>(bool arg);
 };
+
+class Error
+{
+public:
+    
+    template<typename T>
+    static void printer(T arg)
+    {
+        print(arg);
+        std::cerr << std::endl;
+    }
+    
+    template<typename T, typename ... TS>
+    static void printer(T arg, TS ... args)
+    {
+        print(arg);
+        printer(args...);
+    }
+
+    template<typename ... TS>
+    static void NameSpacePrinter(const char* FileName, int Line, TS ... args)
+    {
+        std::cerr << get_filename(FileName) << " Line:" << Line << ' ';
+        printer(args...);
+    }
+    
+
+    template<typename T>
+    static void print(T arg)
+    {
+        std::cerr << arg << ' ';
+    }
+    
+    template<>
+    static void print<bool>(bool arg);
+};

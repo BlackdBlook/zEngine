@@ -15,6 +15,7 @@
 
 #define MAT4(name) glm::mat4 name(1.0f)
 #define LOG(...) Log::NameSpacePrinter(__FILE__, __LINE__, __VA_ARGS__)
+#define ERROR(...) Error::NameSpacePrinter(__FILE__, __LINE__, __VA_ARGS__)
 #define VEC3_ZERO glm::vec3(0,0,0)
 
 template<typename ...T>

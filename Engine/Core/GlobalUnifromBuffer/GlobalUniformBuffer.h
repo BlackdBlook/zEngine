@@ -81,7 +81,7 @@ public:
         auto target = UniformBlockMap.find(Name);
         if(target == UniformBlockMap.end())
         {
-            LOG("Error Uniform Buffer Not Find:", Name);
+            ERROR("Error Uniform Buffer Not Find:", Name);
             CacheMissingBufferSetOperation<T>(
                 std::forward<string>(Name), Data, std::forward<string>(memberName));
             return;
@@ -90,7 +90,7 @@ public:
             target->second.offsetMap.find(memberName);
         if(targetMember == target->second.offsetMap.end())
         {
-            LOG("Error Uniform Buffer Not Find:", Name);
+            ERROR("Error Uniform Buffer Not Find:", Name);
             CacheMissingBufferSetOperation<T>(
                 std::forward<string>(Name), Data, std::forward<string>(memberName));
             return;

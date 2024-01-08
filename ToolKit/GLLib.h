@@ -16,7 +16,7 @@ public:
         (GLFWwindow* window, int width, int height);
 
     // 获取最大纹理单元数量
-    static uint32 GetMaxTextureUnitCount();
+    static int GetMaxTextureUnitCount();
     
     void GLADinit();
 };

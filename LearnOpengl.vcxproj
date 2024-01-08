@@ -1092,6 +1092,8 @@
     <None Include="Shaders\SanJiaoXing.vsc" />
     <None Include="Shaders\ShadowMap\ShadowMap.fsc" />
     <None Include="Shaders\ShadowMap\ShadowMap.vsc" />
+    <None Include="Shaders\ShowFrameBuffer\ShowFrameBuffer.fsc" />
+    <None Include="Shaders\ShowFrameBuffer\ShowFrameBuffer.vsc" />
     <None Include="Shaders\TexBox.fsc" />
     <None Include="Shaders\TexBox.vsc" />
     <None Include="Shaders\texBoxWithLight.fsc" />

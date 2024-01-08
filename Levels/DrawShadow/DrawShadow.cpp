@@ -51,11 +51,11 @@ void DrawShadow::Init()
     Camera::GetCamera()->SetPos(glm::vec3{0,0,5});
 
     
-    // {
-    //     auto Light = NewObject();
-    //     auto DirLight = NewSPtr<DirectLightWithUbo>();
-    //     Light->Attach(DirLight);
-    // }
+    {
+        auto Light = NewObject();
+        auto DirLight = NewSPtr<DirectLightWithUbo>();
+        Light->Attach(DirLight);
+    }
 
     {
         
@@ -86,7 +86,14 @@ void DrawShadow::Init()
         auto obj = NewObject();
         auto box = NewSPtr<BoxV4>();
         obj->Attach(box);
-        obj->SetPos(glm::vec3{0,0,-5});
+        obj->SetPos(glm::vec3{-1,2,0});
+    }
+
+    {
+        auto obj = NewObject();
+        auto box = NewSPtr<BoxV4>();
+        obj->Attach(box);
+        obj->SetPos(glm::vec3{0,0,0});
     }
 
     {

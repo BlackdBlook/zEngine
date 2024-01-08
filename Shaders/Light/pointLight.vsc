@@ -8,13 +8,12 @@ out vec3 Normal;
 out vec2 TexCoords;
 
 uniform mat4 model;
-//uniform mat4 view;
-//uniform mat4 projection;
 
 layout (shared) uniform Matrices
 {
     mat4 view;
     mat4 projection;
+    mat4 lightSpaceMatrix;
 };
 
 void main()

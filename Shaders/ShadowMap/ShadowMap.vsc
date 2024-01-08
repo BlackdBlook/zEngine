@@ -1,7 +1,13 @@
 #version 460 core
 layout (location = 0) in vec3 position;
 
-uniform mat4 lightSpaceMatrix;
+layout (shared) uniform Matrices
+{
+    mat4 view;
+    mat4 projection;
+    mat4 lightSpaceMatrix;
+};
+
 uniform mat4 model;
 
 void main()

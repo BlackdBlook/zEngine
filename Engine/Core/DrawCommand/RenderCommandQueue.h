@@ -20,7 +20,7 @@ public:
     }
 
     
-private:
+public:
 
     static void Flush();
     void FlushImpl();

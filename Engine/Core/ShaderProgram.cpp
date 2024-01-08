@@ -3,7 +3,9 @@
 #include <glad/glad.h>
 #include <iostream>
 #include "../../Header.h"
+#include "Engine/zEngine.h"
 #include "GlobalUnifromBuffer/GlobalUniformBuffer.h"
+#include "LightSystem/LightSystem.h"
 
 GLID ShaderProgram::getUniformFromCache(const std::string& name)
 {
@@ -15,7 +17,7 @@ GLID ShaderProgram::getUniformFromCache(const std::string& name)
         ans = glGetUniformLocation(programID, name.c_str());
         if (ans == 0xffffffff)
         {
-            LOG("unifrom not find", shaderNameVer, shaderNameFar, name);
+            ERROR("unifrom not find", shaderNameVer, shaderNameFar, name);
         }
         uniformCache.insert(std::pair<std::string, GLID>(name, ans));
         return ans;
@@ -193,21 +195,28 @@ ShaderProgram::ShaderProgram(const ShaderProgram& other)
 
 ShaderProgram::ShaderProgram(std::string&& ver)
 {
-    programID = glCreateProgram();
-    shaderNameVer = ver;
-    shaderNameFar = shaderNameVer;
-    use();
-    Shader vs(shaderNameVer, EShaderType::VertexShader);
-    Shader fs(shaderNameFar, EShaderType::FragmentShader);
-
-    Attach(vs);
-    Attach(fs);
-    link();
-    RegistGlobalUniformBlock();
+    std::string s = ver;
+    init(std::move(s), std::move(ver));
     //showAllActiveUnifrom();
 }
 
+void ShaderProgram::BindShadowMap()
+{
+    LightSystem::GetInstance()->BindShadowMapTexture(this);
+}
+
 ShaderProgram::ShaderProgram(std::string&& ver, std::string&& far)
+{
+    init(std::move(ver), std::move(far));
+    //showAllActiveUnifrom();
+}
+
+void ShaderProgram::use()
+{
+    glUseProgram(programID);
+}
+
+void ShaderProgram::init(std::string&& ver, std::string&& far)
 {
     programID = glCreateProgram();
     shaderNameVer = ver;
@@ -220,12 +229,7 @@ ShaderProgram::ShaderProgram(std::string&& ver, std::string&& far)
     Attach(fs);
     link();
     RegistGlobalUniformBlock();
-    //showAllActiveUnifrom();
-}
-
-void ShaderProgram::use()
-{
-    glUseProgram(programID);
+    BindShadowMap();
 }
 
 void ShaderProgram::link()

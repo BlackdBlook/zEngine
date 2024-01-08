@@ -48,7 +48,7 @@ uint32 InitMaxTextureUnitCount()
 	return count;
 }
 
-uint32 GLLib::GetMaxTextureUnitCount()
+int GLLib::GetMaxTextureUnitCount()
 {
 	static uint32 ans = InitMaxTextureUnitCount();
 	return ans;

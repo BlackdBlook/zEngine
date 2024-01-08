@@ -25,10 +25,12 @@ class ShaderProgram
 
     std::string shaderNameVer;
     std::string shaderNameFar;
-
+    
+    void init(std::string&& ver,std::string&& far);
     void link();
     void Attach(Shader& s);
     void RegistGlobalUniformBlock();
+    void BindShadowMap();
 
 public:
 
