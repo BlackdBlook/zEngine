@@ -1,15 +1,17 @@
 ﻿#pragma once
 #include "ToolKit/Typedef.h"
 
+class LightScenceDepthFrameBufferFactory;
 class ShaderProgram;
 
-class SceneDepthFrameBuffer
+class LightSceneDepthFrameBuffer
 {
+    friend LightScenceDepthFrameBufferFactory;
     SPtr<ShaderProgram> RenderShader;
     GLID depthMapFBO;
     GLID depthMap;
 public:
-    SceneDepthFrameBuffer();
+    LightSceneDepthFrameBuffer();
 
     void BindAsFrameBuffer();
     void UnBindAsFrameBuffer();

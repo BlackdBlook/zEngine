@@ -7,4 +7,6 @@ public:
     void InitLightBuffer() override;
     void UpdateLightBuffer() override;
     void DisableLight() override;
+
+    void ShadowMapFrameBuffer();
 };

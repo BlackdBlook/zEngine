@@ -4,7 +4,7 @@
 #include "Core/Level.h"
 #include "Core/Camera/Camera.h"
 #include "Core/FrameBuffer/FrameBuffer.h"
-#include "Core/TextureSceneDepth/SceneDepthFrameBuffer.h"
+#include "Core/TextureSceneDepth/LightSceneDepthFrameBuffer.h"
 class LightSystem;
 class ScreenProcessingManager;
 struct GLFWwindow;

@@ -1,11 +1,11 @@
 ﻿#include "LightSystem.h"
 #include "Engine/Core/ShaderProgram.h"
 #include "Engine/Core/DrawCommand/RenderCommandQueue.h"
-#include "Engine/Core/TextureSceneDepth/SceneDepthFrameBuffer.h"
+#include "Engine/Core/TextureSceneDepth/LightSceneDepthFrameBuffer.h"
 
 LightSystem::LightSystem()
 {
-    SceneDepthFrameBufferPtr = NewSPtr<SceneDepthFrameBuffer>();
+    SceneDepthFrameBufferPtr = NewSPtr<LightSceneDepthFrameBuffer>();
 }
 
 void LightSystem::BindShadowMapTexture(ShaderProgram* shader)

@@ -5,7 +5,7 @@
 #include "ToolKit/Typedef.h"
 
 class ShaderProgram;
-class SceneDepthFrameBuffer;
+class LightSceneDepthFrameBuffer;
 class LightComponent;
 class SkyLight;
 class SpotLightWithUbo;
@@ -16,7 +16,7 @@ class LightSystem
 {
     std::vector<WPtr<LightComponent>> Lights;
 
-    SPtr<SceneDepthFrameBuffer> SceneDepthFrameBufferPtr;
+    SPtr<LightSceneDepthFrameBuffer> SceneDepthFrameBufferPtr;
 
     LightSystem();
 public:

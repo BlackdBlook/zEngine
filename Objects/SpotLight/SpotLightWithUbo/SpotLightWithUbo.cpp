@@ -49,3 +49,8 @@ void SpotLightWithUbo::UpdateLightBuffer()
 void SpotLightWithUbo::DisableLight()
 {
 }
+
+void SpotLightWithUbo::ShadowMapFrameBuffer()
+{
+    
+}

@@ -1,10 +1,10 @@
-﻿#include "SceneDepthFrameBuffer.h"
+﻿#include "LightSceneDepthFrameBuffer.h"
 
 #include "Engine/zEngine.h"
 #include "Engine/Core/GlobalUnifromBuffer/GlobalUniformBuffer.h"
 #include "ToolKit/GLLib.h"
 
-SceneDepthFrameBuffer::SceneDepthFrameBuffer()
+LightSceneDepthFrameBuffer::LightSceneDepthFrameBuffer()
 {
     
     glGenFramebuffers(1, &depthMapFBO);
@@ -23,41 +23,39 @@ SceneDepthFrameBuffer::SceneDepthFrameBuffer()
     glDrawBuffer(GL_NONE);
     glReadBuffer(GL_NONE);
     
-    glm::mat4 lightProjection, lightView;
-    glm::mat4 lightSpaceMatrix;
-    GLfloat near_plane = 10.0f, far_plane = 25.5f;
-    lightProjection = glm::ortho(-25.0f, 25.0f, -25.0f, 25.0f, near_plane, far_plane);
+    const GLfloat near_plane = 10.0f, far_plane = 35.5f;
+    const glm::mat4 lightProjection = glm::ortho(-25.0f, 25.0f, -25.0f, 25.0f, near_plane, far_plane);
     
-    lightView = glm::lookAt(glm::vec3{-5.0f, 14.0f, -1.0f}, glm::vec3(0.0f),
+    const glm::mat4 lightView = glm::lookAt(glm::vec3{-15.0f, 14.0f, -1.0f}, glm::vec3(0.0f),
         glm::vec3(0.0, 1.0, 0.0));
-    lightSpaceMatrix = lightProjection * lightView;
+    glm::mat4 lightSpaceMatrix = lightProjection * lightView;
     
     SetGlobalUniformBuffer("Matrices","lightSpaceMatrix",
         lightSpaceMatrix);
 }
 
-void SceneDepthFrameBuffer::BindAsTexture(int index)
+void LightSceneDepthFrameBuffer::BindAsTexture(int index)
 {
     glActiveTexture(GL_TEXTURE0 + index);
     glBindTexture(GL_TEXTURE_2D,depthMap);
 }
 
-void SceneDepthFrameBuffer::BindAsFrameBuffer()
+void LightSceneDepthFrameBuffer::BindAsFrameBuffer()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 }
 
-void SceneDepthFrameBuffer::UnBindAsFrameBuffer()
+void LightSceneDepthFrameBuffer::UnBindAsFrameBuffer()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-int SceneDepthFrameBuffer::GetShadowMapTextureId()
+int LightSceneDepthFrameBuffer::GetShadowMapTextureId()
 {
     return GLLib::GetMaxTextureUnitCount() - 1;
 }
 
-void SceneDepthFrameBuffer::BindAsTexture()
+void LightSceneDepthFrameBuffer::BindAsTexture()
 {
     glActiveTexture(GL_TEXTURE0 + GetShadowMapTextureId());
     glBindTexture(GL_TEXTURE_2D,depthMap);
@@ -91,7 +89,7 @@ GLID GENVAO()
     return VAO;
 }
 
-void SceneDepthFrameBuffer::RenderToScreen()
+void LightSceneDepthFrameBuffer::RenderToScreen()
 {
     static GLID Vao = GENVAO();
     if(RenderShader == nullptr)

@@ -100,11 +100,12 @@
     </ClCompile>
     <ClCompile Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.cpp" />
     <ClCompile Include="Engine\Core\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="Engine\Core\LightScenceDepthFrameBufferFactory\LightScenceDepthFrameBufferFactory.cpp" />
     <ClCompile Include="Engine\Core\LightSystem\LightSystem.cpp" />
     <ClCompile Include="Engine\Core\ScreenProcessingManager\ScreenProcessingManager.cpp" />
     <ClCompile Include="Engine\Core\TextureAssimp\TextureAssimp.cpp" />
     <ClCompile Include="Engine\Core\TextureCube\TextureCube.cpp" />
-    <ClCompile Include="Engine\Core\TextureSceneDepth\SceneDepthFrameBuffer.cpp" />
+    <ClCompile Include="Engine\Core\TextureSceneDepth\LightSceneDepthFrameBuffer.cpp" />
     <ClCompile Include="Engine\Core\Vertex\Vertex.cpp" />
     <ClCompile Include="Engine\SubSystem\AssetSystem.cpp" />
     <ClCompile Include="Levels\BoxWithMat\DrawBoxWithMat.cpp" />
@@ -1002,11 +1003,12 @@
     <ClInclude Include="Engine\Core\GlobalUnifromBuffer\GlobalUniformBuffer.h" />
     <ClInclude Include="Engine\Core\IBindableTexture\IBindableTexture.h" />
     <ClInclude Include="Engine\Core\InputSystem\InputSystem.h" />
+    <ClInclude Include="Engine\Core\LightScenceDepthFrameBufferFactory\LightScenceDepthFrameBufferFactory.h" />
     <ClInclude Include="Engine\Core\LightSystem\LightSystem.h" />
     <ClInclude Include="Engine\Core\ScreenProcessingManager\ScreenProcessingManager.h" />
     <ClInclude Include="Engine\Core\TextureAssimp\TextureAssimp.h" />
     <ClInclude Include="Engine\Core\TextureCube\TextureCube.h" />
-    <ClInclude Include="Engine\Core\TextureSceneDepth\SceneDepthFrameBuffer.h" />
+    <ClInclude Include="Engine\Core\TextureSceneDepth\LightSceneDepthFrameBuffer.h" />
     <ClInclude Include="Engine\Core\Vertex\Vertex.h" />
     <ClInclude Include="Engine\SubSystem\AssetSystem.h" />
     <ClInclude Include="Levels\BoxWithMat\DrawBoxWithMat.h" />

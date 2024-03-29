@@ -13,6 +13,8 @@ public:
 
     long long GetTimeSpanInLongLong();
 
+    virtual ~Timer(){}
+
 protected:
     std::chrono::time_point<std::chrono::system_clock> m_StartTime;
     const char* f;
@@ -36,6 +38,10 @@ private:
 
 class LogTimer : public Timer
 {
+public:
+    LogTimer(const char* c) : Timer(c){}
     ~LogTimer();
 };
 #define T() LogTimer LogTimer##__LINE__(__func__)
+
+
